@@ -477,7 +477,7 @@
     const email = document.getElementById('subEmail');
 
     const LS_KEY = 'apple-fairy-subscribers';
-    const NOTIFY_EMAIL = 'christophekaisin@gmail.com';
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xnjrppnj';
 
     // expose helpers for the Tweaks panel
     window.__sub = {
@@ -527,11 +527,10 @@
       // 1) Always save locally so you have a backup list even if the network fails
       window.__sub.addToList(v);
 
-      // 2) Notify via FormSubmit.co (free, no signup — emails you each subscriber).
-      //    Override with `formEndpoint` tweak to use Kit / Buttondown / your own endpoint.
+      // 2) Notify via Formspree. Override with `formEndpoint` tweak to use a different service.
       const endpoint = (form.dataset.endpoint && /^https?:\/\//.test(form.dataset.endpoint))
         ? form.dataset.endpoint
-        : `https://formsubmit.co/ajax/${encodeURIComponent(NOTIFY_EMAIL)}`;
+        : FORMSPREE_ENDPOINT;
 
       // Optimistic UI — show success immediately
       wrap.classList.remove('open');
@@ -539,16 +538,17 @@
       email.value = '';
 
       try {
-        await fetch(endpoint, {
+        const res = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify({
             email: v,
-            _subject: 'New Apple Fairy subscriber',
-            _template: 'table',
-            _captcha: 'false'
+            _subject: 'New Apple Fairy subscriber'
           })
         });
+        if (!res.ok) {
+          console.warn('Subscribe POST returned non-OK:', res.status, await res.text());
+        }
       } catch (err) {
         console.warn('Subscribe POST failed (kept local copy):', err);
       }
