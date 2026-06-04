@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Christophe Kaisin — Social Storyteller</title>
+<meta name="description" content="Social storyteller for conscious brands · Web, content & community." />
+<meta name="author" content="Christophe Kaisin" />
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,500;0,700;0,900;1,900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg-base:  #160606;
+    --bg-red:   #b41818;
+    --bg-deep:  #6a0f0f;
+    --ink:      #ffffff;
+    --ink-soft: rgba(255,255,255,0.75);
+    --ink-mute: rgba(255,255,255,0.42);
+    --rule:     rgba(255,255,255,0.1);
+    --frame:    #0a0405;
+
+    --font-display: 'Mulish', system-ui, sans-serif;
+    --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; padding: 0;
+    font-family: var(--font-display);
+    background: var(--frame);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ── Stage ─────────────────────────────────────────────────────── */
+  .stage {
+    position: relative;
+    margin: 24px;
+    border-radius: 4px;
+    min-height: calc(100vh - 48px);
+    overflow: hidden;
+    box-shadow:
+      0 24px 60px -20px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(255,255,255,0.04);
+    background-color: var(--bg-base);
+  }
+
+  .stage-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("assets/apple-bg.png");
+    background-size: cover;
+    background-position: center top;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  /* ── Topbar ────────────────────────────────────────────────────── */
+  .topbar {
+    position: relative;
+    z-index: 10;
+    padding: 32px 44px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-link {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .nav-link:hover { color: var(--ink); }
+  .nav-link.back:hover { transform: translateX(-3px); }
+  .nav-link.ext:hover  { transform: translateX(3px); }
+
+  /* ── Content wrap ──────────────────────────────────────────────── */
+  .cv-wrap {
+    position: relative;
+    z-index: 5;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 44px 88px;
+  }
+
+  /* ── Header ────────────────────────────────────────────────────── */
+  .cv-header {
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .cv-name {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(44px, 7vw, 96px);
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    margin: 0 0 18px;
+  }
+  .cv-name em {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .cv-tagline {
+    font-weight: 500;
+    font-size: clamp(14px, 1.8vw, 18px);
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+  }
+
+  .cv-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--ink-mute);
+    letter-spacing: 0.4px;
+  }
+  .cv-contact a {
+    color: var(--ink-mute);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .cv-contact a:hover { color: var(--ink-soft); }
+
+  /* ── Section label ─────────────────────────────────────────────── */
+  .section-label {
+    font-weight: 900;
+    font-size: 9.5px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0 0 30px;
+    display: block;
+  }
+
+  /* ── Two-column grid ───────────────────────────────────────────── */
+  .cv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 64px;
+    padding: 52px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .cv-col + .cv-col {
+    border-left: 1px solid var(--rule);
+    padding-left: 64px;
+  }
+
+  /* ── Skills ────────────────────────────────────────────────────── */
+  .skill-item {
+    margin-bottom: 26px;
+  }
+  .skill-item:last-child { margin-bottom: 0; }
+  .skill-item h3 {
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 0 5px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .skill-item p {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ── Experience timeline ───────────────────────────────────────── */
+  .exp-item {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 30px;
+  }
+  .exp-item:last-child { margin-bottom: 0; }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--bg-red);
+    border: 2px solid rgba(255,255,255,0.45);
+    flex-shrink: 0;
+  }
+  .exp-item::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 16px;
+    bottom: -30px;
+    width: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+  .exp-item:last-child::after { display: none; }
+
+  .exp-item h3 {
+    font-weight: 700;
+    font-size: 13.5px;
+    margin: 0 0 3px;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .exp-item .period {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-mute);
+    margin: 0 0 7px;
+    letter-spacing: 0.4px;
+    display: block;
+  }
+  .exp-item p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ── Toolkit + Languages ───────────────────────────────────────── */
+  .cv-bottom {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0 64px;
+    padding-top: 48px;
+  }
+
+  .cv-bottom .cv-col + .cv-col {
+    border-left: 1px solid var(--rule);
+    padding-left: 64px;
+  }
+
+  .toolkit-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 0;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+
+  .lang-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 9px;
+  }
+  .lang-item:last-child { margin-bottom: 0; }
+  .lang-name {
+    font-weight: 700;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+  .lang-level {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-mute);
+    letter-spacing: 0.3px;
+  }
+
+  /* ── Responsive ────────────────────────────────────────────────── */
+  @media (max-width: 760px) {
+    .stage   { margin: 12px; }
+    .topbar  { padding: 22px 22px 0; }
+    .cv-wrap { padding: 36px 22px 64px; }
+
+    .cv-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .cv-col + .cv-col {
+      border-left: none;
+      padding-left: 0;
+      border-top: 1px solid var(--rule);
+      padding-top: 44px;
+      margin-top: 44px;
+    }
+    .cv-bottom {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .cv-bottom .cv-col + .cv-col {
+      border-left: none;
+      padding-left: 0;
+      border-top: 1px solid var(--rule);
+      padding-top: 36px;
+      margin-top: 36px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="stage-bg"></div>
+
+  <header class="topbar">
+    <a class="nav-link back" href="index.html">
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5M11 6l-6 6 6 6"/>
+      </svg>
+      Home
+    </a>
+    <a class="nav-link ext" href="https://www.linkedin.com/in/christopheksn" target="_blank" rel="noopener">
+      LinkedIn
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+      </svg>
+    </a>
+  </header>
+
+  <main class="cv-wrap">
+
+    <!-- ── Header ── -->
+    <div class="cv-header">
+      <h1 class="cv-name">Christophe<br><em>Kaisin</em></h1>
+      <p class="cv-tagline">Social storyteller for conscious brands · Web, content &amp; community</p>
+      <div class="cv-contact">
+        <span>Portugal · remote-ready</span>
+        <a href="mailto:christophekaisin@gmail.com">christophekaisin@gmail.com</a>
+        <span>+351 960 461 669</span>
+        <a href="https://linkedin.com/in/christopheksn" target="_blank" rel="noopener">linkedin.com/in/christopheksn</a>
+      </div>
+    </div>
+
+    <!-- ── Skills + Experience ── -->
+    <div class="cv-grid">
+
+      <div class="cv-col">
+        <span class="section-label">What I bring</span>
+
+        <div class="skill-item">
+          <h3>Short-form video that lands.</h3>
+          <p>Editing Reels, TikToks and Shorts in CapCut and Premiere — hook in the first second, pacing tuned to the platform, captions that hold the brand voice.</p>
+        </div>
+
+        <div class="skill-item">
+          <h3>A content calendar that breathes.</h3>
+          <p>Multi-channel planning across Instagram, YouTube, TikTok, Facebook and LinkedIn, mapped against live launches, retreat dates and seasonal cycles — with monthly performance reports kept simple and honest.</p>
+        </div>
+
+        <div class="skill-item">
+          <h3>Captions in a sacred voice.</h3>
+          <p>Ten years of digital writing, plus daily practice translating complex teachings into language that opens hearts and still converts.</p>
+        </div>
+
+        <div class="skill-item">
+          <h3>Visual storytelling, end to end.</h3>
+          <p>Documentary photography bachelor's, digital design master's, ten years as a UI/UX designer. Thumbnails, story templates, asset libraries — held with consistency, not chaos.</p>
+        </div>
+
+        <div class="skill-item">
+          <h3>Community held with care.</h3>
+          <p>Daily comment &amp; DM engagement; four years living and volunteering in retreat centres, eco-villages and spiritual communities. I know how to hold sacred space online.</p>
+        </div>
+      </div>
+
+      <div class="cv-col">
+        <span class="section-label">Where the work lives</span>
+
+        <div class="exp-item">
+          <h3>Eluña Noelle — Digital, Web &amp; Community Manager</h3>
+          <span class="period">2024 – Present · Remote</span>
+          <p>Lead digital presence for a global spiritual community of ~2,500 members and 66k+ public following. Content calendar, Reels, stories, live launches, captions, member onboarding, daily engagement, UX of the membership platform.</p>
+        </div>
+
+        <div class="exp-item">
+          <h3>Freelance UI/UX &amp; Digital Consultant</h3>
+          <span class="period">2019 – Present · Remote</span>
+          <p>Visual systems, content structure and audience journeys for conscious and ethical projects. Helping brands clarify tone, visuals and messaging across digital platforms.</p>
+        </div>
+
+        <div class="exp-item">
+          <h3>Retreat centres, eco-villages &amp; sanctuaries</h3>
+          <span class="period">2020 – Now · Across Europe</span>
+          <p>Four years of lived practice in sacred spaces — supporting retreats, ceremony, workshops and collective life. The wellness and plant medicine world is home.</p>
+        </div>
+
+        <div class="exp-item">
+          <h3>UI/UX Designer — Agencies &amp; Tech</h3>
+          <span class="period">2012 – 2021 · Belgium</span>
+          <p>Decade of designing web and mobile interfaces, shaping interaction flows, and building visual systems that scale. Master's in Digital Design, Bachelor's in Documentary Photography.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Toolkit + Languages ── -->
+    <div class="cv-bottom">
+
+      <div class="cv-col">
+        <span class="section-label">Toolkit</span>
+        <div class="toolkit-tags">
+          CapCut · Premiere Pro · Photoshop · Lightroom · Figma · Canva · Notion · ManyChat · Meta Business Suite · Buffer · WordPress · ConvertKit · Mailchimp · Make / Zapier
+        </div>
+      </div>
+
+      <div class="cv-col">
+        <span class="section-label">Languages</span>
+        <div class="lang-item">
+          <span class="lang-name">French</span>
+          <span class="lang-level">native</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">English</span>
+          <span class="lang-level">fluent</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Spanish</span>
+          <span class="lang-level">basic, growing</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>
