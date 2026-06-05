@@ -351,6 +351,20 @@ body {
 }
 
 /* ════════════════════════════════════════════════════════════════
+   DISPLAY HEADINGS — large typographic anchors
+════════════════════════════════════════════════════════════════ */
+.display-heading {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(64px, 10.5vw, 148px);
+  letter-spacing: -0.045em;
+  line-height: 0.88;
+  color: var(--cream);
+  margin: 10px 0 52px;
+}
+.display-heading em { font-style: italic; font-weight: 300; }
+
+/* ════════════════════════════════════════════════════════════════
    SECTION COLOUR VARIANTS
 ════════════════════════════════════════════════════════════════ */
 
@@ -843,62 +857,70 @@ body {
    WHO I WORK WITH
 ════════════════════════════════════════════════════════════════ */
 .for-section {
-  padding: 72px 0;
   border-bottom: 1px solid var(--rule);
-  background:
-    radial-gradient(ellipse at 20% 80%,
-      rgba(110,180,255,0.05) 0%,
-      rgba(90,155,235,0.02) 50%,
-      transparent 70%),
-    var(--deep);
+}
+.for-section.is-light .for-inner {
+  display: block;
+  padding: 88px 52px;
 }
 .for-inner {
   max-width: 1040px;
   margin: 0 auto;
   padding: 0 52px;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 0 80px;
-  align-items: center;
 }
-.for-headline {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: clamp(28px, 3.2vw, 44px);
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-  color: var(--cream);
-  margin: 0;
-}
-.for-headline em { font-style: italic; font-weight: 300; }
 .for-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
+  border-top: 1px solid var(--rule);
 }
-.for-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 14px 0;
+.for-entry {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 0 40px;
+  align-items: center;
+  padding: 28px 0;
   border-bottom: 1px solid var(--rule);
+  transition: gap 0.35s cubic-bezier(0.22,1,0.36,1);
+}
+.for-entry:hover { gap: 0 60px; }
+.for-num {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 2px;
+  color: var(--mute);
+  padding-top: 3px;
+}
+.for-entry-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.for-text {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(20px, 2.4vw, 30px);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--cream);
+  transition: color 0.2s;
+}
+.for-entry:hover .for-text { color: var(--gold); }
+.for-sub-text {
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.5;
   color: var(--soft);
 }
-.for-item:nth-last-child(-n+2) { border-bottom: none; }
-.for-dot {
-  display: block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--gold);
+.for-entry-arrow {
+  font-size: 22px;
+  color: var(--mute);
+  transition: color 0.2s, transform 0.35s cubic-bezier(0.22,1,0.36,1);
   flex-shrink: 0;
-  margin-top: 6px;
+}
+.for-entry:hover .for-entry-arrow {
+  color: var(--gold);
+  transform: translate(5px, -3px);
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -923,8 +945,15 @@ body {
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 0 60px;
-  padding: 44px 0;
+  padding: 44px 32px;
+  margin: 0 -32px;
   border-bottom: 1px solid var(--rule);
+  border-radius: 6px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.exp-item:hover {
+  background: rgba(255,255,255,0.025);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
 }
 .exp-item:last-child { border-bottom: none; }
 .exp-meta {
@@ -1192,10 +1221,11 @@ body {
   .shine-card-content { padding: 36px 24px 28px !important; }
   .shine-card-img { height: 180px; }
 
-  .for-inner { grid-template-columns: 1fr; gap: 36px 0; }
-  .for-list  { grid-template-columns: 1fr; }
-  .for-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule); }
-  .for-item:last-child { border-bottom: none; }
+  .for-section.is-light .for-inner { padding: 64px 24px; }
+  .for-entry { grid-template-columns: 36px 1fr auto; gap: 0 18px; padding: 22px 0; }
+  .for-entry:hover { gap: 0 28px; }
+  .display-heading { font-size: clamp(48px, 13vw, 100px); margin-bottom: 40px; }
+  .exp-item { padding: 36px 20px; margin: 0 -20px; }
 
   .exp-item { grid-template-columns: 1fr; gap: 8px; padding: 32px 0; }
   .exp-meta { flex-direction: row; gap: 10px; align-items: baseline; }
@@ -1382,6 +1412,7 @@ body {
   <section class="shine-section is-light" id="shine">
     <div class="shine-inner">
       <h2 class="section-label">Where I shine</h2>
+      <p class="display-heading">How I<br><em>show up</em></p>
       <div class="shine-grid">
 
         <div class="shine-card">
@@ -1457,6 +1488,7 @@ body {
   <section class="work-section" id="work">
     <div class="work-inner">
       <h2 class="section-label">Selected Work</h2>
+      <p class="display-heading">Selected<br><em>Work</em></p>
       <p class="work-intro">Projects that show what I love.</p>
       <div class="work-list">
 
@@ -1580,16 +1612,59 @@ body {
   <!-- ═══════════════════════════════════════════════
        WHO I WORK WITH
   ═══════════════════════════════════════════════ -->
-  <section class="for-section">
+  <section class="for-section is-light">
     <div class="for-inner">
-      <h2 class="for-headline">I work<br>with <em>you</em><br>if you are&hellip;</h2>
+      <h2 class="section-label">Who I work with</h2>
+      <p class="display-heading">Built for<br><em>the right<br>people</em></p>
       <ul class="for-list">
-        <li class="for-item"><span class="for-dot"></span>A spiritual teacher or facilitator building a digital home for your community</li>
-        <li class="for-item"><span class="for-dot"></span>A retreat centre or wellness platform expanding online</li>
-        <li class="for-item"><span class="for-dot"></span>A conscious creator who needs the full operational stack covered</li>
-        <li class="for-item"><span class="for-dot"></span>A plant medicine practitioner or somatic practitioner growing your practice</li>
-        <li class="for-item"><span class="for-dot"></span>A values-driven organisation needing tech, community, and systems</li>
-        <li class="for-item"><span class="for-dot"></span>Anyone whose work is about transformation and who needs it to actually run</li>
+        <li class="for-entry">
+          <span class="for-num">01</span>
+          <div class="for-entry-body">
+            <span class="for-text">Spiritual Teachers &amp; Facilitators</span>
+            <span class="for-sub-text">Building a digital home for your community</span>
+          </div>
+          <span class="for-entry-arrow">→</span>
+        </li>
+        <li class="for-entry">
+          <span class="for-num">02</span>
+          <div class="for-entry-body">
+            <span class="for-text">Retreat Centres &amp; Wellness Platforms</span>
+            <span class="for-sub-text">Expanding your sacred space online</span>
+          </div>
+          <span class="for-entry-arrow">→</span>
+        </li>
+        <li class="for-entry">
+          <span class="for-num">03</span>
+          <div class="for-entry-body">
+            <span class="for-text">Conscious Creators</span>
+            <span class="for-sub-text">Who need the full operational stack covered</span>
+          </div>
+          <span class="for-entry-arrow">→</span>
+        </li>
+        <li class="for-entry">
+          <span class="for-num">04</span>
+          <div class="for-entry-body">
+            <span class="for-text">Plant Medicine &amp; Somatic Practitioners</span>
+            <span class="for-sub-text">Growing your practice with integrity</span>
+          </div>
+          <span class="for-entry-arrow">→</span>
+        </li>
+        <li class="for-entry">
+          <span class="for-num">05</span>
+          <div class="for-entry-body">
+            <span class="for-text">Values-Driven Organisations</span>
+            <span class="for-sub-text">Needing tech, community, and systems that last</span>
+          </div>
+          <span class="for-entry-arrow">→</span>
+        </li>
+        <li class="for-entry">
+          <span class="for-num">06</span>
+          <div class="for-entry-body">
+            <span class="for-text">Anyone whose work is transformation</span>
+            <span class="for-sub-text">And who needs it to actually run</span>
+          </div>
+          <span class="for-entry-arrow">→</span>
+        </li>
       </ul>
     </div>
   </section>
@@ -1600,6 +1675,7 @@ body {
   <section class="exp-section" id="experience">
     <div class="exp-inner">
       <h2 class="section-label">Experience</h2>
+      <p class="display-heading">My<br><em>journey</em></p>
       <div class="timeline">
 
         <article class="exp-item">
@@ -2191,12 +2267,12 @@ body {
 
     [
       ['.manifestor-inner',             0],
+      ['.display-heading',              0],
       ['.shine-card',                0.08],
       ['.work-intro',                   0],
       ['.work-item',                 0.07],
       ['.exp-item',                  0.08],
-      ['.for-headline',                 0],
-      ['.for-item',                  0.05],
+      ['.for-entry',                 0.06],
       ['.fairy-title',                  0],
       ['.fairy-body',                   0],
       ['.fairy-img',                    0],
