@@ -364,6 +364,10 @@ body {
   max-width: 1040px;
   margin: 0 auto;
   padding: 0 52px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .manifestor-label {
@@ -377,7 +381,8 @@ body {
   color: var(--gold);
   margin-bottom: 40px;
 }
-.manifestor-label::before {
+.manifestor-label::before,
+.manifestor-label::after {
   content: '';
   display: block;
   width: 20px;
@@ -1134,9 +1139,9 @@ body {
 
       <span class="manifestor-label">Why this works for you</span>
 
-      <p class="manifestor-title">I am a</p>
-      <span class="manifestor-word">Manifestor II.</span>
-      <p class="manifestor-subtitle">We build your impact.</p>
+      <p class="manifestor-title">Your mission needs a</p>
+      <span class="manifestor-word">Manifestor.</span>
+      <p class="manifestor-subtitle">I'm here to build yours.</p>
 
       <div class="manifestor-text">
         <p>I'm a Manifestor with an 11 life path — I see what needs to happen before most people do, and I make it happen.</p>
