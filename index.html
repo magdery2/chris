@@ -940,6 +940,7 @@ body {
   margin: -24px 0 52px;
   letter-spacing: -0.01em;
 }
+.work-carousel-dots { display: none; }
 
 
 /* ════════════════════════════════════════════════════════════════
@@ -1352,6 +1353,7 @@ body {
   .scroll-cue { display: none; }
   .btn-gold { font-size: 12px; padding: 12px 18px; }
 
+  .work-intro { text-align: center; }
   .work-list {
     flex-direction: row;
     overflow-x: auto;
@@ -1394,6 +1396,23 @@ body {
   .work-item .work-gallery-img.full img { height: 100% !important; object-fit: cover !important; object-position: top center; }
   .work-item-header.simple { grid-template-columns: 1fr; }
   .is-light .work-item { background: rgba(255,255,255,0.5) !important; }
+  .work-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 4px 0 8px;
+  }
+  .work-carousel-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(24,20,16,0.18);
+    transition: background 0.3s ease, width 0.3s ease, border-radius 0.3s ease;
+  }
+  .work-carousel-dot.active {
+    width: 18px;
+    border-radius: 3px;
+    background: rgba(24,20,16,0.45);
+  }
 
   .manifestor-inner,
   .shine-inner,
@@ -1417,9 +1436,29 @@ body {
   .manifestor-stat-n { font-size: clamp(28px, 7vw, 42px); }
   .manifestor-stat { align-items: center; }
   .manifestor-cta-text { white-space: normal; text-align: center; font-size: 15px; }
+  /* Fairy hidden in original position — shown inside carousel after contact */
+  .fairy-section { display: none !important; }
   .fairy-inner { grid-template-columns: 1fr; gap: 28px 0; padding: 0 24px; }
   .fairy-title  { position: static; text-align: center; }
   .fairy-body { text-align: center; }
+
+  /* Fairy + game carousel */
+  .fairy-game-carousel {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .fairy-game-carousel::-webkit-scrollbar { display: none; }
+  .fairy-game-carousel > section {
+    flex: 0 0 100vw;
+    min-width: 0;
+    scroll-snap-align: start;
+    display: block !important;
+    border-bottom: none;
+  }
   .manifestor-word { font-size: clamp(44px, 13vw, 90px); text-align: center; }
   .manifestor-subtitle { font-size: clamp(22px, 6vw, 40px); text-align: center; }
 
@@ -1498,8 +1537,8 @@ body {
   .contact-link { gap: 16px; padding: 18px 0; }
   .contact-link-value { font-size: clamp(15px, 4vw, 22px); word-break: break-word; }
   /* Show copy/nav tags always on touch (no hover state) */
-  .contact-copy .copy-idle { opacity: 0.5; }
-  .contact-link .nav-tag { opacity: 0.5; transform: none; }
+  .contact-copy .copy-idle { opacity: 0.85; }
+  .contact-link .nav-tag { opacity: 0.7; transform: none; }
 }
 
 @media (max-width: 480px) {
@@ -2799,6 +2838,54 @@ body {
       var del  = Math.random() * 14;           // stagger up to 14 s
       el.style.animation = 'glitch-sm ' + dur.toFixed(2) + 's ' + del.toFixed(2) + 's ease-in-out infinite';
     });
+  })();
+
+  // Mobile: fairy + game carousel after contact
+  (function() {
+    if (window.innerWidth > 900) return;
+    var fairy   = document.querySelector('.fairy-section');
+    var contact = document.querySelector('.contact-section');
+    var game    = document.querySelector('.game-section');
+    if (!fairy || !contact || !game) return;
+    var carousel = document.createElement('div');
+    carousel.className = 'fairy-game-carousel';
+    contact.after(carousel);
+    carousel.appendChild(fairy);
+    carousel.appendChild(game);
+    // Let browser reflow before canvas recalculates its dimensions
+    setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 0);
+  })();
+
+  // Work carousel: dots + bounce hint
+  (function() {
+    if (window.innerWidth > 900) return;
+    var list = document.querySelector('.work-list');
+    if (!list) return;
+    var items = Array.from(list.querySelectorAll('.work-item'));
+    if (items.length < 2) return;
+
+    // Create dots
+    var wrap = document.createElement('div');
+    wrap.className = 'work-carousel-dots';
+    list.parentNode.insertBefore(wrap, list.nextSibling);
+    var dots = items.map(function(_, i) {
+      var d = document.createElement('span');
+      d.className = 'work-carousel-dot' + (i === 0 ? ' active' : '');
+      wrap.appendChild(d);
+      return d;
+    });
+
+    // Sync active dot on scroll
+    list.addEventListener('scroll', function() {
+      var idx = Math.round(list.scrollLeft / (items[0].offsetWidth + 12));
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+    }, { passive: true });
+
+    // Bounce hint to show it's scrollable
+    setTimeout(function() {
+      list.scrollBy({ left: 48, behavior: 'smooth' });
+      setTimeout(function() { list.scrollBy({ left: -48, behavior: 'smooth' }); }, 650);
+    }, 900);
   })();
 </script>
 
