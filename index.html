@@ -1446,16 +1446,18 @@ body {
   .fairy-game-carousel-wrap { position: relative; }
   .fairy-game-arrow {
     position: absolute;
-    right: 10px;
+    right: 6px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 32px;
+    font-size: 48px;
     line-height: 1;
     color: var(--soft);
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-    text-shadow: 0 0 12px rgba(0,0,0,0.3);
+    pointer-events: auto;
+    cursor: pointer;
+    transition: opacity 0.4s ease, color 0.2s ease;
+    text-shadow: 0 0 16px rgba(0,0,0,0.4);
     z-index: 10;
+    padding: 12px 8px;
   }
   .fairy-game-carousel {
     display: flex;
@@ -1729,7 +1731,7 @@ body {
 <div class="stage">
 <main>
 
-  <a href="#contact" class="contact-pill">Contact</a>
+  <a href="#contact" class="contact-pill">Get in Touch</a>
 
   <!-- ═══════════════════════════════════════════════
        HERO
@@ -2883,6 +2885,10 @@ body {
     arrow.className = 'fairy-game-arrow';
     arrow.innerHTML = '&#8250;';
     wrap.appendChild(arrow);
+    arrow.addEventListener('click', function() {
+      var slideW = carousel.querySelector('section').offsetWidth + 12;
+      carousel.scrollBy({ left: slideW, behavior: 'smooth' });
+    });
     carousel.addEventListener('scroll', function() {
       var atEnd = carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth - 20;
       arrow.style.opacity = atEnd ? '0' : '';
