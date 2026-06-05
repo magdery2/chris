@@ -1674,7 +1674,7 @@ body {
       </div>
       <div class="game-hud">
         <span>Score&nbsp;<strong id="g-score">0</strong></span>
-        <span id="g-lives">♥ ♥ ♥</span>
+        <span id="g-lives">♥ ♥ ♥ ♥ ♥</span>
       </div>
       <p class="game-hint">Mouse · Touch · ← →</p>
     </div>
@@ -1727,7 +1727,7 @@ body {
 
     let W, H, state = 'idle', score, missed, frame;
     let fairy, apples, particles, trees, stars, mouseX;
-    const MAX_MISSES = 3;
+    const MAX_MISSES = 5;
 
     // ── Setup ─────────────────────────────────────────────────
     function resize() {
@@ -1748,7 +1748,7 @@ body {
       fairy = { x: W/2, tx: W/2, y: H - 70, wp: 0, morph: 0, morphDir: 0 };
       mouseX = W / 2;
       scoreEl.textContent = 0;
-      livesEl.textContent = '♥ ♥ ♥';
+      livesEl.textContent = '♥ ♥ ♥ ♥ ♥';
     }
     function updateLives() {
       const hearts = MAX_MISSES - missed;
@@ -2101,7 +2101,7 @@ body {
       overlayIcon.textContent = score >= 20 ? '✨' : score >= 10 ? '🌳' : '🍎';
       overlaySub.innerHTML =
         `You won! You caught <strong>${score}</strong> apple${score!==1?'s':''}` +
-        (kept > 0 ? ` — and let <strong>${kept}</strong> find their way back to the earth.<br><em style="font-size:0.85em;opacity:0.7">Thank you for letting nature keep a few.</em>` : `.<br><em style="font-size:0.85em;opacity:0.7">Perfect catch — the fairy is proud.</em>`);
+        (kept > 0 ? ` — and let <strong>${kept}</strong> find their way back to the earth.<br><em style="font-size:0.85em;opacity:0.7">Thank you for letting nature grow again.</em>` : `.<br><em style="font-size:0.85em;opacity:0.7">Perfect catch — the fairy is proud.</em>`);
       btn.textContent = 'Play again';
       overlay.classList.remove('hidden');
     }
