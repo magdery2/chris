@@ -1339,13 +1339,15 @@ body {
     margin-top: auto;
     padding: 0 28px 52px;
     justify-content: flex-end;
+    align-items: center;
+    text-align: center;
   }
-  .hero-eyebrow { margin-bottom: 18px; }
+  .hero-eyebrow { margin-bottom: 18px; justify-content: center; }
   .hero-name { margin-bottom: 14px; }
   .hero-tagline { margin-bottom: 14px; }
-  .hero-sub { margin-bottom: 28px; }
-  .cta-row { gap: 8px; margin-bottom: 36px; }
-  .hero-creds { flex-wrap: wrap; gap: 10px; padding-top: 16px; }
+  .hero-sub { margin-bottom: 28px; max-width: 100%; }
+  .cta-row { gap: 8px; margin-bottom: 36px; justify-content: center; }
+  .hero-creds { flex-wrap: wrap; gap: 10px; padding-top: 16px; justify-content: center; }
   .hero-cred + .hero-cred { border-left: none; padding-left: 0; }
   .scroll-cue { display: none; }
   .btn-gold { font-size: 12px; padding: 12px 18px; }
@@ -1384,32 +1386,89 @@ body {
 
   .manifestor-section { padding: 64px 0 56px; }
   .manifestor-top { grid-template-columns: 1fr; gap: 40px 0; margin-bottom: 48px; }
-  .manifestor-heading { font-size: clamp(44px, 12vw, 72px); }
-  .manifestor-stats { gap: 28px 40px; flex-wrap: wrap; }
-  .manifestor-stat-n { font-size: clamp(26px, 7vw, 40px); }
+  .manifestor-heading { font-size: clamp(52px, 14vw, 80px); text-align: center; }
+  .manifestor-stats { gap: 28px 40px; flex-wrap: wrap; justify-content: center; }
+  .manifestor-stat-n { font-size: clamp(28px, 7vw, 42px); }
+  .manifestor-stat { align-items: center; }
   .manifestor-cta-text { white-space: normal; text-align: center; font-size: 15px; }
   .fairy-inner { grid-template-columns: 1fr; gap: 28px 0; padding: 0 24px; }
-  .fairy-title  { position: static; }
-  .manifestor-word { font-size: clamp(40px, 12vw, 90px); }
-  .manifestor-subtitle { font-size: clamp(20px, 5.5vw, 40px); }
+  .fairy-title  { position: static; text-align: center; }
+  .fairy-body { text-align: center; }
+  .manifestor-word { font-size: clamp(44px, 13vw, 90px); text-align: center; }
+  .manifestor-subtitle { font-size: clamp(22px, 6vw, 40px); text-align: center; }
 
-  .shine-item { grid-template-columns: 36px 1fr; gap: 0 20px; padding: 32px 0; }
-  .shine-item-body { display: none; }
-  .shine-item h3 { font-size: clamp(26px, 7vw, 40px); }
+  .section-label { justify-content: center; }
+
+  /* Shine: horizontal scroll carousel */
+  .shine-list {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 12px;
+    margin: 0 -24px;
+    padding: 8px 24px 24px;
+    border-top: none;
+  }
+  .shine-list::-webkit-scrollbar { display: none; }
+  .shine-item {
+    flex: 0 0 78vw;
+    max-width: 340px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 28px 22px;
+    border: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    border-radius: 8px;
+    background: rgba(240,235,227,0.025);
+  }
+  .shine-item::after { display: none; }
+  .shine-item-body { display: flex; }
+  .shine-item h3 { font-size: clamp(26px, 7vw, 36px); }
+  .shine-num { padding-top: 0; }
 
   .for-section.is-light .for-inner { padding: 56px 24px; }
   .for-entry-trigger { grid-template-columns: 32px 1fr auto; gap: 0 16px; padding: 20px 10px; }
   .for-entry-trigger:hover { background: rgba(240,235,227,0.02); }
   .for-expand-inner { padding: 16px 16px 24px 48px; }
-  .display-heading { font-size: 46px; margin-bottom: 36px; }
-  .contact-headline { font-size: 36px; }
+  .display-heading { font-size: 56px; text-align: center; margin-bottom: 36px; }
+  .contact-headline { font-size: 44px; text-align: center; }
 
-  .exp-item { grid-template-columns: 1fr; gap: 8px; padding: 32px 0; }
-  .exp-meta { flex-direction: row; gap: 10px; align-items: baseline; }
+  /* Experience: horizontal scroll carousel */
+  .timeline {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 12px;
+    margin: 0 -24px;
+    padding: 8px 24px 24px;
+  }
+  .timeline::-webkit-scrollbar { display: none; }
+  .exp-item {
+    flex: 0 0 78vw;
+    max-width: 340px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 28px 22px;
+    margin: 0;
+    border: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    border-radius: 8px;
+    background: rgba(240,235,227,0.025);
+  }
+  .exp-meta { flex-direction: column; gap: 3px; align-items: flex-start; }
 
   /* Contact */
   .contact-top { grid-template-columns: 1fr; gap: 28px 0; }
-  .contact-img-wrap { display: none; }
+  .contact-img-wrap { border-radius: 6px; max-height: 56vw; overflow: hidden; }
   .contact-link { gap: 16px; padding: 18px 0; }
   .contact-link-value { font-size: clamp(15px, 4vw, 22px); word-break: break-word; }
   /* Show copy/nav tags always on touch (no hover state) */
@@ -1441,15 +1500,16 @@ body {
   .contact-section { padding: 56px 0 48px; }
   .manifestor-section { padding: 52px 0 44px; }
 
-  .display-heading { font-size: 36px; margin-bottom: 28px; }
-  .contact-headline { font-size: 30px; letter-spacing: -0.035em; }
-  .manifestor-heading { font-size: clamp(38px, 11vw, 60px); }
-  .manifestor-word { font-size: clamp(36px, 11vw, 72px); }
-  .manifestor-subtitle { font-size: clamp(18px, 5vw, 32px); }
+  .display-heading { font-size: 44px; margin-bottom: 28px; }
+  .contact-headline { font-size: 36px; }
+  .manifestor-heading { font-size: clamp(44px, 13vw, 68px); }
+  .manifestor-word { font-size: clamp(40px, 12vw, 72px); }
+  .manifestor-subtitle { font-size: clamp(20px, 5.5vw, 32px); }
   .manifestor-stats { gap: 20px 32px; }
 
-  .shine-item { grid-template-columns: 32px 1fr; gap: 0 16px; padding: 26px 0; }
-  .shine-item h3 { font-size: clamp(22px, 7vw, 34px); }
+  .shine-item { flex: 0 0 84vw; padding: 24px 18px; }
+  .exp-item { flex: 0 0 84vw; padding: 24px 18px; }
+  .shine-item h3 { font-size: clamp(24px, 8vw, 34px); }
 
   .for-section.is-light .for-inner { padding: 48px 20px; }
   .for-entry-trigger { padding: 18px 8px; }
