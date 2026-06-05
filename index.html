@@ -139,6 +139,20 @@ body {
 }
 .top-nav a:hover { color: var(--cream); }
 
+/* Subtle blue aurora — hero left panel */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 58%; height: 70%;
+  background: radial-gradient(ellipse at 18% 12%,
+    rgba(120,185,255,0.06) 0%,
+    rgba(100,160,240,0.02) 42%,
+    transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
 /* Hero text block */
 .hero-text {
   position: relative;
@@ -222,7 +236,7 @@ body {
   font-size: 13px;
   letter-spacing: 0.3px;
   text-decoration: none;
-  padding: 13px 30px;
+  padding: 13px 20px;
   border-radius: 999px;
   white-space: nowrap;
   box-shadow: 0 8px 28px rgba(196,154,60,0.22);
@@ -239,7 +253,7 @@ body {
   font-weight: 700;
   font-size: 13px;
   text-decoration: none;
-  padding: 12px 28px;
+  padding: 12px 20px;
   border-radius: 999px;
   border: 1.5px solid rgba(240,235,227,0.16);
   white-space: nowrap;
@@ -347,47 +361,36 @@ body {
   overflow: hidden;
 }
 
-/* Very subtle radial warmth behind the big text */
+/* Soft blue-white light behind the big text */
 .manifestor-section::before {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
-  height: 80%;
-  background: radial-gradient(ellipse at center, rgba(196,154,60,0.05) 0%, transparent 70%);
+  width: 80%;
+  height: 90%;
+  background: radial-gradient(ellipse at center,
+    rgba(140,200,255,0.05) 0%,
+    transparent 75%);
   pointer-events: none;
 }
 
 .manifestor-inner {
-  max-width: 1040px;
+  max-width: 860px;
   margin: 0 auto;
   padding: 0 52px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .manifestor-label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
   font-family: var(--mono);
   font-size: 9.5px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 40px;
-}
-.manifestor-label::before,
-.manifestor-label::after {
-  content: '';
+  color: var(--mute);
+  margin-bottom: 36px;
   display: block;
-  width: 20px;
-  height: 1px;
-  background: var(--gold);
 }
 
 .manifestor-title {
@@ -412,8 +415,8 @@ body {
 }
 
 .manifestor-text {
-  max-width: 700px;
-  margin-bottom: 60px;
+  max-width: 580px;
+  margin: 0 auto 60px;
 }
 .manifestor-text p {
   font-family: var(--sans);
@@ -465,6 +468,10 @@ body {
 .shine-section {
   padding: 88px 0;
   border-bottom: 1px solid var(--rule);
+  background: radial-gradient(ellipse at 50% 40%,
+    rgba(130,195,255,0.08) 0%,
+    rgba(100,165,240,0.03) 50%,
+    transparent 75%);
 }
 .shine-inner {
   max-width: 1040px;
@@ -584,6 +591,10 @@ body {
 .work-section {
   padding: 88px 0;
   border-bottom: 1px solid var(--rule);
+  background: radial-gradient(ellipse at 80% 15%,
+    rgba(120,190,255,0.06) 0%,
+    rgba(100,165,240,0.02) 45%,
+    transparent 70%);
 }
 .work-inner {
   max-width: 1040px;
@@ -738,7 +749,12 @@ body {
 .for-section {
   padding: 72px 0;
   border-bottom: 1px solid var(--rule);
-  background: var(--deep);
+  background:
+    radial-gradient(ellipse at 20% 80%,
+      rgba(110,180,255,0.05) 0%,
+      rgba(90,155,235,0.02) 50%,
+      transparent 70%),
+    var(--deep);
 }
 .for-inner {
   max-width: 1040px;
@@ -795,6 +811,10 @@ body {
 .exp-section {
   padding: 88px 0;
   border-bottom: 1px solid var(--rule);
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(120,185,255,0.05) 0%,
+    rgba(100,160,240,0.02) 45%,
+    transparent 68%);
 }
 .exp-inner {
   max-width: 1040px;
@@ -861,6 +881,10 @@ body {
 .fairy-section {
   padding: 88px 0;
   border-bottom: 1px solid var(--rule);
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(130,195,255,0.07) 0%,
+    rgba(110,175,245,0.03) 45%,
+    transparent 72%);
 }
 .fairy-inner {
   max-width: 1040px;
@@ -896,6 +920,10 @@ body {
 ════════════════════════════════════════════════════════════════ */
 .contact-section {
   padding: 100px 0 88px;
+  background: radial-gradient(ellipse at 75% 100%,
+    rgba(130,195,255,0.06) 0%,
+    rgba(100,165,240,0.02) 50%,
+    transparent 72%);
 }
 .contact-inner {
   max-width: 1040px;
@@ -1091,9 +1119,8 @@ body {
 
     <!-- Nav spans full width — must come first in DOM so it's above photo on mobile -->
     <header class="topbar">
-      <span class="logo-mark">CK</span>
       <nav class="top-nav">
-        <a href="#manifestor">My Design</a>
+        <a href="#manifestor">How I Work</a>
         <a href="#shine">Where I Shine</a>
         <a href="#contact">Contact</a>
         <a href="https://www.linkedin.com/in/christopheksn" target="_blank" rel="noopener" class="hide-sm">LinkedIn&nbsp;↗</a>
@@ -1116,9 +1143,9 @@ body {
         Chris<br><em>Kaisin</em>
       </h1>
       <p class="hero-tagline">For the creators<br>changing the world.</p>
-      <p class="hero-sub">I bring the full operational stack — platform tech, community, automations, content systems, and growth — so you can stay in your work.</p>
+      <p class="hero-sub">I bring the full operational stack, platform tech, community, automations, content systems, and growth, so you can stay in your work.</p>
       <div class="cta-row">
-        <a class="btn-gold"    href="mailto:christophekaisin@gmail.com">Say hello</a>
+        <a class="btn-gold" href="https://calendly.com/christophekaisin/30min" target="_blank" rel="noopener">Schedule a meeting&nbsp;↗</a>
         <a class="btn-outline" href="#shine">Where I shine&nbsp;↓</a>
       </div>
     </div>
@@ -1137,15 +1164,11 @@ body {
   <section class="manifestor-section" id="manifestor">
     <div class="manifestor-inner">
 
-      <span class="manifestor-label">Why this works for you</span>
-
-      <p class="manifestor-title">Your mission needs a</p>
-      <span class="manifestor-word">Manifestor.</span>
-      <p class="manifestor-subtitle">I'm here to build yours.</p>
+      <p class="manifestor-subtitle">Your vision, built.</p>
 
       <div class="manifestor-text">
-        <p>I'm a Manifestor with an 11 life path — I see what needs to happen before most people do, and I make it happen.</p>
-        <p>A minimalist by nature, I keep what matters and build what works.</p>
+        <p>I'm a Projector with an 11 Life Path, a master number for clarity and insight. In plain terms: I see the whole system at once, I know where the energy needs to go, and I build what makes it move.</p>
+        <p>Minimalist by nature, I keep what matters and cut the rest.</p>
       </div>
 
 
@@ -1388,8 +1411,8 @@ body {
     <div class="fairy-inner">
       <h2 class="fairy-title">🍎 Why I'm the Apple Fairy</h2>
       <div class="fairy-body">
-        <p>The apple fairy comes from Avalon — the isle of apples — the magical place you leave and always return to. That's how I work: I retreat into the quiet, then come back carrying something worth giving.</p>
-        <p>What I bring is clarity. My Sun sits in Gate 9, the "golden apples" of focused attention. I don't push my gifts on anyone — I offer them the way a tree offers fruit, freely, to whoever's ready to receive them.</p>
+        <p>Because I love connection — giving freely, with nothing hidden and nothing asked in return. That's the magic I carry: light on a tree, quietly becoming fruit. I give what I have, and trust something good takes root.</p>
+        <p>I love being near magic, close to nature, learning from life.</p>
       </div>
     </div>
   </section>
@@ -1404,6 +1427,7 @@ body {
         <div class="contact-body">
           <p class="contact-avail">Portugal · Remote-ready · Available now</p>
           <p>I work with ethical creators, spiritual teachers, and conscious community builders who need the full operational stack covered — without hiring a team of four. If your work is about transformation, let's talk about making it run.</p>
+          <a class="btn-gold" href="https://calendly.com/christophekaisin/30min" target="_blank" rel="noopener" style="margin-top:16px; display:inline-block;">Schedule a short meeting&nbsp;↗</a>
         </div>
       </div>
       <div class="contact-links">
@@ -1416,7 +1440,7 @@ body {
           </button>
         </div>
         <div class="contact-link">
-          <span class="contact-link-label">Phone</span>
+          <span class="contact-link-label">WhatsApp</span>
           <a href="tel:+351960461669" class="contact-link-value">+351 960 461 669</a>
           <button class="copy-btn" data-copy="+351960461669" aria-label="Copy phone" title="Copy">
             <svg class="copy-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
