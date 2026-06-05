@@ -1450,10 +1450,11 @@ body {
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    gap: 12px;
   }
   .fairy-game-carousel::-webkit-scrollbar { display: none; }
   .fairy-game-carousel > section {
-    flex: 0 0 100vw;
+    flex: 0 0 calc(100vw - 44px);
     min-width: 0;
     scroll-snap-align: start;
     display: block !important;
