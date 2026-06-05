@@ -1365,8 +1365,8 @@ body {
   .work-list::-webkit-scrollbar { display: none; }
   .work-pair { display: contents !important; }
   .work-item {
-    flex: 0 0 82vw;
-    max-width: 360px;
+    flex: 0 0 76vw;
+    max-width: 340px;
     scroll-snap-align: start;
     display: flex !important;
     flex-direction: column;
@@ -1388,6 +1388,10 @@ body {
   .work-gallery.cols-2 > .work-gallery-img:not(:first-child),
   .work-gallery.cols-3 > .work-gallery-img:not(:first-child) { display: none; }
   .work-gallery-img { height: 48vw; max-height: 200px; border-radius: 0 !important; }
+  .work-item .work-gallery-img,
+  .work-item .work-gallery-img.full { height: 56vw !important; max-height: 220px; }
+  .work-item .work-gallery-img img,
+  .work-item .work-gallery-img.full img { height: 100% !important; object-fit: cover !important; object-position: top center; }
   .work-item-header.simple { grid-template-columns: 1fr; }
   .is-light .work-item { background: rgba(255,255,255,0.5) !important; }
 
@@ -1538,7 +1542,7 @@ body {
   .for-expand-inner { padding: 14px 12px 20px 44px; }
 
   .work-gallery-img { height: 50vw; max-height: 180px; }
-  .work-item { flex: 0 0 86vw; }
+  .work-item { flex: 0 0 80vw; }
 
   .contact-link { gap: 12px; padding: 16px 0; }
   .contact-link-label { min-width: 52px; font-size: 8px; }
@@ -1823,10 +1827,10 @@ body {
         <!-- Eluña Noelle -->
         <a class="work-item" href="https://circle.elunanoelle.com/videos/" target="_blank" rel="noopener noreferrer">
           <div class="work-gallery cols-2">
-            <div class="work-gallery-img full">
+            <div class="work-gallery-img">
               <img src="assets/eluna-usecase3.jpg" alt="Eluña community platform" loading="lazy" />
             </div>
-            <div class="work-gallery-img full">
+            <div class="work-gallery-img">
               <img src="assets/eluna-usecase.jpg" alt="Eluña content library" loading="lazy" />
             </div>
           </div>
@@ -1856,10 +1860,10 @@ body {
         <!-- Mycosphere -->
         <a class="work-item" href="https://lamycosphere.com/collections/myceliums-sur-grains" target="_blank" rel="noopener noreferrer">
           <div class="work-gallery cols-2">
-            <div class="work-gallery-img no-veil full">
+            <div class="work-gallery-img no-veil">
               <img src="assets/mycosphere-usecase.jpg" alt="Mycosphere shop" loading="lazy" />
             </div>
-            <div class="work-gallery-img no-veil full">
+            <div class="work-gallery-img no-veil">
               <img src="assets/mycosphere-usecase2.jpg" alt="Mycosphere multi-device" loading="lazy" />
             </div>
           </div>
