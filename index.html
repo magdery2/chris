@@ -1443,6 +1443,20 @@ body {
   .fairy-body { text-align: center; }
 
   /* Fairy + game carousel */
+  .fairy-game-carousel-wrap { position: relative; }
+  .fairy-game-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    line-height: 1;
+    color: var(--soft);
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    text-shadow: 0 0 12px rgba(0,0,0,0.3);
+    z-index: 10;
+  }
   .fairy-game-carousel {
     display: flex;
     flex-direction: row;
@@ -1865,7 +1879,7 @@ body {
       <div class="work-list">
 
         <!-- Eluña Noelle -->
-        <a class="work-item" href="https://circle.elunanoelle.com/videos/" target="_blank" rel="noopener noreferrer">
+        <div class="work-item">
           <div class="work-gallery cols-2">
             <div class="work-gallery-img">
               <img src="assets/eluna-usecase3.jpg" alt="Eluña community platform" loading="lazy" />
@@ -1878,10 +1892,10 @@ body {
             <span class="work-index">01</span>
             <div class="work-identity">
               <h3 class="work-client">Eluña Noelle</h3>
-              <span class="work-url">
+              <a class="work-url" href="https://circle.elunanoelle.com/videos/" target="_blank" rel="noopener noreferrer">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
                 elunanoelle.com
-              </span>
+              </a>
             </div>
             <div class="work-detail">
               <p class="work-desc">Membership-based online spiritual community focused on embodiment, discernment, and personal transformation — live events, workshops, archives, and interactive group spaces. Full ownership of the digital ecosystem: community management, UX and web architecture (WordPress, Elementor, MemberPress), email marketing, and automation workflows.</p>
@@ -1893,12 +1907,11 @@ body {
                 <span class="work-tag">Automations</span>
               </div>
             </div>
-            <span class="work-arrow">↗</span>
           </div>
-        </a>
+        </div>
 
         <!-- Mycosphere -->
-        <a class="work-item" href="https://lamycosphere.com/collections/myceliums-sur-grains" target="_blank" rel="noopener noreferrer">
+        <div class="work-item">
           <div class="work-gallery cols-2">
             <div class="work-gallery-img no-veil">
               <img src="assets/mycosphere-usecase.jpg" alt="Mycosphere shop" loading="lazy" />
@@ -1911,10 +1924,10 @@ body {
             <span class="work-index">02</span>
             <div class="work-identity">
               <h3 class="work-client">Mycosphere</h3>
-              <span class="work-url">
+              <a class="work-url" href="https://lamycosphere.com/collections/myceliums-sur-grains" target="_blank" rel="noopener noreferrer">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
                 lamycosphere.com
-              </span>
+              </a>
             </div>
             <div class="work-detail">
               <p class="work-desc">From cultivation to customer — I built the e-commerce platform that takes Mycosphere's organic mushrooms to market. Product pages, shop architecture, client experience, and the digital infrastructure that connects growers to buyers across Belgium and beyond.</p>
@@ -1924,9 +1937,8 @@ body {
                 <span class="work-tag">Digital Consulting</span>
               </div>
             </div>
-            <span class="work-arrow">↗</span>
           </div>
-        </a>
+        </div>
 
         <!-- Anubis + Soulmates: two columns -->
         <div class="work-pair" style="display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--rule);">
@@ -2169,7 +2181,7 @@ body {
         </div>
         <h2 class="contact-headline">Ready to initiate<br>something<br>together?</h2>
         <div class="contact-body">
-          <p class="contact-avail">Portugal · Remote-ready · Available now</p>
+          <p class="contact-avail">Portugal · Remote-ready · Available</p>
           <p>I work with ethical creators, spiritual teachers, and conscious community builders who need the full operational stack covered — without hiring a team of four. If your work is about transformation, let's talk about making it run.</p>
           <a class="btn-outline" href="https://calendly.com/christophekaisin/30min" target="_blank" rel="noopener noreferrer" style="margin-top:16px; display:inline-block;">Schedule a short meeting&nbsp;↗</a>
         </div>
@@ -2848,11 +2860,25 @@ body {
     var contact = document.querySelector('.contact-section');
     var game    = document.querySelector('.game-section');
     if (!fairy || !contact || !game) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'fairy-game-carousel-wrap';
     var carousel = document.createElement('div');
     carousel.className = 'fairy-game-carousel';
-    contact.after(carousel);
+    contact.after(wrap);
+    wrap.appendChild(carousel);
     carousel.appendChild(fairy);
     carousel.appendChild(game);
+
+    // Arrow hint
+    var arrow = document.createElement('div');
+    arrow.className = 'fairy-game-arrow';
+    arrow.innerHTML = '&#8250;';
+    wrap.appendChild(arrow);
+    carousel.addEventListener('scroll', function() {
+      var atEnd = carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth - 20;
+      arrow.style.opacity = atEnd ? '0' : '';
+    }, { passive: true });
+
     // Let browser reflow before canvas recalculates its dimensions
     setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 0);
   })();
