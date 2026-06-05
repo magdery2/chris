@@ -178,6 +178,41 @@ body {
   .contact-pill { top: 16px; right: 16px; padding: 10px 18px; font-size: 12px; }
 }
 
+/* Language toggle */
+.lang-toggle {
+  position: fixed;
+  top: 40px;
+  left: 52px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+.lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--mute);
+  font: inherit;
+  letter-spacing: inherit;
+  padding: 4px 5px;
+  transition: color 0.2s;
+}
+.lang-btn.active { color: var(--cream); }
+.lang-btn:hover:not(.active) { color: var(--soft); }
+.lang-sep { color: var(--rule); user-select: none; }
+.lang-toggle.is-over-light .lang-btn { color: rgba(24,20,16,0.35); }
+.lang-toggle.is-over-light .lang-btn.active { color: rgba(24,20,16,0.75); }
+.lang-toggle.is-over-light .lang-btn:hover:not(.active) { color: rgba(24,20,16,0.55); }
+.lang-toggle.is-over-light .lang-sep { color: rgba(24,20,16,0.15); }
+@media (max-width: 900px) {
+  .lang-toggle { top: 16px; left: 16px; }
+}
+
 /* Subtle blue aurora — hero left panel */
 .hero::before {
   content: '';
@@ -226,13 +261,13 @@ body {
 }
 
 @keyframes glitch-sm {
-  0%, 100% { filter: none; transform: none; }
-  1%   { filter: drop-shadow(-2px 0 rgba(255,40,80,0.85)) drop-shadow(2px 0 rgba(40,220,120,0.75)); transform: skewX(-1.2deg); }
-  2%   { filter: drop-shadow(2px 0 rgba(50,110,255,0.8)) drop-shadow(-1px 0 rgba(255,210,0,0.7)); transform: translate(2px,0); }
-  3.5% { filter: drop-shadow(-1px 0 rgba(255,40,80,0.5)) drop-shadow(1px 0 rgba(40,220,120,0.45)); transform: skewX(0.5deg); }
-  5%   { filter: none; transform: none; }
-  6.5% { filter: drop-shadow(1px 0 rgba(50,110,255,0.4)); }
-  7.5% { filter: none; transform: none; }
+  0%, 100% { text-shadow: none; transform: none; }
+  1%   { text-shadow: -2px 0 rgba(255,40,80,0.85), 2px 0 rgba(40,220,120,0.75); transform: skewX(-1.2deg); }
+  2%   { text-shadow: 2px 0 rgba(50,110,255,0.8), -1px 0 rgba(255,210,0,0.7); transform: translate(2px,0); }
+  3.5% { text-shadow: -1px 0 rgba(255,40,80,0.5), 1px 0 rgba(40,220,120,0.45); transform: skewX(0.5deg); }
+  5%   { text-shadow: none; transform: none; }
+  6.5% { text-shadow: 1px 0 rgba(50,110,255,0.4); }
+  7.5% { text-shadow: none; transform: none; }
 }
 
 @keyframes glitch-scroll {
@@ -828,6 +863,12 @@ body {
 .work-gallery-img.full:hover img {
   transform: scale(1.02);
   filter: saturate(1.0) brightness(1.02);
+}
+.work-pair .work-item:last-child .work-gallery-img.full img {
+  transform: scale(1.04);
+}
+.work-pair .work-item:last-child .work-gallery-img.full:hover img {
+  transform: scale(1.06);
 }
 
 /* Contact image — same treatment */
@@ -1745,6 +1786,11 @@ body {
 <main>
 
   <a href="#contact" class="contact-pill">Get in Touch</a>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" data-lang="fr">FR</button>
+  </div>
 
   <!-- ═══════════════════════════════════════════════
        HERO
@@ -2252,7 +2298,7 @@ body {
         </div>
       </div>
       <div class="game-hud">
-        <span>Score&nbsp;<strong id="g-score">0</strong></span>
+        <span><span class="score-label">Score</span>&nbsp;<strong id="g-score">0</strong></span>
         <span id="g-lives">♥ ♥ ♥ ♥ ♥</span>
       </div>
       <p class="game-hint">Mouse · Touch · ← →</p>
@@ -2671,11 +2717,19 @@ body {
       state = 'idle';
       fairy.morph = 0; fairy.morphDir = 0;
       const kept = missed;
+      const fr = document.documentElement.lang === 'fr';
       overlayIcon.textContent = score >= 20 ? '✨' : score >= 10 ? '🌳' : '🍎';
-      overlaySub.innerHTML =
-        `You won! You caught <strong>${score}</strong> apple${score!==1?'s':''}` +
-        (kept > 0 ? ` — and let some find their way back to the earth.<br><em style="font-size:0.85em;opacity:0.7">Thank you for letting nature grow again.</em>` : `.<br><em style="font-size:0.85em;opacity:0.7">Perfect catch — the fairy is proud.</em>`);
-      btn.textContent = 'Play again';
+      if (fr) {
+        overlaySub.innerHTML =
+          `Tu as gagné ! Tu as attrapé <strong>${score}</strong> pomme${score!==1?'s':''}` +
+          (kept > 0 ? ` — et en as laissé quelques-unes retrouver le chemin de la terre.<br><em style="font-size:0.85em;opacity:0.7">Merci d'avoir laissé la nature reprendre ses droits.</em>` : `.<br><em style="font-size:0.85em;opacity:0.7">Capture parfaite — la fée est fière.</em>`);
+        btn.textContent = 'Rejouer';
+      } else {
+        overlaySub.innerHTML =
+          `You won! You caught <strong>${score}</strong> apple${score!==1?'s':''}` +
+          (kept > 0 ? ` — and let some find their way back to the earth.<br><em style="font-size:0.85em;opacity:0.7">Thank you for letting nature grow again.</em>` : `.<br><em style="font-size:0.85em;opacity:0.7">Perfect catch — the fairy is proud.</em>`);
+        btn.textContent = 'Play again';
+      }
       overlay.classList.remove('hidden');
     }
 
@@ -2851,24 +2905,28 @@ body {
     if (ci) addGroupTilt([ci], soloIdx + 1, 3);
   })();
 
-  // ── Contact pill: adapts to section background ─────────────────
+  // ── Contact pill + lang toggle: adapt to section background ────
   (function() {
-    var pill = document.querySelector('.contact-pill');
-    if (!pill) return;
+    var pill   = document.querySelector('.contact-pill');
+    var toggle = document.querySelector('.lang-toggle');
+    if (!pill && !toggle) return;
     var sections = Array.from(document.querySelectorAll('main section, main .hero'));
     var ticking = false;
 
     function update() {
-      var py = pill.getBoundingClientRect().top + pill.offsetHeight / 2;
-      var onLight = false;
-      for (var i = 0; i < sections.length; i++) {
-        var r = sections[i].getBoundingClientRect();
-        if (r.top <= py && r.bottom > py) {
-          onLight = sections[i].classList.contains('is-light');
-          break;
+      sections.forEach(function(sec) { sec._rect = sec.getBoundingClientRect(); });
+
+      function overLight(el) {
+        var cy = el.getBoundingClientRect().top + el.offsetHeight / 2;
+        for (var i = 0; i < sections.length; i++) {
+          var r = sections[i]._rect;
+          if (r.top <= cy && r.bottom > cy) return sections[i].classList.contains('is-light');
         }
+        return false;
       }
-      pill.classList.toggle('is-over-light', onLight);
+
+      if (pill)   pill.classList.toggle('is-over-light', overLight(pill));
+      if (toggle) toggle.classList.toggle('is-over-light', overLight(toggle));
       ticking = false;
     }
 
@@ -2884,7 +2942,7 @@ body {
       '.shine-tag', '.work-tag', '.section-label',
       '.exp-company', '.contact-link-label',
       '.hero-eyebrow', '.manifestor-stat-l',
-      '.shine-num', '.for-entry-num', '.game-hint',
+      '.shine-num', '.for-num', '.game-hint',
       '.contact-avail'
     ].join(',');
     document.querySelectorAll(sel).forEach(function(el) {
@@ -2967,6 +3025,307 @@ body {
       list.scrollBy({ left: 48, behavior: 'smooth' });
       setTimeout(function() { list.scrollBy({ left: -48, behavior: 'smooth' }); }, 650);
     }, 900);
+  })();
+
+  // FR / EN language toggle
+  (function() {
+    var T = {
+      en: {
+        contactPill: 'Get in Touch',
+        heroTagline: 'For the creators<br>changing the world.',
+        heroSub: 'I bring the full operational stack, platform tech, community, automations, content systems, and growth, so you can stay in your work.',
+        heroCta: 'Where I shine ↓',
+        scrollLabel: 'Scroll',
+        manifestorLabel: 'How I work',
+        manifestorHeading: 'Your<br>vision,<br><em>built.</em>',
+        manifestorP1: "I’m a Projector with an 11 Life Path — a master number for clarity and insight. I see the whole system at once, I know where the energy needs to go, and I build what makes it move.",
+        manifestorP2: 'Minimalist by nature, I keep what matters and cut the rest.',
+        statFollowing: 'Community following',
+        statYears: 'Years',
+        shineLabel: 'Where I shine',
+        shineHeading: 'How I<br><em>show up</em>',
+        shine1H3: 'I build<br><em>the container.</em>',
+        shine1P: 'From bare domain to fully-running membership community — architecture, custom code, and platform stability. Built and maintained with care.',
+        shine1Tags: ['WordPress','MemberPress','BuddyBoss','LearnDash','Elementor','Bunny.net','Custom plugins'],
+        shine2H3: 'I hold<br><em>the space.</em>',
+        shine2P: 'Four years in retreat centres taught me how sacred spaces are held. I bring that to the digital world — onboarding, care, engagement, and the journey from first click to long-term belonging.',
+        shine2Tags: ['Community design','Member onboarding','Moderation','Engagement','Conflict care'],
+        shine3H3: 'I wire<br><em>the machine.</em>',
+        shine3P: 'Automations, content systems, and email flows — all wired together and running quietly so you never have to think about it.',
+        shine3Tags: ['Zapier','ManyChat','Mailchimp','Notion','Content architecture','GPT knowledge bases'],
+        shine4H3: 'I reach<br><em>people.</em>',
+        shine4P: 'Emails people actually read, landing pages that convert without pressure, launches that land with clarity. Communication that feels human because it is.',
+        shine4Tags: ['Email campaigns','Launch strategy','Landing pages','Copywriting','Onboarding flows'],
+        workLabel: 'Selected Work',
+        workHeading: 'Selected<br><em>Work</em>',
+        workIntro: 'Projects that show what I love.',
+        workDesc1: 'Membership-based online spiritual community focused on embodiment, discernment, and personal transformation — live events, workshops, archives, and interactive group spaces. Full ownership of the digital ecosystem: community management, UX and web architecture (WordPress, Elementor, MemberPress), email marketing, and automation workflows.',
+        workDesc2: "From cultivation to customer — I built the e-commerce platform that takes Mycosphere’s organic mushrooms to market. Product pages, shop architecture, client experience, and the digital infrastructure that connects growers to buyers across Belgium and beyond.",
+        workClient3: 'Telling a story',
+        workDesc3: 'Content that tells a story — visual direction and content design crafted to stop the scroll and carry the message before a single word is read.',
+        workClient4: 'Feeling deeply',
+        workDesc4: 'Emotion at the center — a space designed around human connection, where every detail of the experience was built to make people feel something real.',
+        forLabel: 'Who I work with',
+        forHeading: 'Built for<br><em>the right<br>people</em>',
+        for1Text: 'Spiritual Teachers &amp; Facilitators',
+        for1Sub: 'Building a digital home for your community',
+        for1Expand: "<p>You’ve built something real — a following, a practice, a body of work that matters. The infrastructure around it should match that depth.</p><p>I handle the entire digital layer so your energy stays on the work that only you can do.</p>",
+        for2Text: 'Retreat Centres &amp; Wellness Platforms',
+        for2Sub: 'Expanding your sacred space online',
+        for2Expand: "<p>Your physical space holds something sacred. The online extension should feel exactly the same — welcoming, intentional, and easy to navigate.</p><p>I build the membership systems, automations, and community infrastructure that keep your people connected year-round.</p>",
+        for3Text: 'Conscious Creators',
+        for3Sub: 'Who need the full operational stack covered',
+        for3Expand: "<p>You create at the intersection of beauty, meaning, and impact. But the platform, the community, the systems — those take time you don’t have.</p><p>I run the operational layer end to end so you can stay fully in your creative zone.</p>",
+        for4Text: 'Plant Medicine &amp; Somatic Practitioners',
+        for4Sub: 'Growing your practice with integrity',
+        for4Expand: "<p>You work in sensitive, sacred territory that demands trust, discretion, and real care for your community’s experience.</p><p>I understand that world and build digital homes that hold the depth and safety of what you offer.</p>",
+        for5Text: 'Values-Driven Organisations',
+        for5Sub: 'Needing tech, community, and systems that last',
+        for5Expand: "<p>Your work is meaningful and your systems should match — reliable, thoughtful, and built for the long run.</p><p>I bring technical precision and community intelligence to organisations where integrity isn’t optional.</p>",
+        for6Text: 'Anyone whose work is transformation',
+        for6Sub: 'And who needs it to actually run',
+        for6Expand: "<p>If your work changes people — in body, mind, or spirit — we probably speak the same language.</p><p>I’m here for the builders who care as much about how they do it as what they do.</p>",
+        expLabel: 'Experience',
+        expHeading: 'My<br><em>journey</em>',
+        exp1H3: 'Digital, Web &amp; Community Manager',
+        exp1P: 'Full platform ownership for a global creator-led spiritual community: ~2,500 paid members, 66k+ public following. Built and ran the entire stack — MemberPress, BuddyBoss, LearnDash, Elementor, custom plugins, Zapier and ManyChat automations, content calendar, live launches, and member experience end to end.',
+        exp2H3: 'Platform &amp; Digital Consultant',
+        exp2P: 'Platform architecture, automation design, content systems, and audience journeys for conscious and ethical projects. Helping mission-driven creators clarify their tech stack, reduce manual work, and build operations that last.',
+        exp3H3: 'Community &amp; Sacred Space Volunteer',
+        exp3P: 'Four years of lived practice — supporting retreats, ceremony, workshops and collective life across retreat centres, eco-villages and sanctuaries in Europe. The root system beneath everything I build online.',
+        exp4H3: 'UI/UX Designer',
+        exp4P: "A decade designing web and mobile interfaces, building visual systems, and shaping interaction flows. Master’s in Digital Design. Bachelor’s in Documentary Photography. The visual craft that grounds all the tech.",
+        fairyTitle: "🍎 Why I’m the Apple Fairy",
+        fairyP1: "Because the best work comes from real connection, giving fully, with nothing hidden and nothing held back. That’s what I bring to the people I work with — quiet, steady care that turns vision into something real, like light on a tree becoming fruit.",
+        fairyP2: 'I do my best work close to magic, close to nature, and always learning from the people I build alongside.',
+        contactHeadline: 'Ready to initiate<br class="contact-br-desktop"><span class="contact-br-mobile"> </span>something<br>together?',
+        contactAvail: 'Portugal · Remote-ready · Available',
+        contactP: "I work with ethical creators, spiritual teachers, and conscious community builders who need the full operational stack covered — without hiring a team of four. If your work is about transformation, let’s talk about making it run.",
+        contactCta: 'Schedule a short meeting ↗',
+        copyIdle: 'copy',
+        copyDone: 'copied ✓',
+        scoreLabel: 'Score',
+        gameLabel: 'A little magic',
+        gameHeading: 'Catch the apples.<br><em>Be the fairy.</em>',
+        overlaySub: 'Move with mouse, touch or arrow keys',
+        gameBtn: 'Play',
+        gameHint: 'Mouse · Touch · ← →'
+      },
+      fr: {
+        contactPill: 'Contact',
+        heroTagline: 'Pour les créateurs<br>qui changent le monde.',
+        heroSub: "J’apporte la stack opérationnelle complète — tech de plateforme, communauté, automatisations, systèmes de contenu et croissance — pour que vous puissiez rester dans votre travail.",
+        heroCta: 'Où je brille ↓',
+        scrollLabel: 'Défiler',
+        manifestorLabel: 'Comment je travaille',
+        manifestorHeading: 'Votre<br>vision,<br><em>réalisée.</em>',
+        manifestorP1: "Je suis un Projecteur avec un Chemin de Vie 11 — un nombre maître de clarté et de perspicacité. Je vois le système dans son ensemble, je sais où l’énergie doit aller, et je construis ce qui la met en mouvement.",
+        manifestorP2: "Minimaliste par nature, je garde ce qui compte et j’élimine le reste.",
+        statFollowing: 'Abonnés communauté',
+        statYears: 'Ans',
+        shineLabel: 'Où je brille',
+        shineHeading: 'Comment je<br><em>me distingue</em>',
+        shine1H3: 'Je construis<br><em>le cadre.</em>',
+        shine1P: "Du nom de domaine nu à une communauté d’abonnement pleinement opérationnelle — architecture, code sur mesure et stabilité de plateforme. Construit et maintenu avec soin.",
+        shine1Tags: ['WordPress','MemberPress','BuddyBoss','LearnDash','Elementor','Bunny.net','Plugins sur mesure'],
+        shine2H3: "Je tiens<br><em>l’espace.</em>",
+        shine2P: "Quatre ans dans des centres de retraite m’ont appris comment tenir les espaces sacrés. J’apporte cela au monde numérique — intégration, soin, engagement et le parcours du premier clic à l’appartenance durable.",
+        shine2Tags: ['Design communautaire','Intégration membres','Modération','Engagement','Soin des conflits'],
+        shine3H3: 'Je connecte<br><em>la machine.</em>',
+        shine3P: "Automatisations, systèmes de contenu et flux d’e-mails — tout est connecté et fonctionne silencieusement pour que vous n’ayez jamais à y penser.",
+        shine3Tags: ['Zapier','ManyChat','Mailchimp','Notion','Architecture de contenu','Bases GPT'],
+        shine4H3: "J’atteins<br><em>les gens.</em>",
+        shine4P: "Des e-mails que les gens lisent vraiment, des pages de vente qui convertissent sans pression, des lancements qui atterrissent avec clarté. Une communication qui se sent humaine parce qu’elle l’est.",
+        shine4Tags: ["Campagnes email","Stratégie de lancement","Pages de vente","Copywriting","Parcours d’intégration"],
+        workLabel: 'Travaux Sélectionnés',
+        workHeading: 'Travaux<br><em>Sélectionnés</em>',
+        workIntro: "Des projets qui reflètent ce que j’aime.",
+        workDesc1: "Communauté spirituelle en ligne par abonnement, axée sur l’incarnation, le discernement et la transformation personnelle — événements en direct, ateliers, archives et espaces de groupe interactifs. Propriété complète de l’écosystème numérique : gestion de communauté, UX et architecture web (WordPress, Elementor, MemberPress), marketing par e-mail et automatisations.",
+        workDesc2: "De la culture au client — j’ai construit la plateforme e-commerce qui amène les champignons biologiques de Mycosphere sur le marché. Pages produits, architecture de boutique, expérience client et infrastructure numérique qui connecte les producteurs aux acheteurs en Belgique et au-delà.",
+        workClient3: 'Raconter une histoire',
+        workDesc3: "Du contenu qui raconte une histoire — direction visuelle et design de contenu conçus pour arrêter le défilement et porter le message avant qu’un seul mot ne soit lu.",
+        workClient4: 'Ressentir profondément',
+        workDesc4: "L’émotion au centre — un espace conçu autour de la connexion humaine, où chaque détail de l’expérience a été construit pour faire ressentir quelque chose de réel.",
+        forLabel: 'Avec qui je travaille',
+        forHeading: 'Conçu pour<br><em>les bonnes<br>personnes</em>',
+        for1Text: 'Enseignants spirituels &amp; Facilitateurs',
+        for1Sub: 'Créer un foyer numérique pour votre communauté',
+        for1Expand: "<p>Vous avez construit quelque chose de réel — une audience, une pratique, un corpus de travail qui compte. L’infrastructure autour doit correspondre à cette profondeur.</p><p>Je gère l’ensemble de la couche numérique pour que votre énergie reste sur le travail que vous seul pouvez faire.</p>",
+        for2Text: 'Centres de retraite &amp; Plateformes bien-être',
+        for2Sub: 'Étendre votre espace sacré en ligne',
+        for2Expand: "<p>Votre espace physique contient quelque chose de sacré. L’extension en ligne doit se sentir exactement pareil — accueillante, intentionnelle et facile à naviguer.</p><p>Je construis les systèmes d’abonnement, les automatisations et l’infrastructure communautaire qui gardent vos personnes connectées tout au long de l’année.</p>",
+        for3Text: 'Créateurs Conscients',
+        for3Sub: "Qui ont besoin de la stack opérationnelle complète",
+        for3Expand: "<p>Vous créez à l’intersection de la beauté, du sens et de l’impact. Mais la plateforme, la communauté, les systèmes — cela prend du temps que vous n’avez pas.</p><p>Je gère la couche opérationnelle de bout en bout pour que vous restiez pleinement dans votre zone créative.</p>",
+        for4Text: 'Praticiens de médecine végétale &amp; Somatique',
+        for4Sub: 'Développer votre pratique avec intégrité',
+        for4Expand: "<p>Vous travaillez dans un territoire sensible et sacré qui exige confiance, discrétion et vrai soin pour l’expérience de votre communauté.</p><p>Je comprends ce monde et construis des espaces numériques qui contiennent la profondeur et la sécurité de ce que vous offrez.</p>",
+        for5Text: 'Organisations portées par des valeurs',
+        for5Sub: 'Ayant besoin de tech, communauté et systèmes durables',
+        for5Expand: "<p>Votre travail est porteur de sens et vos systèmes devraient en faire de même — fiables, réfléchis et construits pour durer.</p><p>J’apporte précision technique et intelligence communautaire aux organisations où l’intégrité n’est pas optionnelle.</p>",
+        for6Text: 'Quiconque dont le travail est la transformation',
+        for6Sub: "Et qui a besoin que ça fonctionne vraiment",
+        for6Expand: "<p>Si votre travail change les gens — dans le corps, l’esprit ou l’âme — nous parlons probablement le même langage.</p><p>Je suis là pour les bâtisseurs qui se soucient autant du comment que du quoi.</p>",
+        expLabel: 'Expérience',
+        expHeading: 'Mon<br><em>parcours</em>',
+        exp1H3: 'Manager Digital, Web &amp; Communauté',
+        exp1P: "Propriété complète de la plateforme pour une communauté spirituelle mondiale conduite par un créateur : ~2 500 membres payants, 66k+ abonnés publics. Construction et gestion de l’ensemble de la stack — MemberPress, BuddyBoss, LearnDash, Elementor, plugins personnalisés, automatisations Zapier et ManyChat, calendrier de contenu, lancements en direct et expérience membre de bout en bout.",
+        exp2H3: 'Consultant Plateforme &amp; Digital',
+        exp2P: "Architecture de plateforme, conception d’automatisations, systèmes de contenu et parcours d’audience pour des projets conscients et éthiques. Aider les créateurs engagés à clarifier leur stack tech, réduire le travail manuel et construire des opérations durables.",
+        exp3H3: 'Volontaire Communauté &amp; Espaces Sacrés',
+        exp3P: "Quatre ans de pratique vécue — soutien aux retraites, cérémonies, ateliers et vie collective dans des centres de retraite, éco-villages et sanctuaires en Europe. Le système racinaire sous tout ce que je construis en ligne.",
+        exp4H3: 'Designer UI/UX',
+        exp4P: "Une décennie à concevoir des interfaces web et mobiles, à construire des systèmes visuels et à façonner des flux d’interaction. Master en Design Numérique. Licence en Photographie Documentaire. L’art visuel qui ancre toute la tech.",
+        fairyTitle: "🍎 Pourquoi je suis l’Apple Fairy",
+        fairyP1: "Parce que le meilleur travail vient d’une connexion réelle, donner pleinement, sans rien cacher et sans rien retenir. C’est ce que j’apporte aux gens avec qui je travaille — un soin calme et constant qui transforme la vision en quelque chose de réel, comme la lumière sur un arbre qui devient fruit.",
+        fairyP2: "Je fais mon meilleur travail près de la magie, près de la nature, et en apprenant toujours des personnes aux côtés desquelles je construis.",
+        contactHeadline: 'Prêt à initier<br class="contact-br-desktop"><span class="contact-br-mobile"> </span>quelque chose<br>ensemble ?',
+        contactAvail: 'Portugal · Disponible à distance · Disponible',
+        contactP: "Je travaille avec des créateurs éthiques, des enseignants spirituels et des bâtisseurs de communauté conscients qui ont besoin de la stack opérationnelle complète — sans embaucher une équipe de quatre. Si votre travail est transformation, parlons de le faire fonctionner.",
+        contactCta: 'Planifier un court appel ↗',
+        copyIdle: 'copier',
+        copyDone: 'copié ✓',
+        scoreLabel: 'Score',
+        gameLabel: 'Un peu de magie',
+        gameHeading: 'Attrape les pommes.<br><em>Sois la fée.</em>',
+        overlaySub: 'Déplace avec la souris, le toucher ou les touches fléchées',
+        gameBtn: 'Jouer',
+        gameHint: 'Souris · Toucher · ← →'
+      }
+    };
+
+    function setLang(lang) {
+      var t = T[lang];
+      var q = function(sel) { return document.querySelector(sel); };
+      var qa = function(sel) { return document.querySelectorAll(sel); };
+
+      var pill = q('.contact-pill'); if (pill) pill.textContent = t.contactPill;
+
+      var heroTagline = q('.hero-tagline'); if (heroTagline) heroTagline.innerHTML = t.heroTagline;
+      var heroSub = q('.hero-sub'); if (heroSub) heroSub.textContent = t.heroSub;
+      var heroCta = q('.cta-row .btn-outline'); if (heroCta) heroCta.innerHTML = t.heroCta;
+      var scrollLabel = q('.scroll-cue-label'); if (scrollLabel) scrollLabel.textContent = t.scrollLabel;
+
+      var manifestorLabel = q('.manifestor-label'); if (manifestorLabel) manifestorLabel.textContent = t.manifestorLabel;
+      var manifestorHeading = q('.manifestor-heading'); if (manifestorHeading) manifestorHeading.innerHTML = t.manifestorHeading;
+      var manifestorPs = qa('.manifestor-aside > p');
+      if (manifestorPs[0]) manifestorPs[0].textContent = t.manifestorP1;
+      if (manifestorPs[1]) manifestorPs[1].textContent = t.manifestorP2;
+      var statLabels = qa('.manifestor-stat-l');
+      if (statLabels[1]) statLabels[1].textContent = t.statFollowing;
+      if (statLabels[2]) statLabels[2].textContent = t.statYears;
+
+      var shineSection = q('.shine-section');
+      if (shineSection) {
+        var sl = shineSection.querySelector('.section-label'); if (sl) sl.textContent = t.shineLabel;
+        var sh = shineSection.querySelector('.display-heading'); if (sh) sh.innerHTML = t.shineHeading;
+      }
+      var shineData = [
+        { h3: t.shine1H3, p: t.shine1P, tags: t.shine1Tags },
+        { h3: t.shine2H3, p: t.shine2P, tags: t.shine2Tags },
+        { h3: t.shine3H3, p: t.shine3P, tags: t.shine3Tags },
+        { h3: t.shine4H3, p: t.shine4P, tags: t.shine4Tags }
+      ];
+      qa('.shine-item').forEach(function(item, i) {
+        if (!shineData[i]) return;
+        var h3 = item.querySelector('h3'); if (h3) h3.innerHTML = shineData[i].h3;
+        var p = item.querySelector('.shine-item-body p'); if (p) p.textContent = shineData[i].p;
+        item.querySelectorAll('.shine-tag').forEach(function(tag, j) {
+          if (shineData[i].tags[j] !== undefined) tag.textContent = shineData[i].tags[j];
+        });
+      });
+
+      var workSection = q('.work-section');
+      if (workSection) {
+        var wl = workSection.querySelector('.section-label'); if (wl) wl.textContent = t.workLabel;
+        var wh = workSection.querySelector('.display-heading'); if (wh) wh.innerHTML = t.workHeading;
+      }
+      var workIntro = q('.work-intro'); if (workIntro) workIntro.textContent = t.workIntro;
+      var workDescs = qa('.work-desc');
+      if (workDescs[0]) workDescs[0].textContent = t.workDesc1;
+      if (workDescs[1]) workDescs[1].textContent = t.workDesc2;
+      if (workDescs[2]) workDescs[2].textContent = t.workDesc3;
+      if (workDescs[3]) workDescs[3].textContent = t.workDesc4;
+      var workClients = qa('.work-client');
+      if (workClients[2]) workClients[2].textContent = t.workClient3;
+      if (workClients[3]) workClients[3].textContent = t.workClient4;
+
+      var forSection = q('.for-section');
+      if (forSection) {
+        var fl = forSection.querySelector('.section-label'); if (fl) fl.textContent = t.forLabel;
+        var fh = forSection.querySelector('.display-heading'); if (fh) fh.innerHTML = t.forHeading;
+      }
+      var forData = [
+        { text: t.for1Text, sub: t.for1Sub, expand: t.for1Expand },
+        { text: t.for2Text, sub: t.for2Sub, expand: t.for2Expand },
+        { text: t.for3Text, sub: t.for3Sub, expand: t.for3Expand },
+        { text: t.for4Text, sub: t.for4Sub, expand: t.for4Expand },
+        { text: t.for5Text, sub: t.for5Sub, expand: t.for5Expand },
+        { text: t.for6Text, sub: t.for6Sub, expand: t.for6Expand }
+      ];
+      qa('.for-entry').forEach(function(entry, i) {
+        if (!forData[i]) return;
+        var ft = entry.querySelector('.for-text'); if (ft) ft.innerHTML = forData[i].text;
+        var fs = entry.querySelector('.for-sub-text'); if (fs) fs.textContent = forData[i].sub;
+        var fe = entry.querySelector('.for-expand-inner'); if (fe) fe.innerHTML = forData[i].expand;
+      });
+
+      var expSection = q('.exp-section');
+      if (expSection) {
+        var el = expSection.querySelector('.section-label'); if (el) el.textContent = t.expLabel;
+        var eh = expSection.querySelector('.display-heading'); if (eh) eh.innerHTML = t.expHeading;
+      }
+      var expData = [
+        { h3: t.exp1H3, p: t.exp1P },
+        { h3: t.exp2H3, p: t.exp2P },
+        { h3: t.exp3H3, p: t.exp3P },
+        { h3: t.exp4H3, p: t.exp4P }
+      ];
+      qa('.exp-item').forEach(function(item, i) {
+        if (!expData[i]) return;
+        var h3 = item.querySelector('.exp-body h3'); if (h3) h3.innerHTML = expData[i].h3;
+        var p = item.querySelector('.exp-body > p'); if (p) p.textContent = expData[i].p;
+      });
+
+      var fairyTitle = q('.fairy-title'); if (fairyTitle) fairyTitle.textContent = t.fairyTitle;
+      var fairyPs = qa('.fairy-body p');
+      if (fairyPs[0]) fairyPs[0].textContent = t.fairyP1;
+      if (fairyPs[1]) fairyPs[1].textContent = t.fairyP2;
+
+      var contactHeadline = q('.contact-headline'); if (contactHeadline) contactHeadline.innerHTML = t.contactHeadline;
+      var contactAvail = q('.contact-avail'); if (contactAvail) contactAvail.textContent = t.contactAvail;
+      qa('.contact-body > p').forEach(function(p) {
+        if (!p.classList.contains('contact-avail')) p.textContent = t.contactP;
+      });
+      var contactCta = q('.contact-body .btn-outline'); if (contactCta) contactCta.innerHTML = t.contactCta;
+      qa('.copy-idle').forEach(function(el) { el.textContent = t.copyIdle; });
+      qa('.copy-done').forEach(function(el) { el.textContent = t.copyDone; });
+
+      var gameSection = q('.game-section');
+      if (gameSection) {
+        var gl = gameSection.querySelector('.section-label'); if (gl) gl.textContent = t.gameLabel;
+        var gh = gameSection.querySelector('.display-heading'); if (gh) gh.innerHTML = t.gameHeading;
+      }
+      var overlaySub = q('#overlay-sub'); if (overlaySub) overlaySub.textContent = t.overlaySub;
+      var gameBtn = q('#game-btn'); if (gameBtn) gameBtn.textContent = t.gameBtn;
+      var gameHint = q('.game-hint'); if (gameHint) gameHint.textContent = t.gameHint;
+      var scoreLabel = q('.score-label'); if (scoreLabel) scoreLabel.textContent = t.scoreLabel;
+
+      qa('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('lang', lang); } catch(e) {}
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { setLang(btn.dataset.lang); });
+    });
+
+    try {
+      var saved = localStorage.getItem('lang');
+      if (saved === 'fr') setLang('fr');
+    } catch(e) {}
   })();
 </script>
 
