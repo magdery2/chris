@@ -50,8 +50,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Mulish:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="preload" as="image" href="assets/2026-Chris-Hero.jpg" />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Mulish:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Mulish:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
+<link rel="preload" as="image" href="assets/2026-Chris-Hero.webp" fetchpriority="high" />
 
 <style>
 /* ════════════════════════════════════════════════════════════════
@@ -122,10 +123,13 @@ body {
 .hero-portrait-img {
   position: absolute;
   inset: 0;
-  background: url("assets/2026-Chris-Hero.jpg") no-repeat;
-  background-size: cover;
-  background-position: 62% 18%;
   will-change: transform;
+}
+.hero-portrait-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 62% 18%;
+  display: block;
 }
 .hero-portrait-mask {
   position: absolute;
@@ -655,7 +659,7 @@ body {
   transition: background 0.35s;
 }
 
-.shine-item:hover { background: rgba(200,120,60,0.022); }
+.shine-item:hover { background: rgba(240,235,227,0.012); }
 
 .shine-item::after {
   content: '';
@@ -665,7 +669,6 @@ body {
   background: linear-gradient(to right, var(--gold), transparent 60%);
   transition: width 0.55s cubic-bezier(0.22,1,0.36,1);
 }
-.shine-item:hover::after { width: 100%; }
 
 .shine-num {
   font-family: var(--serif);
@@ -717,10 +720,11 @@ body {
   letter-spacing: 0.3px;
   transition: color 0.2s, border-color 0.2s;
 }
-.shine-item:hover .shine-tag {
+.shine-item.active .shine-tag {
   color: rgba(200,120,60,0.65);
   border-color: rgba(200,120,60,0.18);
 }
+.shine-item.active::after { width: 100%; }
 
 
 /* ════════════════════════════════════════════════════════════════
@@ -1326,8 +1330,8 @@ body {
     width: 100%;
     height: 100%;
   }
-  .hero-portrait-img {
-    background-position: 52% 12%;
+  .hero-portrait-img img {
+    object-position: 52% 12%;
   }
   .hero-portrait-mask {
     background:
@@ -1743,7 +1747,12 @@ body {
 
     <!-- Portrait -->
     <div class="hero-portrait">
-      <div class="hero-portrait-img" id="heroPhoto"></div>
+      <div class="hero-portrait-img" id="heroPhoto">
+        <picture>
+          <source srcset="assets/2026-Chris-Hero.webp" type="image/webp" />
+          <img src="assets/2026-Chris-Hero.jpg" alt="Chris Kaisin" fetchpriority="high" loading="eager" />
+        </picture>
+      </div>
       <div class="hero-portrait-mask"></div>
     </div>
 
@@ -1896,10 +1905,10 @@ body {
         <div class="work-item">
           <div class="work-gallery cols-2">
             <div class="work-gallery-img">
-              <img src="assets/eluna-usecase3.jpg" alt="Eluña community platform" loading="lazy" />
+              <img src="assets/eluna-usecase3.webp" alt="Eluña community platform" loading="lazy" />
             </div>
             <div class="work-gallery-img">
-              <img src="assets/eluna-usecase.jpg" alt="Eluña content library" loading="lazy" />
+              <img src="assets/eluna-usecase.webp" alt="Eluña content library" loading="lazy" />
             </div>
           </div>
           <div class="work-item-header" style="padding-top:28px;">
@@ -1928,10 +1937,10 @@ body {
         <div class="work-item">
           <div class="work-gallery cols-2">
             <div class="work-gallery-img no-veil">
-              <img src="assets/mycosphere-usecase.jpg" alt="Mycosphere shop" loading="lazy" />
+              <img src="assets/mycosphere-usecase.webp" alt="Mycosphere shop" loading="lazy" />
             </div>
             <div class="work-gallery-img no-veil">
-              <img src="assets/mycosphere-usecase2.jpg" alt="Mycosphere multi-device" loading="lazy" />
+              <img src="assets/mycosphere-usecase2.webp" alt="Mycosphere multi-device" loading="lazy" />
             </div>
           </div>
           <div class="work-item-header" style="padding-top:28px;">
@@ -1960,7 +1969,7 @@ body {
           <div class="work-item" style="border-bottom:none; border-right:1px solid var(--rule); padding-top:52px;">
             <div class="work-gallery">
               <div class="work-gallery-img full">
-                <img src="assets/Anubis.jpg" alt="Anubis — thumbnail storytelling and visual content design by Chris Kaisin" loading="lazy" />
+                <img src="assets/Anubis.webp" alt="Anubis — thumbnail storytelling and visual content design by Chris Kaisin" loading="lazy" />
               </div>
             </div>
             <div class="work-item-header simple" style="padding-top:28px; padding-right:32px;">
@@ -1982,7 +1991,7 @@ body {
           <div class="work-item" style="border-bottom:none; padding-top:52px;">
             <div class="work-gallery">
               <div class="work-gallery-img full">
-                <img src="assets/soulmates.jpg" alt="Soulmates — emotion-centered community experience design by Chris Kaisin" loading="lazy" />
+                <img src="assets/soulmates.webp" alt="Soulmates — emotion-centered community experience design by Chris Kaisin" loading="lazy" />
               </div>
             </div>
             <div class="work-item-header simple" style="padding-top:28px; padding-left:32px;">
@@ -2191,7 +2200,7 @@ body {
     <div class="contact-inner">
       <div class="contact-top">
         <div class="contact-img-wrap">
-          <img src="assets/ready.jpg" alt="Chris Kaisin — ready to work with you" loading="lazy" />
+          <img src="assets/ready.webp" alt="Chris Kaisin — ready to work with you" loading="lazy" />
         </div>
         <h2 class="contact-headline">Ready to initiate<br class="contact-br-desktop"><span class="contact-br-mobile"> </span>something<br>together?</h2>
         <div class="contact-body">
@@ -2716,6 +2725,15 @@ body {
       });
     });
   })();
+
+  // ── Shine-item: tags highlight on click ──────────────────────
+  document.querySelectorAll('.shine-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      var wasActive = item.classList.contains('active');
+      document.querySelectorAll('.shine-item').forEach(function(i) { i.classList.remove('active'); });
+      if (!wasActive) item.classList.add('active');
+    });
+  });
 
   // ── For-section accordion ────────────────────────────────────
   document.querySelectorAll('.for-entry-trigger').forEach(btn => {
