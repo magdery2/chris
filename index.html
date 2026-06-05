@@ -351,6 +351,59 @@ body {
 }
 
 /* ════════════════════════════════════════════════════════════════
+   SECTION COLOUR VARIANTS
+════════════════════════════════════════════════════════════════ */
+
+/* Forest green — dark brand accent */
+.is-forest {
+  background: #1c251c !important;
+  --rule: rgba(150,210,140,0.1);
+}
+.is-forest::before {
+  background: radial-gradient(ellipse at 30% 60%,
+    rgba(120,200,100,0.07) 0%,
+    rgba(100,180,80,0.03) 45%,
+    transparent 70%) !important;
+}
+
+/* Light cream — bright contrast break */
+.is-light {
+  background: #f5f0e8 !important;
+  --cream:  #1a1410;
+  --soft:   rgba(24,20,16,0.68);
+  --mute:   rgba(24,20,16,0.4);
+  --rule:   rgba(24,20,16,0.09);
+}
+
+/* Glass cards on light sections */
+.is-light .shine-grid { gap: 10px; }
+.is-light .shine-card {
+  border: none !important;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.52);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06), 0 0 0 1px rgba(255,255,255,0.9);
+  overflow: hidden;
+  transition: transform 0.38s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.38s ease,
+              background 0.3s;
+}
+.is-light .shine-card:hover {
+  background: rgba(255,255,255,0.78) !important;
+  transform: translateY(-5px);
+  box-shadow: 0 20px 52px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.9);
+}
+.is-light .shine-tag {
+  background: rgba(24,20,16,0.04);
+  border-color: rgba(24,20,16,0.1) !important;
+}
+.is-light .shine-card:hover .shine-tag {
+  color: rgba(24,20,16,0.5) !important;
+  border-color: rgba(24,20,16,0.14) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
    STATS STRIP
 ════════════════════════════════════════════════════════════════ */
 .stats-strip {
@@ -1309,7 +1362,7 @@ body {
   <!-- ═══════════════════════════════════════════════
        MANIFESTOR
   ═══════════════════════════════════════════════ -->
-  <section class="manifestor-section" id="manifestor">
+  <section class="manifestor-section is-forest" id="manifestor">
     <div class="manifestor-inner">
 
       <p class="manifestor-subtitle">Your vision, built.</p>
@@ -1326,7 +1379,7 @@ body {
   <!-- ═══════════════════════════════════════════════
        WHERE I SHINE
   ═══════════════════════════════════════════════ -->
-  <section class="shine-section" id="shine">
+  <section class="shine-section is-light" id="shine">
     <div class="shine-inner">
       <h2 class="section-label">Where I shine</h2>
       <div class="shine-grid">
@@ -2129,7 +2182,7 @@ body {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const s = document.createElement('style');
-    s.textContent = '[data-fade]{opacity:0;transform:translateY(18px);transition:opacity 0.65s ease,transform 0.65s ease}[data-fade].in{opacity:1;transform:none}';
+    s.textContent = '[data-fade]{opacity:0;transform:translateY(24px) scale(0.975);transition:opacity 0.75s cubic-bezier(0.22,1,0.36,1),transform 0.75s cubic-bezier(0.22,1,0.36,1)}[data-fade].in{opacity:1;transform:translateY(0) scale(1)}';
     document.head.appendChild(s);
 
     const obs = new IntersectionObserver(entries => {
