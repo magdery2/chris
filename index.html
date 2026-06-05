@@ -768,23 +768,46 @@ body {
 .work-gallery.cols-2 { grid-template-columns: 1fr 1fr; }
 .work-gallery.cols-3 { grid-template-columns: 1.3fr 1fr 1fr; }
 
+/* ── Shared image hover mixin ─────────────────────────────── */
 .work-gallery-img {
   height: 300px;
   overflow: hidden;
   position: relative;
+}
+/* Shine sweep */
+.work-gallery-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    112deg,
+    transparent 22%,
+    rgba(255,255,255,0.28) 46%,
+    rgba(255,255,255,0.06) 54%,
+    transparent 78%
+  );
+  transform: translateX(-140%) skewX(-14deg);
+  transition: transform 0s;
+  z-index: 2;
+  pointer-events: none;
+}
+.work-item:hover .work-gallery-img::after {
+  transform: translateX(140%) skewX(-14deg);
+  transition: transform 0.85s cubic-bezier(0.22,1,0.36,1);
 }
 .work-gallery-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top left;
-  transition: transform 0.7s cubic-bezier(0.22,1,0.36,1), filter 0.4s ease;
-  display: block;
   transform: scale(1);
+  filter: saturate(0.82);
+  transition: transform 0.75s cubic-bezier(0.22,1,0.36,1), filter 0.5s ease;
+  display: block;
 }
 .work-item:hover .work-gallery-img img {
-  transform: scale(1.04);
-  filter: brightness(1.04);
+  transform: scale(1.05);
+  filter: saturate(1.12) brightness(1.04);
 }
 .work-gallery-img.full {
   height: auto;
@@ -793,10 +816,49 @@ body {
 .work-gallery-img.full img {
   height: auto;
   object-fit: unset;
-  transition: filter 0.4s ease;
 }
 .work-item:hover .work-gallery-img.full img {
-  transform: none;
+  transform: scale(1.04);
+  filter: saturate(1.1) brightness(1.03);
+}
+
+/* Contact image — same effect */
+.contact-img-wrap {
+  overflow: hidden;
+  border-radius: 5px;
+  position: relative;
+}
+.contact-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    112deg,
+    transparent 22%,
+    rgba(255,255,255,0.22) 46%,
+    rgba(255,255,255,0.05) 54%,
+    transparent 78%
+  );
+  transform: translateX(-140%) skewX(-14deg);
+  transition: transform 0s;
+  z-index: 2;
+  pointer-events: none;
+}
+.contact-img-wrap:hover::after {
+  transform: translateX(140%) skewX(-14deg);
+  transition: transform 0.85s cubic-bezier(0.22,1,0.36,1);
+}
+.contact-img-wrap img {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+  filter: brightness(0.75) saturate(0.82);
+  transform: scale(1);
+  transition: transform 0.75s cubic-bezier(0.22,1,0.36,1), filter 0.5s ease;
+}
+.contact-img-wrap:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.85) saturate(1.1);
 }
 
 .work-index {
@@ -1884,7 +1946,9 @@ body {
   <section class="contact-section" id="contact">
     <div class="contact-inner">
       <div class="contact-top">
-        <img src="assets/ready.jpg" alt="Chris Kaisin — ready to work with you" loading="lazy" style="width:100%; display:block; border-radius:3px; filter:brightness(0.75);" />
+        <div class="contact-img-wrap">
+          <img src="assets/ready.jpg" alt="Chris Kaisin — ready to work with you" loading="lazy" />
+        </div>
         <h2 class="contact-headline">Ready to initiate<br>something<br>together?</h2>
         <div class="contact-body">
           <p class="contact-avail">Portugal · Remote-ready · Available now</p>
