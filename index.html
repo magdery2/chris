@@ -221,6 +221,16 @@ body {
   flex-shrink: 0;
 }
 
+@keyframes glitch-sm {
+  0%, 100% { text-shadow: none; transform: none; }
+  1%   { text-shadow: -2px 0 rgba(255,40,80,0.85), 2px 0 rgba(40,220,120,0.75); transform: skewX(-1.2deg); }
+  2%   { text-shadow: 2px 0 rgba(50,110,255,0.8), -1px 0 rgba(255,210,0,0.7); transform: translate(2px,0); }
+  3.5% { text-shadow: -1px 0 rgba(255,40,80,0.5), 1px 0 rgba(40,220,120,0.45); transform: skewX(0.5deg); }
+  5%   { text-shadow: none; transform: none; }
+  6.5% { text-shadow: 1px 0 rgba(50,110,255,0.4); }
+  7.5% { text-shadow: none; transform: none; }
+}
+
 @keyframes glitch-scroll {
   0%   { text-shadow: -4px 0 rgba(200,120,60,0.9), 3px 0 rgba(80,150,240,0.65); transform: skewX(-0.8deg); }
   10%  { text-shadow: 4px 0 rgba(200,120,60,0.7), -3px 0 rgba(80,150,240,0.8); transform: translate(3px,0); }
@@ -1303,31 +1313,41 @@ body {
 @media (max-width: 900px) {
   .stage { margin: 10px; }
 
-  /* Hero: photo above, text below */
+  /* Hero: full-bleed portrait, text anchored at bottom */
   .hero {
     flex-direction: column;
-    min-height: unset;
+    min-height: 100svh;
   }
   .hero-portrait {
-    position: relative;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: 60vw;
-    min-height: 240px;
-    max-height: 400px;
+    height: 100%;
+  }
+  .hero-portrait-img {
+    background-position: 52% 12%;
   }
   .hero-portrait-mask {
     background:
-      linear-gradient(to bottom, var(--bg) 0%, transparent 16%),
-      linear-gradient(to top,    var(--bg) 0%, transparent 20%);
+      linear-gradient(to top,    var(--bg) 0%, rgba(12,10,9,0.88) 28%, rgba(12,10,9,0.45) 55%, transparent 82%),
+      linear-gradient(to bottom, rgba(12,10,9,0.38) 0%, transparent 18%);
   }
   .hero-text {
+    position: relative;
+    z-index: 10;
     max-width: 100%;
-    padding: 36px 24px 72px;
+    margin-top: auto;
+    padding: 0 28px 52px;
+    justify-content: flex-end;
   }
-  .scroll-cue { display: none; }
-  .hero-creds { flex-wrap: wrap; gap: 12px; }
+  .hero-eyebrow { margin-bottom: 18px; }
+  .hero-name { margin-bottom: 14px; }
+  .hero-tagline { margin-bottom: 14px; }
+  .hero-sub { margin-bottom: 28px; }
+  .cta-row { gap: 8px; margin-bottom: 36px; }
+  .hero-creds { flex-wrap: wrap; gap: 10px; padding-top: 16px; }
   .hero-cred + .hero-cred { border-left: none; padding-left: 0; }
-  .cta-row { gap: 8px; }
+  .scroll-cue { display: none; }
   .btn-gold { font-size: 12px; padding: 12px 18px; }
 
   .work-item { padding: 36px 0 0; }
@@ -1400,11 +1420,10 @@ body {
 @media (max-width: 480px) {
   .stage { margin: 8px; }
 
-  .hero-portrait { height: 72vw; max-height: 320px; }
-  .hero-text { padding: 28px 20px 60px; }
-  .hero-name { font-size: clamp(50px, 13vw, 80px); }
+  .hero-text { padding: 0 20px 44px; }
+  .hero-name { font-size: clamp(48px, 13vw, 72px); }
   .hero-tagline { font-size: clamp(17px, 5vw, 24px); }
-  .hero-creds { gap: 10px; }
+  .hero-sub { font-size: 13px; }
 
   .manifestor-inner,
   .shine-inner,
@@ -2678,6 +2697,22 @@ body {
       if (!ticking) { requestAnimationFrame(update); ticking = true; }
     }, { passive: true });
     update();
+  })();
+
+  // ── Chromatic glitch on small elements ───────────────────────
+  (function() {
+    var sel = [
+      '.shine-tag', '.work-tag', '.section-label',
+      '.exp-company', '.contact-link-label',
+      '.hero-eyebrow', '.manifestor-stat-l',
+      '.shine-num', '.for-entry-num', '.game-hint',
+      '.contact-avail'
+    ].join(',');
+    document.querySelectorAll(sel).forEach(function(el) {
+      var dur  = 6 + Math.random() * 6;       // 6–12 s cycle
+      var del  = Math.random() * 14;           // stagger up to 14 s
+      el.style.animation = 'glitch-sm ' + dur.toFixed(2) + 's ' + del.toFixed(2) + 's ease-in-out infinite';
+    });
   })();
 </script>
 
