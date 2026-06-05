@@ -2880,8 +2880,11 @@ body {
   // ── Chromatic glitch on small elements ───────────────────────
   (function() {
     var sel = [
-      '.section-label', '.exp-company', '.contact-link-label',
-      '.hero-eyebrow', '.shine-num', '.game-hint'
+      '.shine-tag', '.work-tag', '.section-label',
+      '.exp-company', '.contact-link-label',
+      '.hero-eyebrow', '.manifestor-stat-l',
+      '.shine-num', '.for-entry-num', '.game-hint',
+      '.contact-avail'
     ].join(',');
     document.querySelectorAll(sel).forEach(function(el) {
       var dur  = 6 + Math.random() * 6;       // 6–12 s cycle
