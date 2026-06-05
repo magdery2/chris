@@ -2449,6 +2449,7 @@ body {
         <a href="#work" class="fnav-work">Work</a>
         <a href="#experience" class="fnav-exp">Experience</a>
         <a href="#contact" class="fnav-contact">Contact</a>
+        <a href="about.html" class="fnav-cv">Curriculum</a>
       </nav>
       <div class="footer-meta">
         <span class="footer-copy">© 2026 Chris Kaisin</span>
@@ -3265,6 +3266,7 @@ body {
         footerNavWork: 'Work',
         footerNavExp: 'Experience',
         footerNavContact: 'Contact',
+        footerNavCv: 'Curriculum',
         footerLocation: 'Based in Portugal · Available remotely'
       },
       fr: {
@@ -3353,6 +3355,7 @@ body {
         footerNavWork: 'Travaux',
         footerNavExp: 'Expérience',
         footerNavContact: 'Contact',
+        footerNavCv: 'Curriculum',
         footerLocation: 'Basé au Portugal · Disponible à distance'
       }
     };
@@ -3480,6 +3483,7 @@ body {
       var fShine = q('.fnav-shine'); if (fShine) fShine.textContent = t.footerNavShine;
       var fWork  = q('.fnav-work');  if (fWork)  fWork.textContent  = t.footerNavWork;
       var fExp   = q('.fnav-exp');   if (fExp)   fExp.textContent   = t.footerNavExp;
+      var fCv    = q('.fnav-cv');    if (fCv)    fCv.textContent    = t.footerNavCv;
 
       qa('.lang-btn').forEach(function(btn) {
         btn.classList.toggle('active', btn.dataset.lang === lang);
