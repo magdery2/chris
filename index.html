@@ -784,7 +784,7 @@ body {
   z-index: 1;
   pointer-events: none;
 }
-.work-item:hover .work-gallery-img::after {
+.work-gallery-img:hover::after {
   background: rgba(196,154,60,0.04);
 }
 .work-gallery-img img {
@@ -798,7 +798,7 @@ body {
   will-change: transform;
   display: block;
 }
-.work-item:hover .work-gallery-img img {
+.work-gallery-img:hover img {
   transform: scale(1.03);
   filter: saturate(1.0) brightness(1.02);
 }
@@ -810,7 +810,7 @@ body {
   height: auto;
   object-fit: unset;
 }
-.work-item:hover .work-gallery-img.full img {
+.work-gallery-img.full:hover img {
   transform: scale(1.02);
   filter: saturate(1.0) brightness(1.02);
 }
