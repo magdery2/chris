@@ -2066,7 +2066,7 @@ body {
             trees.push({ x: Math.max(30, Math.min(W-30, a.x)), p: 0 });
             spawnLeaves(a.x, H - 12);
             // Fairy morphs into tree briefly
-            fairy.morphDir = 1;
+            if (fairy.morph < 0.05 && fairy.morphDir === 0) fairy.morphDir = 1;
             if (missed >= MAX_MISSES) { endGame(); return false; }
             return false;
           }
@@ -2097,11 +2097,12 @@ body {
     }
     function endGame() {
       state = 'idle';
+      fairy.morph = 0; fairy.morphDir = 0;
       const kept = missed;
       overlayIcon.textContent = score >= 20 ? '✨' : score >= 10 ? '🌳' : '🍎';
       overlaySub.innerHTML =
         `You won! You caught <strong>${score}</strong> apple${score!==1?'s':''}` +
-        (kept > 0 ? ` — and let <strong>${kept}</strong> find their way back to the earth.<br><em style="font-size:0.85em;opacity:0.7">Thank you for letting nature grow again.</em>` : `.<br><em style="font-size:0.85em;opacity:0.7">Perfect catch — the fairy is proud.</em>`);
+        (kept > 0 ? ` — and let some find their way back to the earth.<br><em style="font-size:0.85em;opacity:0.7">Thank you for letting nature grow again.</em>` : `.<br><em style="font-size:0.85em;opacity:0.7">Perfect catch — the fairy is proud.</em>`);
       btn.textContent = 'Play again';
       overlay.classList.remove('hidden');
     }
