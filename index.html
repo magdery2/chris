@@ -1173,7 +1173,7 @@ body {
    CONTACT
 ════════════════════════════════════════════════════════════════ */
 .contact-section {
-  padding: 100px 0 88px;
+  padding: 72px 0 88px;
   background: radial-gradient(ellipse at 75% 100%,
     rgba(130,195,255,0.06) 0%,
     rgba(100,165,240,0.02) 50%,
@@ -1235,6 +1235,7 @@ body {
   text-decoration: none;
   transition: gap 0.22s ease;
 }
+.contact-link:first-child { border-top: none; }
 .contact-link:last-child { border-bottom: 1px solid var(--rule); }
 .contact-link:hover { gap: 30px; }
 .contact-link-label {
@@ -1427,7 +1428,7 @@ body {
   .fairy-section,
   .exp-section { padding: 64px 0; }
   .for-section { padding: 64px 0 56px; }
-  .contact-section { padding: 72px 0 60px; }
+  .contact-section { padding: 48px 0 60px; }
 
   .manifestor-section { padding: 64px 0 56px; }
   .manifestor-top { grid-template-columns: 1fr; gap: 40px 0; margin-bottom: 48px; }
@@ -1446,7 +1447,6 @@ body {
   .fairy-game-carousel-wrap { position: relative; }
   .fairy-game-arrow {
     position: absolute;
-    right: 6px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 48px;
@@ -1459,6 +1459,8 @@ body {
     z-index: 10;
     padding: 12px 8px;
   }
+  .fairy-game-arrow--next { right: 6px; }
+  .fairy-game-arrow--prev { left: 6px; }
   .fairy-game-carousel {
     display: flex;
     flex-direction: row;
@@ -1588,7 +1590,7 @@ body {
   .fairy-section,
   .exp-section { padding: 52px 0; }
   .for-section { padding: 52px 0 44px; }
-  .contact-section { padding: 56px 0 48px; }
+  .contact-section { padding: 36px 0 48px; }
   .manifestor-section { padding: 52px 0 44px; }
 
   .display-heading { font-size: 44px; margin-bottom: 28px; }
@@ -2880,18 +2882,27 @@ body {
     carousel.appendChild(fairy);
     carousel.appendChild(game);
 
-    // Arrow hint
-    var arrow = document.createElement('div');
-    arrow.className = 'fairy-game-arrow';
-    arrow.innerHTML = '&#8250;';
-    wrap.appendChild(arrow);
-    arrow.addEventListener('click', function() {
-      var slideW = carousel.querySelector('section').offsetWidth + 12;
-      carousel.scrollBy({ left: slideW, behavior: 'smooth' });
-    });
+    // Arrow hints
+    var arrowNext = document.createElement('div');
+    arrowNext.className = 'fairy-game-arrow fairy-game-arrow--next';
+    arrowNext.innerHTML = '&#8250;';
+    wrap.appendChild(arrowNext);
+
+    var arrowPrev = document.createElement('div');
+    arrowPrev.className = 'fairy-game-arrow fairy-game-arrow--prev';
+    arrowPrev.innerHTML = '&#8249;';
+    arrowPrev.style.opacity = '0';
+    wrap.appendChild(arrowPrev);
+
+    var getSlideW = function() { return carousel.querySelector('section').offsetWidth + 12; };
+    arrowNext.addEventListener('click', function() { carousel.scrollBy({ left: getSlideW(), behavior: 'smooth' }); });
+    arrowPrev.addEventListener('click', function() { carousel.scrollBy({ left: -getSlideW(), behavior: 'smooth' }); });
+
     carousel.addEventListener('scroll', function() {
       var atEnd = carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth - 20;
-      arrow.style.opacity = atEnd ? '0' : '';
+      var atStart = carousel.scrollLeft < 20;
+      arrowNext.style.opacity = atEnd ? '0' : '';
+      arrowPrev.style.opacity = atStart ? '0' : '';
     }, { passive: true });
 
     // Let browser reflow before canvas recalculates its dimensions
