@@ -1109,6 +1109,8 @@ body {
   .work-gallery.cols-2,
   .work-gallery.cols-3 { grid-template-columns: 1fr; }
   .work-gallery-img { height: 220px; }
+  .work-pair { grid-template-columns: 1fr !important; }
+  .work-pair .work-item { border-right: none !important; padding-right: 0 !important; padding-left: 0 !important; }
 
   .manifestor-inner,
   .shine-inner,
@@ -1368,7 +1370,7 @@ body {
         </a>
 
         <!-- Anubis + Soulmates: two columns -->
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--rule);">
+        <div class="work-pair" style="display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--rule);">
 
           <div class="work-item" style="border-bottom:none; border-right:1px solid var(--rule); padding-top:52px;">
             <div class="work-gallery">
