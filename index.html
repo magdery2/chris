@@ -866,10 +866,11 @@ body {
   filter: saturate(1.0) brightness(1.02);
 }
 .work-pair .work-item:last-child .work-gallery-img.full img {
-  transform: scale(1.04);
+  transform: rotate(2deg) scale(1.07);
+  transform-origin: center center;
 }
 .work-pair .work-item:last-child .work-gallery-img.full:hover img {
-  transform: scale(1.06);
+  transform: rotate(2deg) scale(1.09);
 }
 
 /* Contact image — same treatment */
@@ -2134,9 +2135,9 @@ body {
         </div>
 
         <!-- Anubis + Soulmates: two columns -->
-        <div class="work-pair" style="display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--rule);">
+        <div class="work-pair" style="display:grid; grid-template-columns:1fr 1fr; gap:0 48px; border-top:1px solid var(--rule);">
 
-          <div class="work-item" style="border-bottom:none; border-right:1px solid var(--rule); padding-top:52px;">
+          <div class="work-item" style="border-bottom:none; padding-top:52px;">
             <div class="work-gallery">
               <div class="work-gallery-img full">
                 <img src="assets/Anubis.webp" alt="Anubis — thumbnail storytelling and visual content design by Chris Kaisin" loading="lazy" width="900" height="506" />
