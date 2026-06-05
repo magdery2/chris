@@ -110,33 +110,30 @@ body {
   flex-direction: column;
 }
 
-/* Portrait — emerges from lower-right darkness */
+/* Portrait — full-width background, text overlaid */
 .hero-portrait {
   position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 54%;
+  inset: 0;
+  width: 100%;
   z-index: 1;
   pointer-events: none;
   overflow: hidden;
 }
 .hero-portrait-img {
   position: absolute;
-  inset: 2%;
+  inset: 0;
   background: url("assets/2026-Chris-Hero.jpg") no-repeat;
   background-size: cover;
-  background-position: 38% 24%;
+  background-position: 62% 18%;
   will-change: transform;
 }
 .hero-portrait-mask {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to right,  var(--bg) 0%, var(--bg) 2%, rgba(12,10,9,0.72) 24%, transparent 52%),
-    linear-gradient(to bottom, var(--bg) 0%, rgba(12,10,9,0.55) 10%, transparent 26%),
-    linear-gradient(to top,    var(--bg) 0%, transparent 22%),
-    radial-gradient(ellipse at 100% 50%, rgba(12,10,9,0.4) 0%, transparent 60%);
+    linear-gradient(to right,  rgba(12,10,9,0.88) 0%, rgba(12,10,9,0.72) 32%, rgba(12,10,9,0.28) 62%, rgba(12,10,9,0.15) 100%),
+    linear-gradient(to bottom, rgba(12,10,9,0.6) 0%, transparent 22%),
+    linear-gradient(to top,    rgba(12,10,9,0.7) 0%, transparent 28%);
 }
 
 /* Nav */
@@ -368,16 +365,15 @@ body {
    SECTION COLOUR VARIANTS
 ════════════════════════════════════════════════════════════════ */
 
-/* Forest green — dark brand accent */
+/* Forest green → deep indigo gradient */
 .is-forest {
-  background: #1c251c !important;
+  background: linear-gradient(135deg, #181825 0%, #1c251c 55%, #1a2318 100%) !important;
   --rule: rgba(150,210,140,0.1);
 }
 .is-forest::before {
-  background: radial-gradient(ellipse at 30% 60%,
-    rgba(120,200,100,0.07) 0%,
-    rgba(100,180,80,0.03) 45%,
-    transparent 70%) !important;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(100,90,180,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 40%, rgba(80,160,90,0.08) 0%, transparent 55%) !important;
 }
 
 /* Light cream — bright contrast break */
