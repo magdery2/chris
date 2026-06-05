@@ -8,6 +8,7 @@
 <meta name="author" content="Chris Kaisin" />
 <meta name="theme-color" content="#c49a3c" />
 <meta name="robots" content="index, follow" />
+<meta name="google-site-verification" content="2taVXCDgLO16cwYN6wxapkzcKw-wOgZ0w9rUsN1tkR4" />
 <meta name="keywords" content="community manager, platform operations, spiritual community, conscious creators, WordPress, MemberPress, BuddyBoss, membership site, digital consultant, fractional COO" />
 
 <link rel="canonical" href="https://chriskaisin.com/" />
@@ -640,7 +641,6 @@ body {
   text-decoration: none;
   color: inherit;
   transition: background 0.25s;
-  overflow: hidden;
 }
 .work-item:last-child { border-bottom: none; }
 .work-item:hover { background: rgba(196,154,60,0.02); }
@@ -671,20 +671,23 @@ body {
   object-fit: cover;
   object-position: top left;
   filter: grayscale(8%) brightness(0.52);
-  transition: filter 0.4s ease, transform 0.5s ease;
+  transition: filter 0.4s ease;
   display: block;
 }
 .work-item:hover .work-gallery-img img {
   filter: grayscale(0%) brightness(0.74);
-  transform: scale(1.03);
 }
 .work-gallery-img.full {
   height: auto;
-  overflow: visible;
+  overflow: hidden;
 }
 .work-gallery-img.full img {
   height: auto;
   object-fit: unset;
+  transition: filter 0.4s ease;
+}
+.work-item:hover .work-gallery-img.full img {
+  transform: none;
 }
 
 .work-index {
