@@ -226,13 +226,13 @@ body {
 }
 
 @keyframes glitch-sm {
-  0%, 100% { text-shadow: none; transform: none; }
-  1%   { text-shadow: -2px 0 rgba(255,40,80,0.85), 2px 0 rgba(40,220,120,0.75); transform: skewX(-1.2deg); }
-  2%   { text-shadow: 2px 0 rgba(50,110,255,0.8), -1px 0 rgba(255,210,0,0.7); transform: translate(2px,0); }
-  3.5% { text-shadow: -1px 0 rgba(255,40,80,0.5), 1px 0 rgba(40,220,120,0.45); transform: skewX(0.5deg); }
-  5%   { text-shadow: none; transform: none; }
-  6.5% { text-shadow: 1px 0 rgba(50,110,255,0.4); }
-  7.5% { text-shadow: none; transform: none; }
+  0%, 100% { filter: none; transform: none; }
+  1%   { filter: drop-shadow(-2px 0 rgba(255,40,80,0.85)) drop-shadow(2px 0 rgba(40,220,120,0.75)); transform: skewX(-1.2deg); }
+  2%   { filter: drop-shadow(2px 0 rgba(50,110,255,0.8)) drop-shadow(-1px 0 rgba(255,210,0,0.7)); transform: translate(2px,0); }
+  3.5% { filter: drop-shadow(-1px 0 rgba(255,40,80,0.5)) drop-shadow(1px 0 rgba(40,220,120,0.45)); transform: skewX(0.5deg); }
+  5%   { filter: none; transform: none; }
+  6.5% { filter: drop-shadow(1px 0 rgba(50,110,255,0.4)); }
+  7.5% { filter: none; transform: none; }
 }
 
 @keyframes glitch-scroll {
@@ -1755,7 +1755,7 @@ body {
       <div class="hero-portrait-img" id="heroPhoto">
         <picture>
           <source srcset="assets/2026-Chris-Hero.webp" type="image/webp" />
-          <img src="assets/2026-Chris-Hero.jpg" alt="Chris Kaisin" fetchpriority="high" loading="eager" />
+          <img src="assets/2026-Chris-Hero.jpg" alt="Chris Kaisin" fetchpriority="high" loading="eager" width="1200" height="670" />
         </picture>
       </div>
       <div class="hero-portrait-mask"></div>
@@ -1910,10 +1910,10 @@ body {
         <div class="work-item">
           <div class="work-gallery cols-2">
             <div class="work-gallery-img">
-              <img src="assets/eluna-usecase3.webp" alt="Eluña community platform" loading="lazy" />
+              <img src="assets/eluna-usecase3.webp" alt="Eluña community platform" loading="lazy" width="900" height="489" />
             </div>
             <div class="work-gallery-img">
-              <img src="assets/eluna-usecase.webp" alt="Eluña content library" loading="lazy" />
+              <img src="assets/eluna-usecase.webp" alt="Eluña content library" loading="lazy" width="900" height="491" />
             </div>
           </div>
           <div class="work-item-header" style="padding-top:28px;">
@@ -1942,10 +1942,10 @@ body {
         <div class="work-item">
           <div class="work-gallery cols-2">
             <div class="work-gallery-img no-veil">
-              <img src="assets/mycosphere-usecase.webp" alt="Mycosphere shop" loading="lazy" />
+              <img src="assets/mycosphere-usecase.webp" alt="Mycosphere shop" loading="lazy" width="900" height="1162" />
             </div>
             <div class="work-gallery-img no-veil">
-              <img src="assets/mycosphere-usecase2.webp" alt="Mycosphere multi-device" loading="lazy" />
+              <img src="assets/mycosphere-usecase2.webp" alt="Mycosphere multi-device" loading="lazy" width="900" height="647" />
             </div>
           </div>
           <div class="work-item-header" style="padding-top:28px;">
@@ -1974,7 +1974,7 @@ body {
           <div class="work-item" style="border-bottom:none; border-right:1px solid var(--rule); padding-top:52px;">
             <div class="work-gallery">
               <div class="work-gallery-img full">
-                <img src="assets/Anubis.webp" alt="Anubis — thumbnail storytelling and visual content design by Chris Kaisin" loading="lazy" />
+                <img src="assets/Anubis.webp" alt="Anubis — thumbnail storytelling and visual content design by Chris Kaisin" loading="lazy" width="900" height="506" />
               </div>
             </div>
             <div class="work-item-header simple" style="padding-top:28px; padding-right:32px;">
@@ -1996,7 +1996,7 @@ body {
           <div class="work-item" style="border-bottom:none; padding-top:52px;">
             <div class="work-gallery">
               <div class="work-gallery-img full">
-                <img src="assets/soulmates.webp" alt="Soulmates — emotion-centered community experience design by Chris Kaisin" loading="lazy" />
+                <img src="assets/soulmates.webp" alt="Soulmates — emotion-centered community experience design by Chris Kaisin" loading="lazy" width="900" height="506" />
               </div>
             </div>
             <div class="work-item-header simple" style="padding-top:28px; padding-left:32px;">
@@ -2205,7 +2205,7 @@ body {
     <div class="contact-inner">
       <div class="contact-top">
         <div class="contact-img-wrap">
-          <img src="assets/ready.webp" alt="Chris Kaisin — ready to work with you" loading="lazy" />
+          <img src="assets/ready.webp" alt="Chris Kaisin — ready to work with you" loading="lazy" width="700" height="933" />
         </div>
         <h2 class="contact-headline">Ready to initiate<br class="contact-br-desktop"><span class="contact-br-mobile"> </span>something<br>together?</h2>
         <div class="contact-body">
@@ -2880,11 +2880,8 @@ body {
   // ── Chromatic glitch on small elements ───────────────────────
   (function() {
     var sel = [
-      '.shine-tag', '.work-tag', '.section-label',
-      '.exp-company', '.contact-link-label',
-      '.hero-eyebrow', '.manifestor-stat-l',
-      '.shine-num', '.for-entry-num', '.game-hint',
-      '.contact-avail'
+      '.section-label', '.exp-company', '.contact-link-label',
+      '.hero-eyebrow', '.shine-num', '.game-hint'
     ].join(',');
     document.querySelectorAll(sel).forEach(function(el) {
       var dur  = 6 + Math.random() * 6;       // 6–12 s cycle
