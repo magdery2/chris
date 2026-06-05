@@ -873,15 +873,26 @@ body {
   border-top: 1px solid var(--rule);
 }
 .for-entry {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--rule);
+}
+.for-entry-trigger {
   display: grid;
   grid-template-columns: 48px 1fr auto;
   gap: 0 40px;
   align-items: center;
   padding: 28px 0;
-  border-bottom: 1px solid var(--rule);
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
   transition: gap 0.35s cubic-bezier(0.22,1,0.36,1);
 }
-.for-entry:hover { gap: 0 60px; }
+.for-entry-trigger:hover { gap: 0 60px; }
 .for-num {
   font-family: var(--mono);
   font-size: 9.5px;
@@ -903,22 +914,51 @@ body {
   color: var(--cream);
   transition: color 0.2s;
 }
-.for-entry:hover .for-text { color: var(--gold); }
+.for-entry-trigger:hover .for-text { color: var(--gold); }
 .for-sub-text {
   font-family: var(--sans);
   font-size: 13px;
   line-height: 1.5;
   color: var(--soft);
 }
-.for-entry-arrow {
-  font-size: 22px;
+.for-entry-toggle {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1;
   color: var(--mute);
-  transition: color 0.2s, transform 0.35s cubic-bezier(0.22,1,0.36,1);
   flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), color 0.2s;
 }
-.for-entry:hover .for-entry-arrow {
+.for-entry-trigger:hover .for-entry-toggle { color: var(--gold); }
+.for-entry.open .for-entry-toggle {
+  transform: rotate(45deg);
   color: var(--gold);
-  transform: translate(5px, -3px);
+}
+
+/* Expand / collapse panel */
+.for-expand-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+.for-entry.open .for-expand-wrap {
+  grid-template-rows: 1fr;
+}
+.for-expand { overflow: hidden; }
+.for-expand-inner {
+  padding: 0 64px 28px 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+}
+.for-expand-inner p {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.72;
+  color: var(--soft);
+  margin: 0;
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -1220,8 +1260,9 @@ body {
   .shine-card-img { height: 180px; }
 
   .for-section.is-light .for-inner { padding: 64px 24px; }
-  .for-entry { grid-template-columns: 36px 1fr auto; gap: 0 18px; padding: 22px 0; }
-  .for-entry:hover { gap: 0 28px; }
+  .for-entry-trigger { grid-template-columns: 36px 1fr auto; gap: 0 18px; padding: 22px 0; }
+  .for-entry-trigger:hover { gap: 0 28px; }
+  .for-expand-inner { padding: 0 16px 24px 52px; padding-top: 18px; }
   .display-heading { font-size: 52px; margin-bottom: 40px; }
   .exp-item { padding: 36px 20px; margin: 0 -20px; }
 
@@ -1615,54 +1656,97 @@ body {
       <h2 class="section-label">Who I work with</h2>
       <p class="display-heading">Built for<br><em>the right<br>people</em></p>
       <ul class="for-list">
+
         <li class="for-entry">
-          <span class="for-num">01</span>
-          <div class="for-entry-body">
-            <span class="for-text">Spiritual Teachers &amp; Facilitators</span>
-            <span class="for-sub-text">Building a digital home for your community</span>
-          </div>
-          <span class="for-entry-arrow">→</span>
+          <button class="for-entry-trigger" aria-expanded="false">
+            <span class="for-num">01</span>
+            <div class="for-entry-body">
+              <span class="for-text">Spiritual Teachers &amp; Facilitators</span>
+              <span class="for-sub-text">Building a digital home for your community</span>
+            </div>
+            <span class="for-entry-toggle">+</span>
+          </button>
+          <div class="for-expand-wrap"><div class="for-expand"><div class="for-expand-inner">
+            <p>You've built something real — a following, a practice, a body of work that matters. The infrastructure around it should match that depth.</p>
+            <p>I handle the entire digital layer so your energy stays on the work that only you can do.</p>
+          </div></div></div>
         </li>
+
         <li class="for-entry">
-          <span class="for-num">02</span>
-          <div class="for-entry-body">
-            <span class="for-text">Retreat Centres &amp; Wellness Platforms</span>
-            <span class="for-sub-text">Expanding your sacred space online</span>
-          </div>
-          <span class="for-entry-arrow">→</span>
+          <button class="for-entry-trigger" aria-expanded="false">
+            <span class="for-num">02</span>
+            <div class="for-entry-body">
+              <span class="for-text">Retreat Centres &amp; Wellness Platforms</span>
+              <span class="for-sub-text">Expanding your sacred space online</span>
+            </div>
+            <span class="for-entry-toggle">+</span>
+          </button>
+          <div class="for-expand-wrap"><div class="for-expand"><div class="for-expand-inner">
+            <p>Your physical space holds something sacred. The online extension should feel exactly the same — welcoming, intentional, and easy to navigate.</p>
+            <p>I build the membership systems, automations, and community infrastructure that keep your people connected year-round.</p>
+          </div></div></div>
         </li>
+
         <li class="for-entry">
-          <span class="for-num">03</span>
-          <div class="for-entry-body">
-            <span class="for-text">Conscious Creators</span>
-            <span class="for-sub-text">Who need the full operational stack covered</span>
-          </div>
-          <span class="for-entry-arrow">→</span>
+          <button class="for-entry-trigger" aria-expanded="false">
+            <span class="for-num">03</span>
+            <div class="for-entry-body">
+              <span class="for-text">Conscious Creators</span>
+              <span class="for-sub-text">Who need the full operational stack covered</span>
+            </div>
+            <span class="for-entry-toggle">+</span>
+          </button>
+          <div class="for-expand-wrap"><div class="for-expand"><div class="for-expand-inner">
+            <p>You create at the intersection of beauty, meaning, and impact. But the platform, the community, the systems — those take time you don't have.</p>
+            <p>I run the operational layer end to end so you can stay fully in your creative zone.</p>
+          </div></div></div>
         </li>
+
         <li class="for-entry">
-          <span class="for-num">04</span>
-          <div class="for-entry-body">
-            <span class="for-text">Plant Medicine &amp; Somatic Practitioners</span>
-            <span class="for-sub-text">Growing your practice with integrity</span>
-          </div>
-          <span class="for-entry-arrow">→</span>
+          <button class="for-entry-trigger" aria-expanded="false">
+            <span class="for-num">04</span>
+            <div class="for-entry-body">
+              <span class="for-text">Plant Medicine &amp; Somatic Practitioners</span>
+              <span class="for-sub-text">Growing your practice with integrity</span>
+            </div>
+            <span class="for-entry-toggle">+</span>
+          </button>
+          <div class="for-expand-wrap"><div class="for-expand"><div class="for-expand-inner">
+            <p>You work in sensitive, sacred territory that demands trust, discretion, and real care for your community's experience.</p>
+            <p>I understand that world and build digital homes that hold the depth and safety of what you offer.</p>
+          </div></div></div>
         </li>
+
         <li class="for-entry">
-          <span class="for-num">05</span>
-          <div class="for-entry-body">
-            <span class="for-text">Values-Driven Organisations</span>
-            <span class="for-sub-text">Needing tech, community, and systems that last</span>
-          </div>
-          <span class="for-entry-arrow">→</span>
+          <button class="for-entry-trigger" aria-expanded="false">
+            <span class="for-num">05</span>
+            <div class="for-entry-body">
+              <span class="for-text">Values-Driven Organisations</span>
+              <span class="for-sub-text">Needing tech, community, and systems that last</span>
+            </div>
+            <span class="for-entry-toggle">+</span>
+          </button>
+          <div class="for-expand-wrap"><div class="for-expand"><div class="for-expand-inner">
+            <p>Your work is meaningful and your systems should match — reliable, thoughtful, and built for the long run.</p>
+            <p>I bring technical precision and community intelligence to organisations where integrity isn't optional.</p>
+          </div></div></div>
         </li>
+
         <li class="for-entry">
-          <span class="for-num">06</span>
-          <div class="for-entry-body">
-            <span class="for-text">Anyone whose work is transformation</span>
-            <span class="for-sub-text">And who needs it to actually run</span>
-          </div>
-          <span class="for-entry-arrow">→</span>
+          <button class="for-entry-trigger" aria-expanded="false">
+            <span class="for-num">06</span>
+            <div class="for-entry-body">
+              <span class="for-text">Anyone whose work is transformation</span>
+              <span class="for-sub-text">And who needs it to actually run</span>
+            </div>
+            <span class="for-entry-toggle">+</span>
+          </button>
+          <div class="for-expand-wrap"><div class="for-expand"><div class="for-expand-inner">
+            <p>If your work changes people — in body, mind, or spirit — we probably speak the same language.</p>
+            <p>I'm here for the builders who care as much about how they do it as what they do.</p>
+          </div></div></div>
         </li>
+
       </ul>
     </div>
   </section>
@@ -2286,6 +2370,16 @@ body {
       });
     });
   })();
+
+  // ── For-section accordion ────────────────────────────────────
+  document.querySelectorAll('.for-entry-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const entry = btn.closest('.for-entry');
+      const isOpen = entry.classList.contains('open');
+      entry.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
 
   // ── Hero parallax ────────────────────────────────────────────
   (function() {
