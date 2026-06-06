@@ -70,7 +70,7 @@
   --rule:    rgba(240,235,227,0.07);
   --frame:   #070505;
 
-  --serif: 'Cormorant Garamond', Georgia, serif;
+  --serif: 'Urbanist', system-ui, sans-serif;
   --sans:  'Urbanist', 'Mulish', system-ui, sans-serif;
   --mono:  'JetBrains Mono', ui-monospace, monospace;
 }
@@ -2408,16 +2408,6 @@ body {
   </section>
 
   <!-- ═══════════════════════════════════════════════
-       APPLE FAIRY
-  ═══════════════════════════════════════════════ -->
-  <section class="fairy-section">
-    <div class="fairy-inner">
-      <span class="fairy-label">🍎 Why I'm the Apple Fairy</span>
-      <p class="fairy-title">Because the best work comes from real connection — quiet, steady care that turns vision into something real.</p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════
        CONTACT
   ═══════════════════════════════════════════════ -->
   <section class="contact-section" id="contact">
@@ -2447,6 +2437,16 @@ body {
           <span class="contact-link-value">linkedin.com/in/christopheksn<span class="nav-tag">↗</span></span>
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       APPLE FAIRY
+  ═══════════════════════════════════════════════ -->
+  <section class="fairy-section">
+    <div class="fairy-inner">
+      <span class="fairy-label">🍎 Why I'm the Apple Fairy</span>
+      <p class="fairy-title">Because the best work comes from real connection — quiet, steady care that turns vision into something real.</p>
     </div>
   </section>
 
@@ -3155,14 +3155,6 @@ body {
     });
   })();
 
-  // Mobile: place fairy banner directly above game section
-  (function() {
-    if (window.innerWidth > 900) return;
-    var fairy = document.querySelector('.fairy-section');
-    var game  = document.querySelector('.game-section');
-    if (!fairy || !game) return;
-    game.before(fairy);
-  })();
 
   // Work carousel: dots + bounce hint
   (function() {
