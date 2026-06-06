@@ -51,8 +51,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geom:wght@400;700&family=Urbanist:wght@400;500;700;900&family=Mulish:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geom:wght@400;700&family=Urbanist:wght@400;500;700;900&family=Mulish:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geom&family=Urbanist:wght@400;500;700;900&family=Mulish:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geom&family=Urbanist:wght@400;500;700;900&family=Mulish:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
 <link rel="preload" as="image" href="assets/2026-Chris-Hero.webp" fetchpriority="high" />
 
 <style>
@@ -86,6 +86,7 @@ body {
   color: var(--cream);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  font-synthesis: style;
 }
 
 /* ── Stage ───────────────────────────────────────────────────── */
@@ -819,10 +820,10 @@ body {
 }
 .work-stat-l {
   font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 1.5px;
+  font-size: 10px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: var(--mute);
+  color: var(--soft);
   line-height: 1.4;
 }
 .work-stat-role {
@@ -943,7 +944,8 @@ body {
 .contact-img-wrap:hover::after {
   background: rgba(200,120,60,0.04);
 }
-.contact-img-wrap img {
+.contact-img-wrap img,
+.contact-img-wrap video {
   display: block;
   width: 100%;
   height: auto;
@@ -953,7 +955,8 @@ body {
   transition: transform 1.1s cubic-bezier(0.16,1,0.3,1), filter 0.65s ease;
   will-change: transform;
 }
-.contact-img-wrap:hover img {
+.contact-img-wrap:hover img,
+.contact-img-wrap:hover video {
   transform: scale(1.03);
   filter: brightness(0.92) saturate(1.0);
 }
@@ -977,6 +980,7 @@ body {
   margin: 0 0 6px;
   transition: color 0.2s;
 }
+.work-client em { font-style: italic; font-weight: 300; }
 .work-sub {
   display: block;
   font-family: var(--mono);
@@ -2115,7 +2119,7 @@ body {
             </div>
             <div class="work-stat">
               <span class="work-stat-n">2</span>
-              <span class="work-stat-l">Years on project</span>
+              <span class="work-stat-l">Years</span>
             </div>
             <div class="work-stat">
               <span class="work-stat-role">Head of Community<br>&amp; Platform Operations</span>
@@ -2123,7 +2127,7 @@ body {
           </div>
           <div class="work-item-header" style="padding-top:28px;">
             <div class="work-identity">
-              <h3 class="work-client">Eluña Noelle</h3>
+              <h3 class="work-client">Eluña <em>Noelle</em></h3>
               <a class="work-url" href="https://circle.elunanoelle.com/videos/" target="_blank" rel="noopener noreferrer">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
                 elunanoelle.com
@@ -2159,11 +2163,11 @@ body {
           <div class="work-stats">
             <div class="work-stat">
               <span class="work-stat-n">#1</span>
-              <span class="work-stat-l">Mycelium production in Europe</span>
+              <span class="work-stat-l">In Europe</span>
             </div>
             <div class="work-stat">
               <span class="work-stat-n">2</span>
-              <span class="work-stat-l">Years on project</span>
+              <span class="work-stat-l">Years</span>
             </div>
             <div class="work-stat">
               <span class="work-stat-role">Head of Web Strategy<br>&amp; Production</span>
@@ -2171,7 +2175,7 @@ body {
           </div>
           <div class="work-item-header" style="padding-top:28px;">
             <div class="work-identity">
-              <h3 class="work-client">Mycosphere</h3>
+              <h3 class="work-client"><em>Mycosphere</em></h3>
               <a class="work-url" href="https://lamycosphere.com/collections/myceliums-sur-grains" target="_blank" rel="noopener noreferrer">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
                 lamycosphere.com
@@ -2199,7 +2203,7 @@ body {
             </div>
             <div class="work-item-header simple" style="padding-top:28px; padding-right:32px;">
               <div>
-                <div class="work-identity"><h3 class="work-client">Telling a story</h3></div>
+                <div class="work-identity"><h3 class="work-client">Telling <em>a story</em></h3></div>
                 <div class="work-detail">
                 <p class="work-desc">Content that tells a story — visual direction and content design crafted to stop the scroll and carry the message before a single word is read.</p>
                 <div class="work-tags">
@@ -2220,7 +2224,7 @@ body {
             </div>
             <div class="work-item-header simple" style="padding-top:28px; padding-left:32px;">
               <div>
-                <div class="work-identity"><h3 class="work-client">Feeling deeply</h3></div>
+                <div class="work-identity"><h3 class="work-client">Feeling <em>deeply</em></h3></div>
                 <div class="work-detail">
                 <p class="work-desc">Emotion at the center — a space designed around human connection, where every detail of the experience was built to make people feel something real.</p>
                 <div class="work-tags">
@@ -2357,7 +2361,7 @@ body {
             <span class="exp-loc">Remote</span>
           </div>
           <div class="exp-body">
-            <h3>Digital, Web &amp; Community Manager</h3>
+            <h3>Head of Community  &amp; Platform Operations</h3>
             <span class="exp-company">Eluña Noelle</span>
             <p>Full platform ownership for a global creator-led spiritual community: ~2,500 paid members, 66k+ public following. Built and ran the entire stack — MemberPress, BuddyBoss, LearnDash, Elementor, custom plugins, Zapier and ManyChat automations, content calendar, live launches, and member experience end to end.</p>
           </div>
@@ -2414,7 +2418,9 @@ body {
     <div class="contact-inner">
       <div class="contact-top">
         <div class="contact-img-wrap">
-          <img src="assets/ready.webp" alt="Chris Kaisin — ready to work with you" loading="lazy" width="750" height="1000" />
+          <video id="readyVideo" muted playsinline preload="auto" poster="assets/ready.webp" aria-hidden="true">
+            <source src="assets/ready.mp4" type="video/mp4" />
+          </video>
         </div>
         <h2 class="contact-headline">Ready to initiate<br class="contact-br-desktop"><span class="contact-br-mobile"> </span>something<br>together?</h2>
         <div class="contact-body">
@@ -3108,6 +3114,23 @@ body {
     if (ci) addGroupTilt([ci], soloIdx + 1, 3);
   })();
 
+  // ── Ready video: play once on scroll into view ──────────────────
+  (function() {
+    var vid = document.getElementById('readyVideo');
+    if (!vid) return;
+    var played = false;
+    var io = new IntersectionObserver(function(entries) {
+      if (played) return;
+      if (entries[0].isIntersecting) {
+        played = true;
+        vid.play();
+        io.disconnect();
+      }
+    }, { threshold: 0.3 });
+    io.observe(vid);
+  })();
+
+
   // ── Contact pill + lang toggle: adapt to section background ────
   (function() {
     var pill   = document.querySelector('.contact-pill');
@@ -3222,9 +3245,9 @@ body {
         workIntro: 'Projects that show what I love.',
         workDesc1: 'Membership-based online spiritual community focused on embodiment, discernment, and personal transformation — live events, workshops, archives, and interactive group spaces. Full ownership of the digital ecosystem: community management, UX and web architecture (WordPress, Elementor, MemberPress), email marketing, and automation workflows.',
         workDesc2: "From cultivation to customer — I built the e-commerce platform that takes Mycosphere’s organic mushrooms to market. Product pages, shop architecture, client experience, and the digital infrastructure that connects growers to buyers across Belgium and beyond.",
-        workClient3: 'Telling a story',
+        workClient3: 'Telling <em>a story</em>',
         workDesc3: 'Content that tells a story — visual direction and content design crafted to stop the scroll and carry the message before a single word is read.',
-        workClient4: 'Feeling deeply',
+        workClient4: 'Feeling <em>deeply</em>',
         workDesc4: 'Emotion at the center — a space designed around human connection, where every detail of the experience was built to make people feel something real.',
         forLabel: 'Who I work with',
         forHeading: 'Built for<br><em>the right<br>people</em>',
@@ -3310,9 +3333,9 @@ body {
         workIntro: "Des projets qui reflètent ce que j’aime.",
         workDesc1: "Communauté spirituelle en ligne par abonnement, axée sur l’incarnation, le discernement et la transformation personnelle — événements en direct, ateliers, archives et espaces de groupe interactifs. Propriété complète de l’écosystème numérique : gestion de communauté, UX et architecture web (WordPress, Elementor, MemberPress), marketing par e-mail et automatisations.",
         workDesc2: "De la culture au client — j’ai construit la plateforme e-commerce qui amène les champignons biologiques de Mycosphere sur le marché. Pages produits, architecture de boutique, expérience client et infrastructure numérique qui connecte les producteurs aux acheteurs en Belgique et au-delà.",
-        workClient3: 'Raconter une histoire',
+        workClient3: 'Raconter <em>une histoire</em>',
         workDesc3: "Du contenu qui raconte une histoire — direction visuelle et design de contenu conçus pour arrêter le défilement et porter le message avant qu’un seul mot ne soit lu.",
-        workClient4: 'Ressentir profondément',
+        workClient4: 'Ressentir <em>profondément</em>',
         workDesc4: "L’émotion au centre — un espace conçu autour de la connexion humaine, où chaque détail de l’expérience a été construit pour faire ressentir quelque chose de réel.",
         forLabel: 'Avec qui je travaille',
         forHeading: 'Conçu pour<br><em>les bonnes<br>personnes</em>',
@@ -3422,8 +3445,8 @@ body {
       if (workDescs[2]) workDescs[2].textContent = t.workDesc3;
       if (workDescs[3]) workDescs[3].textContent = t.workDesc4;
       var workClients = qa('.work-client');
-      if (workClients[2]) workClients[2].textContent = t.workClient3;
-      if (workClients[3]) workClients[3].textContent = t.workClient4;
+      if (workClients[2]) workClients[2].innerHTML = t.workClient3;
+      if (workClients[3]) workClients[3].innerHTML = t.workClient4;
 
       var forSection = q('.for-section');
       if (forSection) {
