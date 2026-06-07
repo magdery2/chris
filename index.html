@@ -94,7 +94,7 @@ body {
   position: relative;
   margin: 20px;
   border-radius: 3px;
-  overflow: hidden;
+  overflow: clip;
   background: var(--bg);
   box-shadow:
     0 40px 100px -32px rgba(0,0,0,0.8),
@@ -651,12 +651,6 @@ body {
     rgba(100,165,240,0.03) 50%,
     transparent 75%);
 }
-.shine-inner {
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 0 52px;
-}
-
 .section-label {
   display: flex;
   align-items: center;
@@ -677,27 +671,32 @@ body {
   flex-shrink: 0;
 }
 
-/* ── Shine gallery list ─────────────────────────────────────── */
-.shine-list {
-  display: flex;
-  flex-direction: column;
+/* ── Shine: 2-column layout, sticky left, animated right ────── */
+.shine-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 52px;
+  display: grid;
+  grid-template-columns: 5fr 8fr;
+  gap: 0 100px;
+  align-items: start;
+}
+.shine-left {
+  position: sticky;
+  top: 100px;
+}
+.shine-left .section-label { margin-bottom: 24px; }
+.shine-right {
   border-top: 1px solid var(--rule);
-  margin-top: 8px;
 }
 
 .shine-item {
-  display: grid;
-  grid-template-columns: 52px 1fr 1.1fr;
-  gap: 0 56px;
-  align-items: start;
-  padding: 52px 0;
+  padding: 44px 0;
   border-bottom: 1px solid var(--rule);
   position: relative;
   transition: background 0.35s;
 }
-
 .shine-item:hover { background: rgba(240,235,227,0.012); }
-
 .shine-item::after {
   content: '';
   position: absolute;
@@ -706,34 +705,40 @@ body {
   background: linear-gradient(to right, var(--gold), transparent 60%);
   transition: width 0.55s cubic-bezier(0.22,1,0.36,1);
 }
+.shine-item.active::after { width: 100%; }
 
+.shine-item-head {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
 .shine-num {
   font-family: var(--serif);
   font-style: italic;
   font-size: 13px;
   color: var(--gold);
   letter-spacing: 0.04em;
-  padding-top: 10px;
+  width: 52px;
+  flex-shrink: 0;
+  padding-top: 8px;
 }
-
 .shine-item h3 {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(34px, 4vw, 56px);
-  letter-spacing: -0.035em;
-  line-height: 1.0;
+  font-size: clamp(26px, 2.8vw, 40px);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
   color: var(--cream);
   margin: 0;
 }
 .shine-item h3 em { font-style: italic; font-weight: 300; }
 
 .shine-item-body {
+  padding-left: 52px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding-top: 10px;
+  gap: 16px;
 }
-
 .shine-item-body p {
   font-family: var(--sans);
   font-size: 14px;
@@ -741,7 +746,6 @@ body {
   color: var(--soft);
   margin: 0;
 }
-
 .shine-tags {
   display: flex;
   flex-wrap: wrap;
@@ -761,7 +765,6 @@ body {
   color: rgba(200,120,60,0.65);
   border-color: rgba(200,120,60,0.18);
 }
-.shine-item.active::after { width: 100%; }
 
 
 /* ════════════════════════════════════════════════════════════════
@@ -1573,7 +1576,10 @@ body {
 
   .section-label { justify-content: center; }
 
-  /* Shine: horizontal scroll carousel */
+  /* Shine: collapse grid, horizontal scroll carousel */
+  .shine-inner { display: block; }
+  .shine-left { position: static; margin-bottom: 32px; }
+  .shine-right { border-top: none; }
   .shine-list {
     display: flex;
     flex-direction: row;
@@ -1584,7 +1590,6 @@ body {
     gap: 12px;
     margin: 0 -24px;
     padding: 8px 24px 24px;
-    border-top: none;
   }
   .shine-list::-webkit-scrollbar { display: none; }
   .shine-item {
@@ -1593,17 +1598,17 @@ body {
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 0;
     padding: 28px 22px;
     border: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
     border-radius: 8px;
     background: rgba(240,235,227,0.025);
   }
   .shine-item::after { display: none; }
-  .shine-item-body { display: flex; }
+  .shine-item-head { flex-direction: column; gap: 4px; margin-bottom: 14px; }
+  .shine-num { width: auto; padding-top: 0; }
+  .shine-item-body { padding-left: 0; }
   .shine-item h3 { font-size: clamp(26px, 7vw, 36px); }
-  .shine-num { padding-top: 0; }
 
   .for-section.is-light .for-inner { padding: 56px 24px; }
   .for-entry-trigger { grid-template-columns: 32px 1fr auto; gap: 0 16px; padding: 20px 10px; }
@@ -1702,6 +1707,80 @@ body {
   * { transition: none !important; }
 }
 
+/* ════════════════════════════════════════════════════════════════
+   CSS VIEW TIMELINE — scroll-driven entry animations
+   Native: Chrome 115+, Safari 18+   Fallback: IntersectionObserver
+════════════════════════════════════════════════════════════════ */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@supports (animation-timeline: view()) {
+  .shine-item-head {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 42%;
+  }
+  .shine-item-body {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 8% entry 52%;
+  }
+  .work-item {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 36%;
+  }
+  .for-entry {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+  .exp-item {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}
+
+/* Fallback: JS adds .no-view-tl on <html>; IntersectionObserver adds .is-visible */
+.no-view-tl .shine-item-head,
+.no-view-tl .shine-item-body,
+.no-view-tl .work-item,
+.no-view-tl .for-entry,
+.no-view-tl .exp-item {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.no-view-tl .shine-item.is-visible .shine-item-head,
+.no-view-tl .shine-item.is-visible .shine-item-body {
+  opacity: 1;
+  transform: none;
+}
+.no-view-tl .shine-item.is-visible .shine-item-body { transition-delay: 0.12s; }
+.no-view-tl .work-item.is-visible,
+.no-view-tl .for-entry.is-visible,
+.no-view-tl .exp-item.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shine-item-head, .shine-item-body, .work-item, .for-entry, .exp-item {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+@media (max-width: 900px) {
+  .shine-item-head, .shine-item-body, .work-item, .for-entry, .exp-item {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 /* ════════════════════════════════════════════════════════════════
    MINI GAME
 ════════════════════════════════════════════════════════════════ */
@@ -2017,13 +2096,18 @@ body {
   ═══════════════════════════════════════════════ -->
   <section class="shine-section" id="shine">
     <div class="shine-inner">
-      <h2 class="section-label">Where I shine</h2>
-      <p class="display-heading">How I<br><em>show up</em></p>
+      <div class="shine-left">
+        <h2 class="section-label">Where I shine</h2>
+        <p class="display-heading">How I<br><em>show up</em></p>
+      </div>
+      <div class="shine-right">
       <div class="shine-list">
 
         <div class="shine-item">
-          <span class="shine-num">I.</span>
-          <h3>I build<br><em>the container.</em></h3>
+          <div class="shine-item-head">
+            <span class="shine-num">I.</span>
+            <h3>I build<br><em>the container.</em></h3>
+          </div>
           <div class="shine-item-body">
             <p>From bare domain to fully-running membership community, architecture, custom code, and platform stability. Built and maintained with care.</p>
             <div class="shine-tags">
@@ -2039,8 +2123,10 @@ body {
         </div>
 
         <div class="shine-item">
-          <span class="shine-num">II.</span>
-          <h3>I hold<br><em>the space.</em></h3>
+          <div class="shine-item-head">
+            <span class="shine-num">II.</span>
+            <h3>I hold<br><em>the space.</em></h3>
+          </div>
           <div class="shine-item-body">
             <p>Four years in retreat centres taught me how sacred spaces are held. I bring that to the digital world, onboarding, care, engagement, and the journey from first click to long-term belonging.</p>
             <div class="shine-tags">
@@ -2054,8 +2140,10 @@ body {
         </div>
 
         <div class="shine-item">
-          <span class="shine-num">III.</span>
-          <h3>I wire<br><em>the machine.</em></h3>
+          <div class="shine-item-head">
+            <span class="shine-num">III.</span>
+            <h3>I wire<br><em>the machine.</em></h3>
+          </div>
           <div class="shine-item-body">
             <p>Automations, content systems, and email flows, all wired together and running quietly so you never have to think about it.</p>
             <div class="shine-tags">
@@ -2070,8 +2158,10 @@ body {
         </div>
 
         <div class="shine-item">
-          <span class="shine-num">IV.</span>
-          <h3>I reach<br><em>people.</em></h3>
+          <div class="shine-item-head">
+            <span class="shine-num">IV.</span>
+            <h3>I reach<br><em>people.</em></h3>
+          </div>
           <div class="shine-item-body">
             <p>Emails people actually read, landing pages that convert without pressure, launches that land with clarity. Communication that feels human because it is.</p>
             <div class="shine-tags">
@@ -2084,6 +2174,7 @@ body {
           </div>
         </div>
 
+      </div>
       </div>
     </div>
   </section>
@@ -2455,6 +2546,7 @@ body {
       <p class="fairy-title">Because the best work comes from real connection, quiet, steady care that turns vision into something real.</p>
     </div>
   </section>
+
 
   <!-- ═══════════════════════════════════════════════
        MINI GAME
@@ -3530,6 +3622,21 @@ body {
       var saved = localStorage.getItem('lang');
       if (saved === 'fr') setLang('fr');
     } catch(e) {}
+  })();
+
+  // ── CSS view timeline fallback (IntersectionObserver) ──────────
+  (function() {
+    if (typeof CSS !== 'undefined' && CSS.supports('animation-timeline: view()')) return;
+    if (window.innerWidth <= 900) return;
+    document.documentElement.classList.add('no-view-tl');
+    var els = document.querySelectorAll('.shine-item, .work-item, .for-entry, .exp-item');
+    if (!els.length) return;
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(function(el) { obs.observe(el); });
   })();
 </script>
 
