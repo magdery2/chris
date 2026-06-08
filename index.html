@@ -1399,17 +1399,17 @@ body {
 }
 .contact-top {
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
+  grid-template-columns: 280px 1fr;
   grid-template-rows: auto auto;
-  grid-template-areas: "head head" "img body";
-  gap: 32px 52px;
+  grid-template-areas: "img head" "img body";
+  gap: 24px 52px;
   align-items: start;
   padding-bottom: 64px;
   border-bottom: 1px solid var(--rule);
   margin-bottom: 0;
 }
 .contact-headline { grid-area: head; }
-.contact-img-wrap { grid-area: img; }
+.contact-img-wrap { grid-area: img; display: block; }
 .contact-body { grid-area: body; justify-content: flex-start; }
 .contact-headline {
   font-family: var(--serif);
