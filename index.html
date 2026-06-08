@@ -1399,13 +1399,18 @@ body {
 }
 .contact-top {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0 52px;
+  grid-template-columns: 1fr 1.6fr;
+  grid-template-rows: auto auto;
+  grid-template-areas: "img head" "img body";
+  gap: 24px 52px;
+  align-items: start;
   padding-bottom: 64px;
   border-bottom: 1px solid var(--rule);
   margin-bottom: 0;
-  align-items: end;
 }
+.contact-headline { grid-area: head; }
+.contact-img-wrap { grid-area: img; }
+.contact-body { grid-area: body; justify-content: flex-start; }
 .contact-headline {
   font-family: var(--serif);
   font-weight: 300;
