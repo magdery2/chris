@@ -2656,6 +2656,11 @@ body {
       })();
     }
 
+    window._updateHeroTypewriter = function(newEl, newWords) {
+      el = newEl;
+      if (newWords) { words = newWords; idx = 0; }
+    };
+
     var vid     = document.getElementById('heroVid');
     var started = false;
 
@@ -2955,7 +2960,8 @@ body {
     var T = {
       en: {
         contactPill: 'Get in Touch',
-        heroTagline: 'For the creators<br>changing the world.',
+        heroTagline: 'For the <span id="heroVar">creators</span><span class="hero-cursor" aria-hidden="true"></span><br>changing the world.',
+        heroWords: ['creators','spiritual teachers','retreat centres','wellness platforms','plant medicine practitioners','values-driven organisations','builders of transformation'],
         heroSub: 'I bring the full operational stack, platform tech, community, automations, content systems, and growth, so you can stay in your work.',
         heroCta: 'How I shine ↓',
         scrollLabel: 'Scroll',
@@ -3043,7 +3049,8 @@ body {
       },
       fr: {
         contactPill: 'Contact',
-        heroTagline: 'Pour les créateurs<br>qui changent le monde.',
+        heroTagline: ‘Pour les <span id="heroVar">créateurs</span><span class="hero-cursor" aria-hidden="true"></span><br>qui changent le monde.’,
+        heroWords: [‘créateurs’,’enseignants spirituels’,’centres de retraite’,’plateformes bien-être’,’praticiens de médecine végétale’,’organisations portées par des valeurs’,’bâtisseurs de transformation’],
         heroSub: "J’apporte la stack opérationnelle complète, tech de plateforme, communauté, automatisations, systèmes de contenu et croissance, pour que vous puissiez rester dans votre travail.",
         heroCta: 'Où je brille ↓',
         scrollLabel: 'Défiler',
@@ -3138,7 +3145,13 @@ body {
 
       var pill = q('.contact-pill'); if (pill) pill.textContent = t.contactPill;
 
-      var heroTagline = q('.hero-tagline'); if (heroTagline) heroTagline.innerHTML = t.heroTagline;
+      var heroTagline = q('.hero-tagline');
+      if (heroTagline) {
+        heroTagline.innerHTML = t.heroTagline;
+        if (window._updateHeroTypewriter) {
+          window._updateHeroTypewriter(document.getElementById('heroVar'), t.heroWords);
+        }
+      }
       var heroSub = q('.hero-sub'); if (heroSub) heroSub.textContent = t.heroSub;
       var heroCta = q('.cta-row .btn-outline'); if (heroCta) heroCta.innerHTML = t.heroCta;
       var scrollLabel = q('.scroll-cue-label'); if (scrollLabel) scrollLabel.textContent = t.scrollLabel;
@@ -3249,10 +3262,11 @@ body {
       var fQuote = q('.footer-quote-text'); if (fQuote) fQuote.innerHTML = t.footerQuote;
       var fTag   = q('.footer-tagline');    if (fTag)   fTag.innerHTML   = t.footerTagline;
       var fLoc   = q('.footer-location');   if (fLoc)   fLoc.textContent = t.footerLocation;
-      var fShine = q('.fnav-shine'); if (fShine) fShine.textContent = t.footerNavShine;
-      var fWork  = q('.fnav-work');  if (fWork)  fWork.textContent  = t.footerNavWork;
-      var fExp   = q('.fnav-exp');   if (fExp)   fExp.textContent   = t.footerNavExp;
-      var fCv    = q('.fnav-cv');    if (fCv)    fCv.textContent    = t.footerNavCv;
+      var fShine   = q('.fnav-shine');    if (fShine)   fShine.textContent   = t.footerNavShine;
+      var fWork    = q('.fnav-work');     if (fWork)    fWork.textContent    = t.footerNavWork;
+      var fExp     = q('.fnav-exp');      if (fExp)     fExp.textContent     = t.footerNavExp;
+      var fContact = q('.fnav-contact');  if (fContact) fContact.textContent = t.footerNavContact;
+      var fCv      = q('.fnav-cv');       if (fCv)      fCv.textContent      = t.footerNavCv;
 
       qa('.lang-btn').forEach(function(btn) {
         btn.classList.toggle('active', btn.dataset.lang === lang);
