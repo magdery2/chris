@@ -68,8 +68,8 @@
   --mauve:   #8a4c5c;
   --sage:    #607090;
   --cream:   #f0ebe3;
-  --soft:    rgba(240,235,227,0.65);
-  --mute:    rgba(240,235,227,0.32);
+  --soft:    rgba(240,235,227,0.75);
+  --mute:    rgba(240,235,227,0.52);
   --rule:    rgba(240,235,227,0.07);
   --frame:   #070505;
 
@@ -251,7 +251,7 @@ body {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 1.5px;
-  color: rgba(240,235,227,0.65);
+  color: var(--soft);
   margin: 0;
   max-height: 0;
   overflow: hidden;
@@ -629,7 +629,7 @@ body {
   font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(240,235,227,0.55);
+  color: var(--mute);
   line-height: 1.4;
 }
 
@@ -690,7 +690,7 @@ body {
   font-size: 11px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: rgba(240,235,227,0.55);
+  color: var(--mute);
   margin-bottom: 52px;
 }
 .section-label::before {
@@ -808,7 +808,7 @@ body {
 .shine-tag {
   font-family: var(--mono);
   font-size: 11px;
-  color: rgba(240,235,227,0.55);
+  color: var(--mute);
   padding: 4px 10px;
   border: 1px solid var(--rule);
   border-radius: 2px;
@@ -879,7 +879,7 @@ body {
   font-size: 12px;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: rgba(240,235,227,0.72);
+  color: var(--soft);
   line-height: 1.4;
 }
 .work-stat-role {
@@ -887,7 +887,7 @@ body {
   font-weight: 500;
   font-size: 13px;
   letter-spacing: 0.3px;
-  color: rgba(240,235,227,0.72);
+  color: var(--soft);
   line-height: 1.5;
 }
 @media (max-width: 900px) {
@@ -1044,7 +1044,7 @@ body {
   font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(240,235,227,0.55);
+  color: var(--mute);
   margin-bottom: 14px;
 }
 .work-url {
@@ -1053,7 +1053,7 @@ body {
   gap: 5px;
   font-family: var(--mono);
   font-size: 12px;
-  color: rgba(240,235,227,0.55);
+  color: var(--mute);
   text-decoration: none;
   letter-spacing: 0.3px;
   transition: color 0.2s;
@@ -1076,7 +1076,7 @@ body {
 .work-tag {
   font-family: var(--mono);
   font-size: 11px;
-  color: rgba(240,235,227,0.55);
+  color: var(--mute);
   padding: 4px 10px;
   border: 1px solid var(--rule);
   border-radius: 2px;
@@ -1146,7 +1146,7 @@ body {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 2px;
-  color: rgba(240,235,227,0.55);
+  color: var(--mute);
   padding-top: 3px;
 }
 .for-entry-body {
@@ -1258,7 +1258,7 @@ body {
 .exp-period {
   font-family: var(--mono);
   font-size: 12px;
-  color: rgba(240,235,227,0.72);
+  color: var(--soft);
   letter-spacing: .3px;
   padding-top: 2px;
   flex-shrink: 0;
@@ -1266,7 +1266,7 @@ body {
 .exp-loc {
   font-family: var(--mono);
   font-size: 11px;
-  color: rgba(240,235,227,0.72);
+  color: var(--soft);
   letter-spacing: .3px;
   text-align: right;
   flex-shrink: 0;
@@ -1382,7 +1382,7 @@ body {
   font-style: normal;
   font-weight: 400;
   font-size: clamp(14px, 1.3vw, 16px);
-  color: rgba(240,235,227,0.72);
+  color: var(--soft);
   margin: 0;
   line-height: 1.6;
 }
@@ -1537,7 +1537,7 @@ body {
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(240,235,227,0.55);
+  color: var(--mute);
   min-width: 58px;
   flex-shrink: 0;
   transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), color 0.3s ease;
@@ -2227,7 +2227,7 @@ body {
   <section class="shine-section" id="shine">
     <div class="shine-inner">
       <div class="shine-left">
-        <h2 class="section-label">How I shine</h2>
+        <h2 class="section-label">Where value lives</h2>
         <p class="display-heading">How I<br><em>Shine</em></p>
         <img src="assets/trametes-1.png" alt="" aria-hidden="true" class="shine-trametes">
       </div>
@@ -2315,7 +2315,7 @@ body {
   ═══════════════════════════════════════════════ -->
   <section class="work-section is-light" id="work">
     <div class="work-inner">
-      <h2 class="section-label">Selected Work</h2>
+      <h2 class="section-label">Things I've made</h2>
       <p class="display-heading">Selected<br><em>Work</em></p>
       <p class="work-intro">Projects that show what I love.</p>
       <div class="work-list">
@@ -2549,7 +2549,7 @@ body {
   <section class="craft-section">
     <div class="craft-inner">
       <div class="craft-header">
-        <h2 class="section-label">Design Craft</h2>
+        <h2 class="section-label">How I think</h2>
         <p class="craft-heading">What design<br><em>really is to me</em></p>
       </div>
       <div class="craft-list">
