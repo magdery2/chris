@@ -64,6 +64,9 @@
   --deep:    #141110;
   --gold:    #c8783c;
   --gold-s:  rgba(200,120,60,0.1);
+  --teal:    #4e9e94;
+  --mauve:   #b07882;
+  --sage:    #72a882;
   --cream:   #f0ebe3;
   --soft:    rgba(240,235,227,0.65);
   --mute:    rgba(240,235,227,0.32);
@@ -736,11 +739,16 @@ body {
 }
 
 .shine-item {
-  padding: 44px 0;
+  padding: 44px 0 44px 20px;
   border-bottom: 1px solid var(--rule);
+  border-left: 3px solid transparent;
   position: relative;
   transition: background 0.35s;
 }
+.shine-item:nth-child(1) { border-left-color: var(--gold); }
+.shine-item:nth-child(2) { border-left-color: var(--teal); }
+.shine-item:nth-child(3) { border-left-color: var(--mauve); }
+.shine-item:nth-child(4) { border-left-color: var(--sage); }
 .shine-item::after {
   content: '';
   position: absolute;
