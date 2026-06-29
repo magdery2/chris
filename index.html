@@ -1919,7 +1919,15 @@ body {
    Native: Chrome 115+, Safari 18+   Fallback: IntersectionObserver
 ════════════════════════════════════════════════════════════════ */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(28px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fade-up-sm {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fade-up-heading {
+  from { opacity: 0; transform: translateY(48px) scale(0.95); }
   to   { opacity: 1; transform: none; }
 }
 
@@ -1964,6 +1972,16 @@ body {
     animation-timeline: view();
     animation-range: entry 0% entry 55%;
   }
+  .section-label {
+    animation: fade-up-sm linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 18%;
+  }
+  .display-heading {
+    animation: fade-up-heading linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 38%;
+  }
 }
 
 /* Fallback: JS adds .no-view-tl on <html>; IntersectionObserver adds .is-visible */
@@ -1974,7 +1992,9 @@ body {
 .no-view-tl .exp-item,
 .no-view-tl .exp-heading,
 .no-view-tl .craft-header,
-.no-view-tl .craft-item {
+.no-view-tl .craft-item,
+.no-view-tl .section-label,
+.no-view-tl .display-heading {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.7s ease, transform 0.7s ease;
@@ -1990,14 +2010,16 @@ body {
 .no-view-tl .exp-item.is-visible,
 .no-view-tl .exp-heading.is-visible,
 .no-view-tl .craft-header.is-visible,
-.no-view-tl .craft-item.is-visible {
+.no-view-tl .craft-item.is-visible,
+.no-view-tl .section-label.is-visible,
+.no-view-tl .display-heading.is-visible {
   opacity: 1;
   transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .shine-item-head, .shine-item-body, .work-item, .for-entry, .exp-item,
-  .exp-heading, .craft-header, .craft-item {
+  .exp-heading, .craft-header, .craft-item, .section-label, .display-heading {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -2164,6 +2186,24 @@ body {
   .footer-social { justify-content: center; }
   .footer-meta { align-items: center; }
 }
+
+/* Shine items — longer, more graceful scroll animation */
+/* Display headings — bigger drop, longer duration, slight scale */
+.display-heading[data-fade] {
+  transform: translateY(48px) scale(0.95);
+  transition: opacity 1s cubic-bezier(0.22,1,0.36,1),
+              transform 1s cubic-bezier(0.22,1,0.36,1);
+  transition-delay: 0.12s;
+}
+.display-heading[data-fade].in { transform: none; }
+
+/* Section labels — small, quick, first to arrive */
+.section-label[data-fade] {
+  transform: translateY(10px);
+  transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
+              transform 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+.section-label[data-fade].in { transform: none; }
 
 /* Shine items — longer, more graceful scroll animation */
 .shine-item[data-fade] {
@@ -2785,6 +2825,7 @@ body {
     const vh = window.innerHeight;
     [
       ['.manifestor-inner',             0],
+      ['.section-label',                0],
       ['.display-heading',              0],
       ['.shine-item',                0.14],
       ['.work-intro',                   0],
@@ -3485,7 +3526,7 @@ body {
     if (typeof CSS !== 'undefined' && CSS.supports('animation-timeline: view()')) return;
     if (window.innerWidth <= 900) return;
     document.documentElement.classList.add('no-view-tl');
-    var els = document.querySelectorAll('.shine-item, .work-item, .for-entry, .exp-item, .exp-heading, .craft-header, .craft-item');
+    var els = document.querySelectorAll('.shine-item, .work-item, .for-entry, .exp-item, .exp-heading, .craft-header, .craft-item, .section-label, .display-heading');
     if (!els.length) return;
     var obs = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
