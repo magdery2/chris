@@ -1383,6 +1383,35 @@ body {
 .fairy-body { display: none; }
 
 /* ════════════════════════════════════════════════════════════════
+   SHINE SUN
+════════════════════════════════════════════════════════════════ */
+.shine-sun-wrap {
+  margin-top: 36px;
+}
+.shine-sun {
+  width: 64px;
+  height: 64px;
+  overflow: visible;
+}
+.shine-sun-circle {
+  fill: var(--gold);
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.shine-sun-circle.is-visible { transform: scale(1); }
+.shine-ray {
+  stroke: var(--gold);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 13;
+  stroke-dashoffset: 13;
+  transition: stroke-dashoffset 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.shine-ray.is-visible { stroke-dashoffset: 0; }
+
+/* ════════════════════════════════════════════════════════════════
    DESIGN CRAFT
 ════════════════════════════════════════════════════════════════ */
 .craft-section {
@@ -2232,6 +2261,19 @@ body {
       <div class="shine-left">
         <h2 class="section-label">How I shine</h2>
         <p class="display-heading">How I<br><em>Shine</em></p>
+        <div class="shine-sun-wrap" aria-hidden="true">
+          <svg class="shine-sun" viewBox="0 0 60 60" fill="none">
+            <circle class="shine-sun-circle" cx="30" cy="30" r="10"/>
+            <line class="shine-ray" x1="30" y1="4"    x2="30" y2="16"/>
+            <line class="shine-ray" x1="44" y1="30"   x2="56" y2="30"/>
+            <line class="shine-ray" x1="30" y1="44"   x2="30" y2="56"/>
+            <line class="shine-ray" x1="16" y1="30"   x2="4"  y2="30"/>
+            <line class="shine-ray" x1="39.9" y1="20.1" x2="48.4" y2="11.6"/>
+            <line class="shine-ray" x1="39.9" y1="39.9" x2="48.4" y2="48.4"/>
+            <line class="shine-ray" x1="20.1" y1="39.9" x2="11.6" y2="48.4"/>
+            <line class="shine-ray" x1="20.1" y1="20.1" x2="11.6" y2="11.6"/>
+          </svg>
+        </div>
       </div>
       <div class="shine-right">
       <div class="shine-list">
@@ -2346,7 +2388,7 @@ body {
               <span class="work-stat-l">Years</span>
             </div>
             <div class="work-stat">
-              <span class="work-stat-role">Head of Community<br>&amp; Platform Operations</span>
+              <span class="work-stat-role">Brand &amp; UX Designer</span>
             </div>
           </div>
           <div class="work-item-header" style="padding-top:28px;">
@@ -2479,16 +2521,31 @@ body {
 
         <article class="exp-item">
           <button class="exp-trigger" aria-expanded="false">
+            <span class="exp-period">2021 – Present</span>
+            <div class="exp-body">
+              <h3>Brand &amp; UX Designer</h3>
+              <span class="exp-company">Freelance</span>
+            </div>
+            <span class="exp-loc">Remote</span>
+            <span class="exp-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="exp-expand-wrap"><div class="exp-expand"><div class="exp-expand-inner">
+            <p>Brand identity, UX design, and digital product design for conscious creators and mission-driven organisations. Visual systems, interface design, and the craft of making things feel as good as they work.</p>
+          </div></div></div>
+        </article>
+
+        <article class="exp-item">
+          <button class="exp-trigger" aria-expanded="false">
             <span class="exp-period">2024 – Present</span>
             <div class="exp-body">
-              <h3>Head of Community &amp; Platform Operations</h3>
+              <h3>Brand &amp; UX Designer</h3>
               <span class="exp-company">Eluña Noelle</span>
             </div>
             <span class="exp-loc">Remote</span>
             <span class="exp-toggle" aria-hidden="true">+</span>
           </button>
           <div class="exp-expand-wrap"><div class="exp-expand"><div class="exp-expand-inner">
-            <p>Full platform ownership for a global creator-led spiritual community: ~2,500 paid members, 66k+ public following. Built and ran the entire stack — MemberPress, BuddyBoss, LearnDash, Elementor, custom plugins, Zapier and ManyChat automations, content calendar, live launches, and member experience end to end.</p>
+            <p>Full platform ownership for a global creator-led spiritual community: ~2,500 paid members, 66k+ public following. Built and ran the entire stack: MemberPress, BuddyBoss, LearnDash, Elementor, custom plugins, Zapier and ManyChat automations, content calendar, live launches, and member experience end to end.</p>
           </div></div></div>
         </article>
 
@@ -2518,7 +2575,7 @@ body {
             <span class="exp-toggle" aria-hidden="true">+</span>
           </button>
           <div class="exp-expand-wrap"><div class="exp-expand"><div class="exp-expand-inner">
-            <p>Four years of lived practice — supporting retreats, ceremony, workshops and collective life across retreat centres, eco-villages and sanctuaries in Europe. The root system beneath everything I build online.</p>
+            <p>Four years of lived practice, supporting retreats, ceremony, workshops and collective life across retreat centres, eco-villages and sanctuaries in Europe. The root system beneath everything I build online.</p>
           </div></div></div>
         </article>
 
@@ -2526,7 +2583,7 @@ body {
           <button class="exp-trigger" aria-expanded="false">
             <span class="exp-period">2012 – 2021</span>
             <div class="exp-body">
-              <h3>Brand &amp; UX Designer</h3>
+              <h3>UI/UX Designer</h3>
               <span class="exp-company">Agencies &amp; Tech Companies</span>
             </div>
             <span class="exp-loc">Belgium</span>
@@ -2552,7 +2609,7 @@ body {
     <div class="craft-inner">
       <div class="craft-header">
         <h2 class="section-label">Design Craft</h2>
-        <p class="craft-heading">What design<br><em>really is</em></p>
+        <p class="craft-heading">What design<br><em>really is</em><br>to me</p>
       </div>
       <div class="craft-list">
 
@@ -2560,7 +2617,7 @@ body {
           <span class="craft-num">01</span>
           <div class="craft-body">
             <h3>A good eye.</h3>
-            <p>Design starts with seeing — really seeing — what works and what doesn't. Before any tool, before any brief.</p>
+            <p>Design starts with seeing, really seeing, what works and what doesn't. Before any tool, before any brief.</p>
           </div>
         </div>
 
@@ -2568,7 +2625,7 @@ body {
           <span class="craft-num">02</span>
           <div class="craft-body">
             <h3>The right tools.</h3>
-            <p>Knowing which instrument serves the moment. Not the trendiest stack — the sharpest one for the job.</p>
+            <p>Knowing which instrument serves the moment. Not the trendiest stack, the sharpest one for the job.</p>
           </div>
         </div>
 
@@ -2592,7 +2649,7 @@ body {
           <span class="craft-num">05</span>
           <div class="craft-body">
             <h3>Listening to who uses it.</h3>
-            <p>The user is always the source of truth. Real listening — not assumption — is what separates good design from the rest.</p>
+            <p>The user is always the source of truth. Real listening, not assumption, is what separates good design from the rest.</p>
           </div>
         </div>
 
@@ -2600,7 +2657,7 @@ body {
           <span class="craft-num">06</span>
           <div class="craft-body">
             <h3>Caring for the output.</h3>
-            <p>Every pixel, every word, every interaction. Details are not small — they are the experience.</p>
+            <p>Every pixel, every word, every interaction. Details are not small, they are the experience.</p>
           </div>
         </div>
 
@@ -3170,13 +3227,13 @@ body {
         for6Expand: "<p>If your work changes people, in body, mind, or spirit, we probably speak the same language.</p><p>I’m here for the builders who care as much about how they do it as what they do.</p>",
         expLabel: 'Experience',
         expHeading: 'My<br><em>journey</em>',
-        exp1H3: 'Digital, Web &amp; Community Manager',
+        exp1H3: 'Brand &amp; UX Designer',
         exp1P: 'Full platform ownership for a global creator-led spiritual community: ~2,500 paid members, 66k+ public following. Built and ran the entire stack, MemberPress, BuddyBoss, LearnDash, Elementor, custom plugins, Zapier and ManyChat automations, content calendar, live launches, and member experience end to end.',
         exp2H3: 'Platform &amp; Digital Consultant',
         exp2P: 'Platform architecture, automation design, content systems, and audience journeys for conscious and ethical projects. Helping mission-driven creators clarify their tech stack, reduce manual work, and build operations that last.',
         exp3H3: 'Community &amp; Sacred Space Volunteer',
         exp3P: 'Four years of lived practice, supporting retreats, ceremony, workshops and collective life across retreat centres, eco-villages and sanctuaries in Europe. The root system beneath everything I build online.',
-        exp4H3: 'Brand &amp; UX Designer',
+        exp4H3: 'UI/UX Designer',
         exp4P: "A decade designing web and mobile interfaces, building visual systems, and shaping interaction flows. Master’s in Digital Design. Bachelor’s in Documentary Photography. The visual craft that grounds all the tech.",
         fairyLabel: "🍎 Why I'm the Apple Fairy",
         fairyLine: "Because the best work comes from real connection, quiet, steady care that turns vision into something real.",
@@ -3258,13 +3315,13 @@ body {
         for6Expand: "<p>Si votre travail change les gens, dans le corps, l’esprit ou l’âme, nous parlons probablement le même langage.</p><p>Je suis là pour les bâtisseurs qui se soucient autant du comment que du quoi.</p>",
         expLabel: 'Expérience',
         expHeading: 'Mon<br><em>parcours</em>',
-        exp1H3: 'Manager Digital, Web &amp; Communauté',
+        exp1H3: 'Designer Brand &amp; UX',
         exp1P: "Propriété complète de la plateforme pour une communauté spirituelle mondiale conduite par un créateur : ~2 500 membres payants, 66k+ abonnés publics. Construction et gestion de l’ensemble de la stack, MemberPress, BuddyBoss, LearnDash, Elementor, plugins personnalisés, automatisations Zapier et ManyChat, calendrier de contenu, lancements en direct et expérience membre de bout en bout.",
         exp2H3: 'Consultant Plateforme &amp; Digital',
         exp2P: "Architecture de plateforme, conception d’automatisations, systèmes de contenu et parcours d’audience pour des projets conscients et éthiques. Aider les créateurs engagés à clarifier leur stack tech, réduire le travail manuel et construire des opérations durables.",
         exp3H3: 'Volontaire Communauté &amp; Espaces Sacrés',
         exp3P: "Quatre ans de pratique vécue, soutien aux retraites, cérémonies, ateliers et vie collective dans des centres de retraite, éco-villages et sanctuaires en Europe. Le système racinaire sous tout ce que je construis en ligne.",
-        exp4H3: 'Designer Brand &amp; UX',
+        exp4H3: 'Designer UI/UX',
         exp4P: "Une décennie à concevoir des interfaces web et mobiles, à construire des systèmes visuels et à façonner des flux d’interaction. Master en Design Numérique. Licence en Photographie Documentaire. L’art visuel qui ancre toute la tech.",
         fairyLabel: "🍎 Pourquoi je suis l’Apple Fairy",
         fairyLine: "Parce que le meilleur travail vient d’une connexion réelle, un soin calme et constant qui transforme la vision en quelque chose de réel.",
@@ -3429,6 +3486,26 @@ body {
       var saved = localStorage.getItem('lang');
       if (saved === 'fr') setLang('fr');
     } catch(e) {}
+  })();
+
+  // ── Shine sun — rays build as each shine item enters view ────────
+  (function() {
+    var circle = document.querySelector('.shine-sun-circle');
+    var rays   = document.querySelectorAll('.shine-ray');
+    var items  = document.querySelectorAll('.shine-item');
+    if (!items.length || !rays.length) return;
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var idx = Array.prototype.indexOf.call(items, entry.target);
+        if (idx === 0 && circle) circle.classList.add('is-visible');
+        var r1 = rays[idx * 2], r2 = rays[idx * 2 + 1];
+        if (r1) r1.classList.add('is-visible');
+        if (r2) setTimeout(function() { r2.classList.add('is-visible'); }, 140);
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.25 });
+    items.forEach(function(item) { obs.observe(item); });
   })();
 
   // ── CSS view timeline fallback (IntersectionObserver) ──────────
