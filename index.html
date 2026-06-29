@@ -1947,7 +1947,22 @@ body {
   .exp-item {
     animation: fade-up linear both;
     animation-timeline: view();
-    animation-range: entry 0% entry 40%;
+    animation-range: entry 0% entry 50%;
+  }
+  .exp-heading {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 28%;
+  }
+  .craft-header {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 28%;
+  }
+  .craft-item {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
   }
 }
 
@@ -1956,7 +1971,10 @@ body {
 .no-view-tl .shine-item-body,
 .no-view-tl .work-item,
 .no-view-tl .for-entry,
-.no-view-tl .exp-item {
+.no-view-tl .exp-item,
+.no-view-tl .exp-heading,
+.no-view-tl .craft-header,
+.no-view-tl .craft-item {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.7s ease, transform 0.7s ease;
@@ -1969,13 +1987,17 @@ body {
 .no-view-tl .shine-item.is-visible .shine-item-body { transition-delay: 0.12s; }
 .no-view-tl .work-item.is-visible,
 .no-view-tl .for-entry.is-visible,
-.no-view-tl .exp-item.is-visible {
+.no-view-tl .exp-item.is-visible,
+.no-view-tl .exp-heading.is-visible,
+.no-view-tl .craft-header.is-visible,
+.no-view-tl .craft-item.is-visible {
   opacity: 1;
   transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .shine-item-head, .shine-item-body, .work-item, .for-entry, .exp-item {
+  .shine-item-head, .shine-item-body, .work-item, .for-entry, .exp-item,
+  .exp-heading, .craft-header, .craft-item {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -2767,8 +2789,11 @@ body {
       ['.shine-item',                0.14],
       ['.work-intro',                   0],
       ['.work-item',                 0.07],
-      ['.exp-item',                  0.08],
+      ['.exp-heading',                  0],
+      ['.exp-item',                  0.1],
       ['.for-entry',                 0.06],
+      ['.craft-header',                 0],
+      ['.craft-item',               0.07],
       ['.fairy-title',                  0],
       ['.fairy-body',                   0],
       ['.fairy-img',                    0],
@@ -3460,7 +3485,7 @@ body {
     if (typeof CSS !== 'undefined' && CSS.supports('animation-timeline: view()')) return;
     if (window.innerWidth <= 900) return;
     document.documentElement.classList.add('no-view-tl');
-    var els = document.querySelectorAll('.shine-item, .work-item, .for-entry, .exp-item');
+    var els = document.querySelectorAll('.shine-item, .work-item, .for-entry, .exp-item, .exp-heading, .craft-header, .craft-item');
     if (!els.length) return;
     var obs = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
