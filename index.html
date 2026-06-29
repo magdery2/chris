@@ -769,8 +769,7 @@ body {
   content: '';
   position: absolute;
   left: 0; top: 0;
-  width: 2px; height: 100%;
-  opacity: 0.45;
+  width: 3px; height: 100%;
   transform-origin: top center;
   transform: scaleY(0);
   transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.18s;
@@ -1787,6 +1786,7 @@ body {
   .shine-inner { display: block; }
   .shine-left { position: static; margin-bottom: 32px; }
   .shine-right { border-top: none; }
+  .shine-trametes { margin: 0 auto; }
   .shine-list {
     display: flex;
     flex-direction: row;
@@ -3569,6 +3569,7 @@ body {
     if (window.innerWidth <= 900) return;
     var len  = path.getTotalLength();
     var lenB = pathB ? pathB.getTotalLength() : 0;
+    if (!len) { if (title) title.classList.add('is-visible'); return; }
     path.style.strokeDasharray  = len;
     path.style.strokeDashoffset = len;
     if (pathB) { pathB.style.strokeDasharray = lenB; pathB.style.strokeDashoffset = lenB; }
@@ -3576,7 +3577,8 @@ body {
     function update() {
       var rect  = section.getBoundingClientRect();
       var range = section.offsetHeight - window.innerHeight;
-      var p     = ease(Math.max(0, Math.min(1, -rect.top / range)));
+      if (range <= 0) { path.style.strokeDashoffset = 0; if (pathB) pathB.style.strokeDashoffset = 0; if (title) title.classList.add('is-visible'); return; }
+      var p = ease(Math.max(0, Math.min(1, -rect.top / range)));
       path.style.strokeDashoffset  = len  * (1 - p);
       if (pathB) pathB.style.strokeDashoffset = lenB * (1 - p);
       if (title) title.classList.toggle('is-visible', p > 0.82);
