@@ -1383,6 +1383,87 @@ body {
 .fairy-body { display: none; }
 
 /* ════════════════════════════════════════════════════════════════
+   DESIGN CRAFT
+════════════════════════════════════════════════════════════════ */
+.craft-section {
+  padding: 96px 0 80px;
+  border-bottom: 1px solid var(--rule);
+}
+.craft-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 52px;
+}
+.craft-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0 48px;
+  margin-bottom: 64px;
+}
+.craft-header .section-label { flex-shrink: 0; }
+.craft-heading {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 74px;
+  letter-spacing: -0.045em;
+  line-height: 0.88;
+  color: var(--cream);
+  margin: 0;
+}
+.craft-heading em { font-style: italic; font-weight: 300; }
+.craft-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.craft-item {
+  padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 0 20px;
+  align-items: baseline;
+}
+.craft-item:nth-child(odd)  { padding-right: 40px; }
+.craft-item:nth-child(even) { padding-left:  40px; border-left: 1px solid var(--rule); }
+.craft-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  padding-top: 4px;
+}
+.craft-body h3 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(17px, 1.6vw, 22px);
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin: 0 0 6px;
+}
+.craft-body p {
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--soft);
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .craft-section { padding: 64px 0 56px; }
+  .craft-inner { padding: 0 24px; }
+  .craft-header { flex-direction: column; gap: 16px 0; margin-bottom: 40px; }
+  .craft-heading { font-size: 40px; }
+  .craft-list { grid-template-columns: 1fr; }
+  .craft-item:nth-child(odd)  { padding-right: 0; }
+  .craft-item:nth-child(even) { padding-left: 0; border-left: none; }
+}
+@media (max-width: 480px) {
+  .craft-heading { font-size: 32px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
    CONTACT
 ════════════════════════════════════════════════════════════════ */
 .contact-section {
@@ -2445,7 +2526,7 @@ body {
           <button class="exp-trigger" aria-expanded="false">
             <span class="exp-period">2012 – 2021</span>
             <div class="exp-body">
-              <h3>UI/UX Designer</h3>
+              <h3>Brand &amp; UX Designer</h3>
               <span class="exp-company">Agencies &amp; Tech Companies</span>
             </div>
             <span class="exp-loc">Belgium</span>
@@ -2460,6 +2541,85 @@ body {
 
       <div style="margin-top:36px;">
         <a href="about.html" class="exp-more-link">Full curriculum</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       DESIGN CRAFT
+  ═══════════════════════════════════════════════ -->
+  <section class="craft-section">
+    <div class="craft-inner">
+      <div class="craft-header">
+        <h2 class="section-label">Design Craft</h2>
+        <p class="craft-heading">What design<br><em>really is</em></p>
+      </div>
+      <div class="craft-list">
+
+        <div class="craft-item">
+          <span class="craft-num">01</span>
+          <div class="craft-body">
+            <h3>A good eye.</h3>
+            <p>Design starts with seeing — really seeing — what works and what doesn't. Before any tool, before any brief.</p>
+          </div>
+        </div>
+
+        <div class="craft-item">
+          <span class="craft-num">02</span>
+          <div class="craft-body">
+            <h3>The right tools.</h3>
+            <p>Knowing which instrument serves the moment. Not the trendiest stack — the sharpest one for the job.</p>
+          </div>
+        </div>
+
+        <div class="craft-item">
+          <span class="craft-num">03</span>
+          <div class="craft-body">
+            <h3>A commitment to learn.</h3>
+            <p>The craft changes. Curiosity is the only constant. Staying sharp means staying humble.</p>
+          </div>
+        </div>
+
+        <div class="craft-item">
+          <span class="craft-num">04</span>
+          <div class="craft-body">
+            <h3>Deeply interested in the why.</h3>
+            <p>Understanding what we're building and why it matters is not optional. It's the foundation everything else rests on.</p>
+          </div>
+        </div>
+
+        <div class="craft-item">
+          <span class="craft-num">05</span>
+          <div class="craft-body">
+            <h3>Listening to who uses it.</h3>
+            <p>The user is always the source of truth. Real listening — not assumption — is what separates good design from the rest.</p>
+          </div>
+        </div>
+
+        <div class="craft-item">
+          <span class="craft-num">06</span>
+          <div class="craft-body">
+            <h3>Caring for the output.</h3>
+            <p>Every pixel, every word, every interaction. Details are not small — they are the experience.</p>
+          </div>
+        </div>
+
+        <div class="craft-item">
+          <span class="craft-num">07</span>
+          <div class="craft-body">
+            <h3>Caring for the people.</h3>
+            <p>Design is an act of service. Who are we talking to? What do they feel? What do they actually need?</p>
+          </div>
+        </div>
+
+        <div class="craft-item">
+          <span class="craft-num">08</span>
+          <div class="craft-body">
+            <h3>Caring for how it changes the world.</h3>
+            <p>Good design transforms. It makes things clearer, kinder, more humane. That responsibility never leaves the room.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -3016,7 +3176,7 @@ body {
         exp2P: 'Platform architecture, automation design, content systems, and audience journeys for conscious and ethical projects. Helping mission-driven creators clarify their tech stack, reduce manual work, and build operations that last.',
         exp3H3: 'Community &amp; Sacred Space Volunteer',
         exp3P: 'Four years of lived practice, supporting retreats, ceremony, workshops and collective life across retreat centres, eco-villages and sanctuaries in Europe. The root system beneath everything I build online.',
-        exp4H3: 'UI/UX Designer',
+        exp4H3: 'Brand &amp; UX Designer',
         exp4P: "A decade designing web and mobile interfaces, building visual systems, and shaping interaction flows. Master’s in Digital Design. Bachelor’s in Documentary Photography. The visual craft that grounds all the tech.",
         fairyLabel: "🍎 Why I'm the Apple Fairy",
         fairyLine: "Because the best work comes from real connection, quiet, steady care that turns vision into something real.",
@@ -3104,7 +3264,7 @@ body {
         exp2P: "Architecture de plateforme, conception d’automatisations, systèmes de contenu et parcours d’audience pour des projets conscients et éthiques. Aider les créateurs engagés à clarifier leur stack tech, réduire le travail manuel et construire des opérations durables.",
         exp3H3: 'Volontaire Communauté &amp; Espaces Sacrés',
         exp3P: "Quatre ans de pratique vécue, soutien aux retraites, cérémonies, ateliers et vie collective dans des centres de retraite, éco-villages et sanctuaires en Europe. Le système racinaire sous tout ce que je construis en ligne.",
-        exp4H3: 'Designer UI/UX',
+        exp4H3: 'Designer Brand &amp; UX',
         exp4P: "Une décennie à concevoir des interfaces web et mobiles, à construire des systèmes visuels et à façonner des flux d’interaction. Master en Design Numérique. Licence en Photographie Documentaire. L’art visuel qui ancre toute la tech.",
         fairyLabel: "🍎 Pourquoi je suis l’Apple Fairy",
         fairyLine: "Parce que le meilleur travail vient d’une connexion réelle, un soin calme et constant qui transforme la vision en quelque chose de réel.",
