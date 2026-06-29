@@ -779,8 +779,10 @@ body {
 .shine-item::before {
   content: '';
   position: absolute;
-  left: 0; top: 0;
-  width: 3px; height: 100%;
+  left: 0;
+  top: 20px;
+  width: 2px;
+  height: calc(100% - 40px);
   transform-origin: top center;
   transform: scaleY(0);
   transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.18s;
