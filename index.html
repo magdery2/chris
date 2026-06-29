@@ -625,7 +625,7 @@ body {
   gap: 20px;
   padding-bottom: 8px;
 }
-.manifestor-heading-wrap { display: flex; flex-direction: column; }
+.manifestor-heading-wrap { display: flex; flex-direction: column; isolation: isolate; }
 .manifestor-trametes {
   display: block;
   width: 275px;
@@ -633,7 +633,7 @@ body {
   margin-left: 40px;
   opacity: 0.85;
   position: relative;
-  z-index: -9;
+  z-index: -1;
 }
 .mc1 { color: #f2915e; font-weight: 600; }
 .mc2 { color: #5b8087; font-weight: 600; }
@@ -2322,6 +2322,11 @@ body {
         </div>
       </div>
 
+      <div class="manifestor-divider">
+        <span class="manifestor-divider-line"></span>
+        <span class="manifestor-cta-text">From insight, everything.</span>
+        <span class="manifestor-divider-line right"></span>
+      </div>
 
     </div>
   </section>
