@@ -2169,6 +2169,46 @@ body {
   .footer-social { justify-content: center; }
   .footer-meta { align-items: center; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   SCROLL GARDEN
+════════════════════════════════════════════════════════════════ */
+.scroll-garden {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 185px;
+  pointer-events: none;
+  z-index: 6;
+  overflow: visible;
+  transition: opacity 0.6s ease;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 28%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 28%);
+}
+.sgarden-svg {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1400px;
+  height: 185px;
+}
+.sgarden-plant {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  transform: scaleY(0);
+  opacity: 0;
+  transition: transform 1.5s cubic-bezier(0.34, 1.46, 0.64, 1),
+              opacity 0.55s ease;
+}
+.sgarden-plant.grown {
+  transform: scaleY(1);
+  opacity: 1;
+}
+@media (max-width: 900px) {
+  .scroll-garden { display: none; }
+}
 </style>
 </head>
 <body>
@@ -3565,8 +3605,280 @@ body {
     update();
   })();
 
+  // ── SCROLL GARDEN ──────────────────────────────────────────────
+  (function() {
+    var gardenEl = document.getElementById('scrollGarden');
+    var plants   = document.querySelectorAll('.sgarden-plant');
+    if (!gardenEl || !plants.length) return;
+
+    function update() {
+      var scrolled  = window.scrollY || document.documentElement.scrollTop;
+      var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      var progress  = maxScroll > 0 ? scrolled / maxScroll : 0;
+
+      // Fade out as user nears the very bottom (footer)
+      gardenEl.style.opacity = progress > 0.86
+        ? String(Math.max(0, 1 - (progress - 0.86) / 0.10))
+        : '1';
+
+      plants.forEach(function(p) {
+        if (progress >= (parseFloat(p.dataset.t) || 0)) {
+          p.classList.add('grown');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
 
 </script>
+
+<!-- ════ SCROLL GARDEN ════ -->
+<div class="scroll-garden" id="scrollGarden" aria-hidden="true">
+  <svg class="sgarden-svg" viewBox="0 0 1400 185" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- ── 1. Reed cluster, lime → x≈80 ── -->
+    <g class="sgarden-plant" data-t="0.04">
+      <path stroke="#a3e635" stroke-width="2.2" stroke-linecap="round"
+            d="M74,185 Q71,155 66,122 Q61,94 57,70"/>
+      <path stroke="#a3e635" stroke-width="1.4" stroke-linecap="round"
+            d="M66,122 Q55,112 48,104"/>
+      <path stroke="#a3e635" stroke-width="2.6" stroke-linecap="round"
+            d="M86,185 Q85,152 84,116 Q83,84 83,56"/>
+      <path stroke="#a3e635" stroke-width="1.4" stroke-linecap="round"
+            d="M84,116 Q95,105 103,97"/>
+      <path stroke="#a3e635" stroke-width="2" stroke-linecap="round"
+            d="M100,185 Q103,155 108,122 Q113,94 120,68"/>
+      <path stroke="#a3e635" stroke-width="1.4" stroke-linecap="round"
+            d="M108,122 Q119,111 128,104"/>
+      <path stroke="#a3e635" stroke-width="1.6" stroke-linecap="round"
+            d="M62,185 Q58,162 52,138 Q47,118 45,98"/>
+      <path stroke="#a3e635" stroke-width="1.1" stroke-linecap="round"
+            d="M52,138 Q42,130 36,124"/>
+    </g>
+
+    <!-- ── 2. Trametes versicolor, purple → x≈265 ── -->
+    <g class="sgarden-plant" data-t="0.16">
+      <!-- Outer fan (largest) -->
+      <path stroke="#a78bfa" stroke-width="1.6" stroke-linecap="round"
+            d="M190,183 C190,138 224,108 265,106 C306,108 340,138 340,183"/>
+      <!-- Concentric bands -->
+      <path stroke="#a78bfa" stroke-width="1.3" stroke-linecap="round"
+            d="M203,181 C203,144 233,116 265,114 C297,116 327,144 327,181"/>
+      <path stroke="#a78bfa" stroke-width="1.1" stroke-linecap="round"
+            d="M217,179 C217,150 242,125 265,123 C288,125 313,150 313,179"/>
+      <path stroke="#a78bfa" stroke-width="1" stroke-linecap="round"
+            d="M231,177 C231,157 251,135 265,132 C279,135 299,157 299,177"/>
+      <path stroke="#a78bfa" stroke-width="0.9" stroke-linecap="round"
+            d="M245,175 C245,164 258,147 265,144 C272,147 285,164 285,175"/>
+      <!-- Left secondary fan -->
+      <path stroke="#a78bfa" stroke-width="1.3" stroke-linecap="round"
+            d="M162,180 C163,157 182,138 206,136 C218,150 214,170 203,178"/>
+      <path stroke="#a78bfa" stroke-width="1" stroke-linecap="round"
+            d="M171,179 C172,159 189,143 206,142"/>
+      <path stroke="#a78bfa" stroke-width="0.8" stroke-linecap="round"
+            d="M180,177 C181,163 195,150 206,148"/>
+      <!-- Right secondary fan -->
+      <path stroke="#a78bfa" stroke-width="1.3" stroke-linecap="round"
+            d="M368,180 C367,157 348,138 324,136 C312,150 316,170 327,178"/>
+      <path stroke="#a78bfa" stroke-width="1" stroke-linecap="round"
+            d="M359,179 C358,159 341,143 324,142"/>
+      <path stroke="#a78bfa" stroke-width="0.8" stroke-linecap="round"
+            d="M350,177 C349,163 335,150 324,148"/>
+      <!-- Stem -->
+      <path stroke="#a78bfa" stroke-width="1.4" stroke-linecap="round"
+            d="M261,185 Q263,178 265,173 Q267,178 269,185"/>
+    </g>
+
+    <!-- ── 3. Wildflower pair, rose → x≈470 ── -->
+    <g class="sgarden-plant" data-t="0.29">
+      <!-- Stem 1 -->
+      <path stroke="#f472b6" stroke-width="1.6" stroke-linecap="round"
+            d="M455,185 Q453,158 450,130 Q448,106 451,84"/>
+      <path stroke="#f472b6" stroke-width="1.3" stroke-linecap="round"
+            d="M450,132 Q440,123 433,115"/>
+      <path stroke="#f472b6" stroke-width="1.3" stroke-linecap="round"
+            d="M450,132 Q458,120 464,110"/>
+      <!-- Petals 1 (5) -->
+      <path stroke="#f472b6" stroke-width="1.1" stroke-linecap="round"
+            d="M451,84 Q444,70 441,60"/>
+      <path stroke="#f472b6" stroke-width="1.1" stroke-linecap="round"
+            d="M451,84 Q451,68 451,56"/>
+      <path stroke="#f472b6" stroke-width="1.1" stroke-linecap="round"
+            d="M451,84 Q459,70 462,60"/>
+      <path stroke="#f472b6" stroke-width="1.1" stroke-linecap="round"
+            d="M451,84 Q462,79 469,73"/>
+      <path stroke="#f472b6" stroke-width="1.1" stroke-linecap="round"
+            d="M451,84 Q440,79 433,73"/>
+      <circle cx="451" cy="84" r="4.5" stroke="#f472b6" stroke-width="1.3"/>
+      <!-- Stem 2 (taller) -->
+      <path stroke="#f472b6" stroke-width="1.6" stroke-linecap="round"
+            d="M476,185 Q478,155 481,125 Q484,98 481,70"/>
+      <path stroke="#f472b6" stroke-width="1.3" stroke-linecap="round"
+            d="M481,126 Q492,114 499,106"/>
+      <path stroke="#f472b6" stroke-width="1.3" stroke-linecap="round"
+            d="M481,126 Q469,116 462,107"/>
+      <!-- Petals 2 (5) -->
+      <path stroke="#f472b6" stroke-width="1.1" stroke-linecap="round"
+            d="M481,70 Q474,55 471,44"/>
+      <path stroke="#f472b6" stroke-width="1.1" stroke-linecap="round"
+            d="M481,70 Q481,54 481,42"/>
+      <path stroke="#f472b6" stroke-width="1.1" stroke-linecap="round"
+            d="M481,70 Q489,55 492,44"/>
+      <path stroke="#f472b6" stroke-width="1.1" stroke-linecap="round"
+            d="M481,70 Q492,65 499,58"/>
+      <path stroke="#f472b6" stroke-width="1.1" stroke-linecap="round"
+            d="M481,70 Q470,65 463,58"/>
+      <circle cx="481" cy="70" r="4.5" stroke="#f472b6" stroke-width="1.3"/>
+      <!-- Small bud (third, short) -->
+      <path stroke="#f472b6" stroke-width="1.4" stroke-linecap="round"
+            d="M435,185 Q432,165 430,146 Q428,130 430,116"/>
+      <path stroke="#f472b6" stroke-width="1" stroke-linecap="round"
+            d="M430,116 Q425,106 423,98 Q427,96 430,100 Q433,96 437,98 Q435,106 430,116"/>
+    </g>
+
+    <!-- ── 4. Fern frond, emerald → x≈650 ── -->
+    <g class="sgarden-plant" data-t="0.43">
+      <!-- Main stem, arching left -->
+      <path stroke="#34d399" stroke-width="2.2" stroke-linecap="round"
+            d="M658,185 Q650,158 638,128 Q626,100 608,72"/>
+      <!-- Leaflet pairs along stem -->
+      <path stroke="#34d399" stroke-width="1.3" stroke-linecap="round"
+            d="M650,160 Q638,151 630,145"/>
+      <path stroke="#34d399" stroke-width="1.3" stroke-linecap="round"
+            d="M650,160 Q659,147 665,140"/>
+      <path stroke="#34d399" stroke-width="1.3" stroke-linecap="round"
+            d="M642,138 Q628,128 620,120"/>
+      <path stroke="#34d399" stroke-width="1.3" stroke-linecap="round"
+            d="M642,138 Q651,124 657,116"/>
+      <path stroke="#34d399" stroke-width="1.2" stroke-linecap="round"
+            d="M633,118 Q618,107 610,99"/>
+      <path stroke="#34d399" stroke-width="1.2" stroke-linecap="round"
+            d="M633,118 Q642,104 647,96"/>
+      <path stroke="#34d399" stroke-width="1.1" stroke-linecap="round"
+            d="M624,99 Q610,89 603,81"/>
+      <path stroke="#34d399" stroke-width="1.1" stroke-linecap="round"
+            d="M624,99 Q632,86 636,78"/>
+      <path stroke="#34d399" stroke-width="1" stroke-linecap="round"
+            d="M615,82 Q603,73 597,66"/>
+      <path stroke="#34d399" stroke-width="1" stroke-linecap="round"
+            d="M615,82 Q622,70 625,62"/>
+      <!-- Curled frond tip -->
+      <path stroke="#34d399" stroke-width="1.8" stroke-linecap="round"
+            d="M608,72 Q602,60 604,50 Q610,44 616,52"/>
+    </g>
+
+    <!-- ── 5. Trametes cluster, orange → x≈825 ── -->
+    <g class="sgarden-plant" data-t="0.56">
+      <!-- Fan 1 (center) -->
+      <path stroke="#fb923c" stroke-width="1.4" stroke-linecap="round"
+            d="M778,183 C778,158 800,140 825,138 C850,140 872,158 872,183"/>
+      <path stroke="#fb923c" stroke-width="1.2" stroke-linecap="round"
+            d="M789,181 C789,163 807,147 825,145 C843,147 861,163 861,181"/>
+      <path stroke="#fb923c" stroke-width="1" stroke-linecap="round"
+            d="M800,179 C800,168 814,155 825,153 C836,155 850,168 850,179"/>
+      <path stroke="#fb923c" stroke-width="0.9" stroke-linecap="round"
+            d="M811,177 C811,173 819,164 825,162 C831,164 839,173 839,177"/>
+      <!-- Fan 2 (left, overlapping) -->
+      <path stroke="#fb923c" stroke-width="1.3" stroke-linecap="round"
+            d="M750,183 C750,160 770,143 792,141 C803,154 800,172 790,180"/>
+      <path stroke="#fb923c" stroke-width="1" stroke-linecap="round"
+            d="M759,182 C759,163 776,148 792,147"/>
+      <path stroke="#fb923c" stroke-width="0.8" stroke-linecap="round"
+            d="M768,180 C768,166 782,153 792,152"/>
+      <!-- Fan 3 (right, overlapping) -->
+      <path stroke="#fb923c" stroke-width="1.3" stroke-linecap="round"
+            d="M900,183 C900,160 880,143 858,141 C847,154 850,172 860,180"/>
+      <path stroke="#fb923c" stroke-width="1" stroke-linecap="round"
+            d="M891,182 C891,163 874,148 858,147"/>
+      <path stroke="#fb923c" stroke-width="0.8" stroke-linecap="round"
+            d="M882,180 C882,166 868,153 858,152"/>
+      <!-- Stem -->
+      <path stroke="#fb923c" stroke-width="1.4" stroke-linecap="round"
+            d="M821,185 Q823,178 825,173 Q827,178 829,185"/>
+    </g>
+
+    <!-- ── 6. Tropical / palm, cyan → x≈990 ── -->
+    <g class="sgarden-plant" data-t="0.67">
+      <!-- Trunk -->
+      <path stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"
+            d="M990,185 Q990,158 990,128 Q991,102 994,76"/>
+      <!-- Left fronds -->
+      <path stroke="#22d3ee" stroke-width="1.7" stroke-linecap="round"
+            d="M994,76 Q972,66 952,46 Q938,32 928,14"/>
+      <path stroke="#22d3ee" stroke-width="1.4" stroke-linecap="round"
+            d="M994,76 Q970,78 950,88 Q935,96 920,108"/>
+      <path stroke="#22d3ee" stroke-width="1.3" stroke-linecap="round"
+            d="M994,76 Q974,92 960,110 Q950,122 944,138"/>
+      <!-- Right fronds -->
+      <path stroke="#22d3ee" stroke-width="1.7" stroke-linecap="round"
+            d="M994,76 Q1016,66 1036,46 Q1050,32 1060,14"/>
+      <path stroke="#22d3ee" stroke-width="1.4" stroke-linecap="round"
+            d="M994,76 Q1018,78 1038,88 Q1053,96 1068,108"/>
+      <path stroke="#22d3ee" stroke-width="1.3" stroke-linecap="round"
+            d="M994,76 Q1014,92 1028,110 Q1038,122 1044,138"/>
+      <!-- Leaflets on outer fronds -->
+      <path stroke="#22d3ee" stroke-width="0.9" stroke-linecap="round"
+            d="M952,46 Q946,36 940,28"/>
+      <path stroke="#22d3ee" stroke-width="0.9" stroke-linecap="round"
+            d="M952,46 Q958,38 964,30"/>
+      <path stroke="#22d3ee" stroke-width="0.9" stroke-linecap="round"
+            d="M936,62 Q929,54 924,46"/>
+      <path stroke="#22d3ee" stroke-width="0.9" stroke-linecap="round"
+            d="M1036,46 Q1042,36 1048,28"/>
+      <path stroke="#22d3ee" stroke-width="0.9" stroke-linecap="round"
+            d="M1036,46 Q1030,38 1024,30"/>
+      <path stroke="#22d3ee" stroke-width="0.9" stroke-linecap="round"
+            d="M1052,62 Q1059,54 1064,46"/>
+    </g>
+
+    <!-- ── 7. Trametes large, golden-yellow → x≈1155 ── -->
+    <g class="sgarden-plant" data-t="0.78">
+      <!-- Outer fan -->
+      <path stroke="#fbbf24" stroke-width="1.7" stroke-linecap="round"
+            d="M1075,183 C1075,132 1110,100 1155,97 C1200,100 1235,132 1235,183"/>
+      <path stroke="#fbbf24" stroke-width="1.4" stroke-linecap="round"
+            d="M1090,181 C1090,138 1120,109 1155,107 C1190,109 1220,138 1220,181"/>
+      <path stroke="#fbbf24" stroke-width="1.2" stroke-linecap="round"
+            d="M1105,179 C1105,145 1130,119 1155,117 C1180,119 1205,145 1205,179"/>
+      <path stroke="#fbbf24" stroke-width="1.1" stroke-linecap="round"
+            d="M1120,177 C1120,153 1141,130 1155,128 C1169,130 1190,153 1190,177"/>
+      <path stroke="#fbbf24" stroke-width="1" stroke-linecap="round"
+            d="M1135,175 C1135,162 1148,143 1155,141 C1162,143 1175,162 1175,175"/>
+      <path stroke="#fbbf24" stroke-width="0.9" stroke-linecap="round"
+            d="M1143,173 C1143,167 1150,155 1155,153 C1160,155 1167,167 1167,173"/>
+      <!-- Stem -->
+      <path stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round"
+            d="M1151,185 Q1153,178 1155,173 Q1157,178 1159,185"/>
+    </g>
+
+    <!-- ── 8. Grass blades, indigo → x≈1325 ── -->
+    <g class="sgarden-plant" data-t="0.90">
+      <path stroke="#818cf8" stroke-width="1.8" stroke-linecap="round"
+            d="M1302,185 Q1296,162 1290,136 Q1285,114 1282,90"/>
+      <path stroke="#818cf8" stroke-width="2.2" stroke-linecap="round"
+            d="M1315,185 Q1311,158 1309,128 Q1307,100 1310,72"/>
+      <path stroke="#818cf8" stroke-width="2.4" stroke-linecap="round"
+            d="M1328,185 Q1326,155 1326,122 Q1326,94 1330,66"/>
+      <path stroke="#818cf8" stroke-width="2" stroke-linecap="round"
+            d="M1340,185 Q1341,160 1345,132 Q1349,106 1356,82"/>
+      <path stroke="#818cf8" stroke-width="1.7" stroke-linecap="round"
+            d="M1352,185 Q1357,162 1364,136 Q1371,112 1380,90"/>
+      <path stroke="#818cf8" stroke-width="1.4" stroke-linecap="round"
+            d="M1362,185 Q1370,165 1380,142 Q1389,122 1400,104"/>
+      <!-- Cross-cuts / nodes -->
+      <path stroke="#818cf8" stroke-width="1" stroke-linecap="round"
+            d="M1309,128 Q1317,120 1323,114"/>
+      <path stroke="#818cf8" stroke-width="1" stroke-linecap="round"
+            d="M1326,122 Q1333,114 1340,107"/>
+      <path stroke="#818cf8" stroke-width="1" stroke-linecap="round"
+            d="M1345,132 Q1351,123 1358,116"/>
+    </g>
+
+  </svg>
+</div>
 
 </body>
 </html>
