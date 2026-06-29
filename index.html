@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Chris Kaisin, Community & Platform Operations for Conscious Creators</title>
-<meta name="description" content="Head of Community & Platform Operations for spiritual teachers, conscious creators, and values-driven communities. Platform tech, community design, automations, and growth, so you can stay in your work." />
+<meta name="description" content="Brand & UX Designer for spiritual teachers, conscious creators, and values-driven communities. Platform tech, community design, automations, and growth, so you can stay in your work." />
 <meta name="author" content="Chris Kaisin" />
 <meta name="theme-color" content="#c8783c" />
 <meta name="robots" content="index, follow" />
@@ -19,14 +19,14 @@
 <meta property="og:type"        content="website" />
 <meta property="og:url"         content="https://chriskaisin.com/" />
 <meta property="og:title"       content="Chris Kaisin, Community & Platform Operations for Conscious Creators" />
-<meta property="og:description" content="Head of Community & Platform Operations. Platform tech, community design, automations, and growth for spiritual teachers and conscious creators." />
+<meta property="og:description" content="Brand & UX Designer. Platform tech, community design, automations, and growth for spiritual teachers and conscious creators." />
 <meta property="og:image"       content="https://chriskaisin.com/assets/2026-Chris-Hero.jpg" />
 <meta property="og:image:width"  content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:locale"      content="en_US" />
 <meta name="twitter:card"        content="summary_large_image" />
 <meta name="twitter:title"       content="Chris Kaisin, Community & Platform Operations for Conscious Creators" />
-<meta name="twitter:description" content="Head of Community & Platform Operations for spiritual teachers and conscious creators." />
+<meta name="twitter:description" content="Brand & UX Designer for spiritual teachers and conscious creators." />
 <meta name="twitter:image"       content="https://chriskaisin.com/assets/2026-Chris-Hero.jpg" />
 
 <script type="application/ld+json">
@@ -36,7 +36,7 @@
   "name": "Chris Kaisin",
   "url": "https://chriskaisin.com",
   "image": "https://chriskaisin.com/assets/2026-Chris-Hero.jpg",
-  "jobTitle": "Head of Community & Platform Operations",
+  "jobTitle": "Brand & UX Designer",
   "description": "Community & Platform Operations specialist for conscious creators, spiritual teachers, and values-driven communities.",
   "sameAs": [
     "https://www.linkedin.com/in/christopheksn"
@@ -775,10 +775,21 @@ body {
   transition: width 0.55s cubic-bezier(0.22,1,0.36,1);
 }
 .shine-item.active::after { width: 100%; }
-.shine-item:nth-child(1) { border-right: 1px solid var(--gold); }
-.shine-item:nth-child(2) { border-right: 1px solid var(--teal); }
-.shine-item:nth-child(3) { border-right: 1px solid var(--mauve); }
-.shine-item:nth-child(4) { border-right: 1px solid var(--sage); }
+/* Left border — draws top-to-bottom on scroll */
+.shine-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 3px; height: 100%;
+  transform-origin: top center;
+  transform: scaleY(0);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.18s;
+}
+.shine-item.in::before { transform: scaleY(1); }
+.shine-item:nth-child(1)::before { background: var(--gold); }
+.shine-item:nth-child(2)::before { background: var(--teal); }
+.shine-item:nth-child(3)::before { background: var(--mauve); }
+.shine-item:nth-child(4)::before { background: var(--sage); }
 
 .shine-item-head {
   display: flex;
