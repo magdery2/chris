@@ -64,9 +64,9 @@
   --deep:    #141110;
   --gold:    #c8783c;
   --gold-s:  rgba(200,120,60,0.1);
-  --teal:    #4e9e94;
-  --mauve:   #b07882;
-  --sage:    #72a882;
+  --teal:    #4e8070;
+  --mauve:   #8a4c5c;
+  --sage:    #607090;
   --cream:   #f0ebe3;
   --soft:    rgba(240,235,227,0.65);
   --mute:    rgba(240,235,227,0.32);
@@ -742,14 +742,25 @@ body {
 .shine-item {
   padding: 44px 0 44px 20px;
   border-bottom: 1px solid var(--rule);
-  border-left: 3px solid transparent;
   position: relative;
   transition: background 0.35s;
 }
-.shine-item:nth-child(1) { border-left-color: var(--gold); }
-.shine-item:nth-child(2) { border-left-color: var(--teal); }
-.shine-item:nth-child(3) { border-left-color: var(--mauve); }
-.shine-item:nth-child(4) { border-left-color: var(--sage); }
+/* Left border — draws top-to-bottom on scroll */
+.shine-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 3px; height: 100%;
+  transform-origin: top center;
+  transform: scaleY(0);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.18s;
+}
+.shine-item.in::before { transform: scaleY(1); }
+.shine-item:nth-child(1)::before { background: var(--gold); }
+.shine-item:nth-child(2)::before { background: var(--teal); }
+.shine-item:nth-child(3)::before { background: var(--mauve); }
+.shine-item:nth-child(4)::before { background: var(--sage); }
+/* Top line — draws on active/click, colour-matched */
 .shine-item::after {
   content: '';
   position: absolute;
@@ -758,6 +769,9 @@ body {
   background: linear-gradient(to right, var(--gold), transparent 60%);
   transition: width 0.55s cubic-bezier(0.22,1,0.36,1);
 }
+.shine-item:nth-child(2)::after { background: linear-gradient(to right, var(--teal),  transparent 60%); }
+.shine-item:nth-child(3)::after { background: linear-gradient(to right, var(--mauve), transparent 60%); }
+.shine-item:nth-child(4)::after { background: linear-gradient(to right, var(--sage),  transparent 60%); }
 .shine-item.active::after { width: 100%; }
 
 .shine-item-head {
@@ -2171,6 +2185,18 @@ body {
   .footer-meta { align-items: center; }
 }
 
+/* Shine items — longer, more graceful scroll animation */
+.shine-item[data-fade] {
+  opacity: 0;
+  transform: translateY(44px);
+  transition: opacity 1.1s cubic-bezier(0.22,1,0.36,1),
+              transform 1.1s cubic-bezier(0.22,1,0.36,1);
+}
+.shine-item[data-fade].in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 </style>
 </head>
 <body>
@@ -2802,7 +2828,7 @@ body {
     [
       ['.manifestor-inner',             0],
       ['.display-heading',              0],
-      ['.shine-item',                0.08],
+      ['.shine-item',                0.14],
       ['.work-intro',                   0],
       ['.work-item',                 0.07],
       ['.exp-item',                  0.08],
