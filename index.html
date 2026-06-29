@@ -698,6 +698,7 @@ body {
 .shine-section {
   padding: 88px 0;
   border-bottom: 1px solid var(--rule);
+  position: relative;
 }
 .section-label {
   display: flex;
@@ -1381,8 +1382,14 @@ body {
 /* ════════════════════════════════════════════════════════════════
    SHINE SUN
 ════════════════════════════════════════════════════════════════ */
-.shine-sun-wrap { margin-top: 44px; }
-.shine-sun { width: 160px; height: 160px; overflow: visible; display: block; }
+.shine-sun-wrap {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.shine-sun { width: 300px; height: 300px; overflow: visible; display: block; }
 
 .shine-sun-glow {
   opacity: 0;
@@ -1393,7 +1400,7 @@ body {
 .shine-sun-circle {
   fill: none;
   stroke: var(--gold);
-  stroke-width: 0.9;
+  stroke-width: 0.5;
   stroke-dasharray: 70;
   stroke-dashoffset: 70;
   transition: stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1405,13 +1412,13 @@ body {
   stroke-linecap: round;
   transition: stroke-dashoffset 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.shine-ray-long  { stroke-width: 1.1; stroke-dasharray: 21; stroke-dashoffset: 21; }
-.shine-ray-short { stroke-width: 0.7; stroke-dasharray: 13; stroke-dashoffset: 13; }
+.shine-ray-long  { stroke-width: 0.55; stroke-dasharray: 21; stroke-dashoffset: 21; }
+.shine-ray-short { stroke-width: 0.35; stroke-dasharray: 13; stroke-dashoffset: 13; }
 .shine-ray.is-visible { stroke-dashoffset: 0; }
 
 @keyframes sun-breathe {
-  0%, 100% { opacity: 0.08; }
-  50%       { opacity: 0.16; }
+  0%, 100% { opacity: 0.04; }
+  50%       { opacity: 0.09; }
 }
 .shine-sun-glow.is-visible { animation: sun-breathe 5s ease-in-out infinite; }
 
@@ -2260,39 +2267,32 @@ body {
        WHERE I SHINE
   ═══════════════════════════════════════════════ -->
   <section class="shine-section" id="shine">
+    <div class="shine-sun-wrap" aria-hidden="true">
+      <svg class="shine-sun" viewBox="0 0 100 100" fill="none">
+        <circle class="shine-sun-glow" cx="50" cy="50" r="18" fill="var(--gold)" opacity="0.08"/>
+        <circle class="shine-sun-circle" cx="50" cy="50" r="11"/>
+        <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(0,50,50)"/>
+        <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(22.5,50,50)"/>
+        <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(45,50,50)"/>
+        <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(67.5,50,50)"/>
+        <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(90,50,50)"/>
+        <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(112.5,50,50)"/>
+        <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(135,50,50)"/>
+        <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(157.5,50,50)"/>
+        <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(180,50,50)"/>
+        <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(202.5,50,50)"/>
+        <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(225,50,50)"/>
+        <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(247.5,50,50)"/>
+        <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(270,50,50)"/>
+        <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(292.5,50,50)"/>
+        <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(315,50,50)"/>
+        <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(337.5,50,50)"/>
+      </svg>
+    </div>
     <div class="shine-inner">
       <div class="shine-left">
         <h2 class="section-label">How I shine</h2>
         <p class="display-heading">How I<br><em>Shine</em></p>
-        <div class="shine-sun-wrap" aria-hidden="true">
-          <svg class="shine-sun" viewBox="0 0 100 100" fill="none">
-            <!-- Soft glow -->
-            <circle class="shine-sun-glow" cx="50" cy="50" r="18" fill="var(--gold)" opacity="0.12"/>
-            <!-- Outline circle (draws in) -->
-            <circle class="shine-sun-circle" cx="50" cy="50" r="11"/>
-            <!-- 16 rays: 8 long (45° steps) + 8 short (22.5° offset) -->
-            <!-- Group 1 — top quarter -->
-            <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(0,50,50)"/>
-            <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(22.5,50,50)"/>
-            <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(45,50,50)"/>
-            <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(67.5,50,50)"/>
-            <!-- Group 2 — right quarter -->
-            <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(90,50,50)"/>
-            <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(112.5,50,50)"/>
-            <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(135,50,50)"/>
-            <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(157.5,50,50)"/>
-            <!-- Group 3 — bottom quarter -->
-            <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(180,50,50)"/>
-            <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(202.5,50,50)"/>
-            <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(225,50,50)"/>
-            <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(247.5,50,50)"/>
-            <!-- Group 4 — left quarter -->
-            <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(270,50,50)"/>
-            <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(292.5,50,50)"/>
-            <line class="shine-ray shine-ray-long"  x1="50" y1="13" x2="50" y2="34" transform="rotate(315,50,50)"/>
-            <line class="shine-ray shine-ray-short" x1="50" y1="21" x2="50" y2="34" transform="rotate(337.5,50,50)"/>
-          </svg>
-        </div>
       </div>
       <div class="shine-right">
       <div class="shine-list">
