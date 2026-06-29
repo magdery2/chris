@@ -2183,8 +2183,6 @@ body {
   z-index: 6;
   overflow: visible;
   transition: opacity 0.6s ease;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 28%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 28%);
 }
 .sgarden-svg {
   position: absolute;
@@ -2195,15 +2193,10 @@ body {
   height: 185px;
 }
 .sgarden-plant {
-  transform-box: fill-box;
-  transform-origin: bottom center;
-  transform: scaleY(0);
   opacity: 0;
-  transition: transform 1.5s cubic-bezier(0.34, 1.46, 0.64, 1),
-              opacity 0.55s ease;
+  transition: opacity 1.4s ease;
 }
 .sgarden-plant.grown {
-  transform: scaleY(1);
   opacity: 1;
 }
 @media (max-width: 900px) {
@@ -3605,32 +3598,6 @@ body {
     update();
   })();
 
-  // ── SCROLL GARDEN ──────────────────────────────────────────────
-  (function() {
-    var gardenEl = document.getElementById('scrollGarden');
-    var plants   = document.querySelectorAll('.sgarden-plant');
-    if (!gardenEl || !plants.length) return;
-
-    function update() {
-      var scrolled  = window.scrollY || document.documentElement.scrollTop;
-      var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      var progress  = maxScroll > 0 ? scrolled / maxScroll : 0;
-
-      // Fade out as user nears the very bottom (footer)
-      gardenEl.style.opacity = progress > 0.86
-        ? String(Math.max(0, 1 - (progress - 0.86) / 0.10))
-        : '1';
-
-      plants.forEach(function(p) {
-        if (progress >= (parseFloat(p.dataset.t) || 0)) {
-          p.classList.add('grown');
-        }
-      });
-    }
-
-    window.addEventListener('scroll', update, { passive: true });
-    update();
-  })();
 
 
 </script>
@@ -3640,7 +3607,7 @@ body {
   <svg class="sgarden-svg" viewBox="0 0 1400 185" fill="none" xmlns="http://www.w3.org/2000/svg">
 
     <!-- ── 1. Reed cluster, lime → x≈80 ── -->
-    <g class="sgarden-plant" data-t="0.04">
+    <g class="sgarden-plant" data-t="0">
       <path stroke="#a3e635" stroke-width="2.2" stroke-linecap="round"
             d="M74,185 Q71,155 66,122 Q61,94 57,70"/>
       <path stroke="#a3e635" stroke-width="1.4" stroke-linecap="round"
@@ -3660,7 +3627,7 @@ body {
     </g>
 
     <!-- ── 2. Trametes versicolor, purple → x≈265 ── -->
-    <g class="sgarden-plant" data-t="0.16">
+    <g class="sgarden-plant" data-t="0.08">
       <!-- Outer fan (largest) -->
       <path stroke="#a78bfa" stroke-width="1.6" stroke-linecap="round"
             d="M190,183 C190,138 224,108 265,106 C306,108 340,138 340,183"/>
@@ -3693,7 +3660,7 @@ body {
     </g>
 
     <!-- ── 3. Wildflower pair, rose → x≈470 ── -->
-    <g class="sgarden-plant" data-t="0.29">
+    <g class="sgarden-plant" data-t="0.18">
       <!-- Stem 1 -->
       <path stroke="#f472b6" stroke-width="1.6" stroke-linecap="round"
             d="M455,185 Q453,158 450,130 Q448,106 451,84"/>
@@ -3740,7 +3707,7 @@ body {
     </g>
 
     <!-- ── 4. Fern frond, emerald → x≈650 ── -->
-    <g class="sgarden-plant" data-t="0.43">
+    <g class="sgarden-plant" data-t="0.28">
       <!-- Main stem, arching left -->
       <path stroke="#34d399" stroke-width="2.2" stroke-linecap="round"
             d="M658,185 Q650,158 638,128 Q626,100 608,72"/>
@@ -3771,7 +3738,7 @@ body {
     </g>
 
     <!-- ── 5. Trametes cluster, orange → x≈825 ── -->
-    <g class="sgarden-plant" data-t="0.56">
+    <g class="sgarden-plant" data-t="0.40">
       <!-- Fan 1 (center) -->
       <path stroke="#fb923c" stroke-width="1.4" stroke-linecap="round"
             d="M778,183 C778,158 800,140 825,138 C850,140 872,158 872,183"/>
@@ -3801,7 +3768,7 @@ body {
     </g>
 
     <!-- ── 6. Tropical / palm, cyan → x≈990 ── -->
-    <g class="sgarden-plant" data-t="0.67">
+    <g class="sgarden-plant" data-t="0.52">
       <!-- Trunk -->
       <path stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"
             d="M990,185 Q990,158 990,128 Q991,102 994,76"/>
@@ -3835,7 +3802,7 @@ body {
     </g>
 
     <!-- ── 7. Trametes large, golden-yellow → x≈1155 ── -->
-    <g class="sgarden-plant" data-t="0.78">
+    <g class="sgarden-plant" data-t="0.64">
       <!-- Outer fan -->
       <path stroke="#fbbf24" stroke-width="1.7" stroke-linecap="round"
             d="M1075,183 C1075,132 1110,100 1155,97 C1200,100 1235,132 1235,183"/>
@@ -3855,7 +3822,7 @@ body {
     </g>
 
     <!-- ── 8. Grass blades, indigo → x≈1325 ── -->
-    <g class="sgarden-plant" data-t="0.90">
+    <g class="sgarden-plant" data-t="0.76">
       <path stroke="#818cf8" stroke-width="1.8" stroke-linecap="round"
             d="M1302,185 Q1296,162 1290,136 Q1285,114 1282,90"/>
       <path stroke="#818cf8" stroke-width="2.2" stroke-linecap="round"
@@ -3879,6 +3846,33 @@ body {
 
   </svg>
 </div>
+
+<script>
+(function() {
+  var gardenEl = document.getElementById('scrollGarden');
+  var plants   = document.querySelectorAll('.sgarden-plant');
+  if (!gardenEl || !plants.length) return;
+
+  function update() {
+    var scrolled  = window.scrollY || document.documentElement.scrollTop;
+    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    var progress  = maxScroll > 0 ? scrolled / maxScroll : 0;
+
+    gardenEl.style.opacity = progress > 0.86
+      ? String(Math.max(0, 1 - (progress - 0.86) / 0.10))
+      : '1';
+
+    plants.forEach(function(p) {
+      if (progress >= (parseFloat(p.dataset.t) || 0)) {
+        p.classList.add('grown');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
 
 </body>
 </html>
