@@ -64,6 +64,9 @@
   --deep:    #141110;
   --gold:    #c8783c;
   --gold-s:  rgba(200,120,60,0.1);
+  --teal:    #4e9e94;
+  --mauve:   #b07882;
+  --sage:    #72a882;
   --cream:   #f0ebe3;
   --soft:    rgba(240,235,227,0.65);
   --mute:    rgba(240,235,227,0.32);
@@ -137,6 +140,7 @@ body {
   position: absolute;
   inset: 0;
   background:
+    radial-gradient(ellipse at 12% 60%, rgba(78,158,148,0.11) 0%, transparent 42%),
     linear-gradient(to right,  rgba(12,10,9,0.72) 0%, rgba(12,10,9,0.52) 32%, rgba(12,10,9,0.16) 62%, rgba(12,10,9,0.06) 100%),
     linear-gradient(to bottom, rgba(12,10,9,0.42) 0%, transparent 22%),
     linear-gradient(to top,    rgba(12,10,9,0.52) 0%, transparent 28%);
@@ -696,9 +700,9 @@ body {
   padding: 88px 0;
   border-bottom: 1px solid var(--rule);
   background: radial-gradient(ellipse at 50% 40%,
-    rgba(130,195,255,0.08) 0%,
-    rgba(100,165,240,0.03) 50%,
-    transparent 75%);
+    rgba(78,158,148,0.10) 0%,
+    rgba(78,158,148,0.04) 52%,
+    transparent 78%);
 }
 .section-label {
   display: flex;
@@ -813,6 +817,18 @@ body {
   color: rgba(200,120,60,0.65);
   border-color: rgba(200,120,60,0.18);
 }
+/* II — teal */
+.shine-item:nth-child(2) .shine-num { color: var(--teal); }
+.shine-item:nth-child(2)::after     { background: linear-gradient(to right, var(--teal), transparent 60%); }
+.shine-item:nth-child(2).active .shine-tag { color: rgba(78,158,148,0.7); border-color: rgba(78,158,148,0.22); }
+/* III — mauve */
+.shine-item:nth-child(3) .shine-num { color: var(--mauve); }
+.shine-item:nth-child(3)::after     { background: linear-gradient(to right, var(--mauve), transparent 60%); }
+.shine-item:nth-child(3).active .shine-tag { color: rgba(176,120,130,0.7); border-color: rgba(176,120,130,0.22); }
+/* IV — sage */
+.shine-item:nth-child(4) .shine-num { color: var(--sage); }
+.shine-item:nth-child(4)::after     { background: linear-gradient(to right, var(--sage), transparent 60%); }
+.shine-item:nth-child(4).active .shine-tag { color: rgba(114,168,130,0.7); border-color: rgba(114,168,130,0.22); }
 
 
 /* ════════════════════════════════════════════════════════════════
@@ -822,8 +838,8 @@ body {
   padding: 88px 0;
   border-bottom: 1px solid var(--rule);
   background: radial-gradient(ellipse at 80% 15%,
-    rgba(120,190,255,0.06) 0%,
-    rgba(100,165,240,0.02) 45%,
+    rgba(176,120,130,0.08) 0%,
+    rgba(176,120,130,0.02) 45%,
     transparent 70%);
 }
 .work-inner {
@@ -1209,8 +1225,8 @@ body {
   padding: 88px 0;
   border-bottom: 1px solid var(--rule);
   background: radial-gradient(ellipse at 50% 0%,
-    rgba(120,185,255,0.05) 0%,
-    rgba(100,160,240,0.02) 45%,
+    rgba(114,168,130,0.08) 0%,
+    rgba(114,168,130,0.02) 45%,
     transparent 68%);
 }
 .exp-inner {
@@ -1425,6 +1441,11 @@ body {
 .craft-section {
   padding: 96px 0 80px;
   border-bottom: 1px solid var(--rule);
+  background:
+    radial-gradient(ellipse at 15% 30%, rgba(78,158,148,0.08)   0%, transparent 48%),
+    radial-gradient(ellipse at 82% 70%, rgba(176,120,130,0.07)  0%, transparent 44%),
+    radial-gradient(ellipse at 50% 95%, rgba(114,168,130,0.05)  0%, transparent 40%),
+    #09080e;
 }
 .craft-inner {
   max-width: 1100px;
@@ -1470,6 +1491,12 @@ body {
   color: var(--gold);
   padding-top: 4px;
 }
+.craft-item:nth-child(2) .craft-num,
+.craft-item:nth-child(6) .craft-num { color: var(--teal); }
+.craft-item:nth-child(3) .craft-num,
+.craft-item:nth-child(7) .craft-num { color: var(--mauve); }
+.craft-item:nth-child(4) .craft-num,
+.craft-item:nth-child(8) .craft-num { color: var(--sage); }
 .craft-body h3 {
   font-family: var(--serif);
   font-weight: 300;
@@ -1505,10 +1532,9 @@ body {
 ════════════════════════════════════════════════════════════════ */
 .contact-section {
   padding: 72px 0 88px;
-  background: radial-gradient(ellipse at 75% 100%,
-    rgba(130,195,255,0.06) 0%,
-    rgba(100,165,240,0.02) 50%,
-    transparent 72%);
+  background:
+    radial-gradient(ellipse at 20% 0%,   rgba(200,120,60,0.11)  0%, transparent 52%),
+    radial-gradient(ellipse at 88% 100%, rgba(176,120,130,0.08) 0%, transparent 48%);
 }
 .contact-inner {
   max-width: 1040px;
