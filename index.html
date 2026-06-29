@@ -1952,31 +1952,6 @@ body {
     animation-timeline: view();
     animation-range: entry 15% entry 55%;
   }
-  .exp-item {
-    animation: fade-up linear both;
-    animation-timeline: view();
-    animation-range: entry 15% entry 62%;
-  }
-  .exp-heading {
-    animation: fade-up linear both;
-    animation-timeline: view();
-    animation-range: entry 12% entry 40%;
-  }
-  .craft-header {
-    animation: fade-up linear both;
-    animation-timeline: view();
-    animation-range: entry 12% entry 40%;
-  }
-  .craft-item {
-    animation: fade-up linear both;
-    animation-timeline: view();
-    animation-range: entry 15% entry 68%;
-  }
-  .section-label {
-    animation: fade-up-sm linear both;
-    animation-timeline: view();
-    animation-range: entry 12% entry 30%;
-  }
   .display-heading {
     animation: fade-up-heading linear both;
     animation-timeline: view();
@@ -2026,7 +2001,7 @@ body {
   }
 }
 @media (max-width: 900px) {
-  .shine-item-head, .shine-item-body, .work-item, .for-entry, .exp-item {
+  .shine-item-head, .shine-item-body, .work-item, .for-entry, .display-heading {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -2188,6 +2163,33 @@ body {
 }
 
 /* Shine items — longer, more graceful scroll animation */
+/* Exp & craft — IO-triggered transitions (not view-timeline, elements too short) */
+.exp-heading[data-fade],
+.exp-item[data-fade] {
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1),
+              transform 0.9s cubic-bezier(0.22,1,0.36,1);
+}
+.exp-heading[data-fade].in,
+.exp-item[data-fade].in { transform: none; }
+
+.craft-header[data-fade],
+.craft-item[data-fade] {
+  transform: translateY(36px);
+  transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1),
+              transform 0.85s cubic-bezier(0.22,1,0.36,1);
+}
+.craft-header[data-fade].in,
+.craft-item[data-fade].in { transform: none; }
+
+/* Section labels — small quick rise */
+.section-label[data-fade] {
+  transform: translateY(10px);
+  transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
+              transform 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+.section-label[data-fade].in { transform: none; }
+
 /* Display headings — bigger drop, longer duration, slight scale */
 .display-heading[data-fade] {
   transform: translateY(48px) scale(0.95);
@@ -2196,14 +2198,6 @@ body {
   transition-delay: 0.12s;
 }
 .display-heading[data-fade].in { transform: none; }
-
-/* Section labels — small, quick, first to arrive */
-.section-label[data-fade] {
-  transform: translateY(10px);
-  transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
-              transform 0.5s cubic-bezier(0.22,1,0.36,1);
-}
-.section-label[data-fade].in { transform: none; }
 
 /* Shine items — longer, more graceful scroll animation */
 .shine-item[data-fade] {
