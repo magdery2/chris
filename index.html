@@ -2824,11 +2824,11 @@ body {
       ['.shine-item',                0.14],
       ['.work-intro',                   0],
       ['.work-item',                 0.07],
-      ['.exp-heading',                  0],
-      ['.exp-item',                  0.1],
+      ['.exp-heading',                  0, 0.25],
+      ['.exp-item',                  0.1, 0.25],
       ['.for-entry',                 0.06],
-      ['.craft-header',                 0],
-      ['.craft-item',               0.07],
+      ['.craft-header',                 0, 0.25],
+      ['.craft-item',               0.07, 0.25],
       ['.fairy-title',                  0],
       ['.fairy-body',                   0],
       ['.fairy-img',                    0],
@@ -2836,12 +2836,12 @@ body {
       ['.contact-body',                 0],
       ['.contact-link',              0.06],
       ['.game-intro',                   0],
-    ].forEach(([sel, stagger]) => {
+    ].forEach(([sel, stagger, base = 0]) => {
       document.querySelectorAll(sel).forEach((el, i) => {
         // Skip elements already in viewport, don't hide them on page load
         if (el.getBoundingClientRect().top < vh) { el.classList.add('in'); return; }
         el.setAttribute('data-fade', '');
-        if (stagger) el.style.transitionDelay = `${(i % 6) * stagger}s`;
+        if (stagger || base) el.style.transitionDelay = `${base + (i % 6) * stagger}s`;
         obs.observe(el);
       });
     });
