@@ -1935,52 +1935,52 @@ body {
   .shine-item-head {
     animation: fade-up linear both;
     animation-timeline: view();
-    animation-range: entry 0% entry 42%;
+    animation-range: entry 15% entry 55%;
   }
   .shine-item-body {
     animation: fade-up linear both;
     animation-timeline: view();
-    animation-range: entry 8% entry 52%;
+    animation-range: entry 22% entry 62%;
   }
   .work-item {
     animation: fade-up linear both;
     animation-timeline: view();
-    animation-range: entry 0% entry 36%;
+    animation-range: entry 15% entry 50%;
   }
   .for-entry {
     animation: fade-up linear both;
     animation-timeline: view();
-    animation-range: entry 0% entry 40%;
+    animation-range: entry 15% entry 55%;
   }
   .exp-item {
     animation: fade-up linear both;
     animation-timeline: view();
-    animation-range: entry 0% entry 50%;
+    animation-range: entry 15% entry 62%;
   }
   .exp-heading {
     animation: fade-up linear both;
     animation-timeline: view();
-    animation-range: entry 0% entry 28%;
+    animation-range: entry 12% entry 40%;
   }
   .craft-header {
     animation: fade-up linear both;
     animation-timeline: view();
-    animation-range: entry 0% entry 28%;
+    animation-range: entry 12% entry 40%;
   }
   .craft-item {
     animation: fade-up linear both;
     animation-timeline: view();
-    animation-range: entry 0% entry 55%;
+    animation-range: entry 15% entry 68%;
   }
   .section-label {
     animation: fade-up-sm linear both;
     animation-timeline: view();
-    animation-range: entry 0% entry 18%;
+    animation-range: entry 12% entry 30%;
   }
   .display-heading {
     animation: fade-up-heading linear both;
     animation-timeline: view();
-    animation-range: entry 0% entry 38%;
+    animation-range: entry 15% entry 52%;
   }
 }
 
@@ -2820,7 +2820,7 @@ body {
 
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
 
     const vh = window.innerHeight;
     [
