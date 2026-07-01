@@ -1959,6 +1959,65 @@ body {
 }
 
 /* ════════════════════════════════════════════════════════════════
+   2560px — iMac / ultrawide
+════════════════════════════════════════════════════════════════ */
+@media (min-width: 2200px) {
+  .stage { margin: 44px; }
+
+  /* Widen all content columns */
+  .shine-inner,
+  .work-inner,
+  .for-inner,
+  .exp-inner,
+  .contact-inner,
+  .fairy-inner,
+  .manifestor-inner { max-width: 1680px; padding: 0 80px; }
+  .craft-inner { max-width: 1760px; padding: 0 80px; }
+  .proof-strip { padding: 24px 80px; }
+
+  /* Sections need more air at this scale */
+  .shine-section,
+  .work-section,
+  .exp-section { padding: 140px 0; }
+  .for-section { padding: 140px 0 120px; }
+  .craft-section { padding: 160px 0 130px; }
+  .manifestor-section { padding: 140px 0 120px; }
+  .contact-section { padding: 130px 0 160px; }
+
+  /* Hero text — anchor to left third of the very wide stage */
+  .hero-text { padding: 0 80px 88px 220px; max-width: 860px; }
+
+  /* Type — let everything scale for the screen size */
+  .hero-name    { font-size: clamp(96px, 7.5vw, 148px); }
+  .hero-tagline { font-size: clamp(28px, 2.6vw, 48px); }
+  .hero-sub     { font-size: 20px; max-width: 520px; }
+
+  .display-heading    { font-size: clamp(60px, 4vw, 90px); }
+  .shine-item h3      { font-size: clamp(36px, 2.8vw, 56px); }
+  .work-client        { font-size: clamp(36px, 2.8vw, 56px); }
+  .work-intro         { font-size: clamp(22px, 1.8vw, 32px); }
+  .exp-heading        { font-size: clamp(44px, 3.2vw, 64px); }
+  .exp-body h3        { font-size: clamp(20px, 1.5vw, 28px); }
+  .for-text           { font-size: clamp(24px, 2.2vw, 38px); }
+  .craft-heading      { font-size: 88px; }
+  .manifestor-heading { font-size: clamp(64px, 5.5vw, 108px); }
+  .manifestor-word    { font-size: clamp(64px, 6vw, 116px); }
+  .manifestor-subtitle{ font-size: clamp(32px, 2.6vw, 52px); }
+  .contact-headline   { font-size: clamp(36px, 2.8vw, 56px); }
+  .fairy-label        { font-size: clamp(22px, 1.8vw, 32px); }
+
+  /* Body paragraphs */
+  .shine-item-body p  { font-size: 18px; }
+  .work-desc          { font-size: 18px; }
+  .for-sub-text       { font-size: 18px; }
+  .for-expand-inner p { font-size: 18px; }
+  .exp-expand-inner p { font-size: 17px; }
+  .craft-body p       { font-size: 17px; }
+  .manifestor-aside p { font-size: 20px; }
+  .contact-body p     { font-size: 18px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
    CSS VIEW TIMELINE - scroll-driven entry animations
    Native: Chrome 115+, Safari 18+   Fallback: IntersectionObserver
 ════════════════════════════════════════════════════════════════ */
