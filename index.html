@@ -384,6 +384,26 @@ body {
   color: var(--cream);
   transform: translateY(-2px);
 }
+.btn-shine {
+  position: relative;
+  border-color: transparent;
+  font-size: 14px;
+  padding: 14px 26px;
+}
+.btn-shine::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  padding: 1.5px;
+  background: linear-gradient(90deg, #c8783c, #4e8070, #8a4c5c, #607090, #c8783c);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.btn-shine:hover { border-color: transparent; }
 
 /* Credential strip */
 .hero-creds {
@@ -2292,7 +2312,7 @@ body {
       <p class="hero-tagline">For the <span id="heroVar">creators</span><span class="hero-cursor" aria-hidden="true"></span><br>changing the world.</p>
       <p class="hero-sub">For creators whose community has outgrown their systems, I run the platform, the automations, and the full member experience, so growth stops being bottlenecked by tech you don't have time for.</p>
       <div class="cta-row">
-        <a class="btn-outline" href="#shine">How I shine&nbsp;↓</a>
+        <a class="btn-outline btn-shine" href="#shine">How I shine&nbsp;↓</a>
       </div>
     </div>
 
