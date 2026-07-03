@@ -2994,7 +2994,7 @@ body {
     function startCycle() {
       if (started) return;
       started = true;
-      enterWord(words[0], function() { setTimeout(cycle, HOLD); });
+      setTimeout(cycle, HOLD);
     }
 
     if (vid) {
